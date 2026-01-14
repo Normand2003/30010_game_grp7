@@ -1,0 +1,54 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+# Toolchain: GNU Tools for STM32 (9-2020-q2-update)
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+C_SRCS += \
+../Src/30010_io.c \
+../Src/Plainmove.c \
+../Src/draw.c \
+../Src/joystick.c \
+../Src/main.c \
+../Src/objects.c \
+../Src/spaceship.c \
+../Src/syscalls.c \
+../Src/sysmem.c \
+../Src/system_stm32f30x.c 
+
+OBJS += \
+./Src/30010_io.o \
+./Src/Plainmove.o \
+./Src/draw.o \
+./Src/joystick.o \
+./Src/main.o \
+./Src/objects.o \
+./Src/spaceship.o \
+./Src/syscalls.o \
+./Src/sysmem.o \
+./Src/system_stm32f30x.o 
+
+C_DEPS += \
+./Src/30010_io.d \
+./Src/Plainmove.d \
+./Src/draw.d \
+./Src/joystick.d \
+./Src/main.d \
+./Src/objects.d \
+./Src/spaceship.d \
+./Src/syscalls.d \
+./Src/sysmem.d \
+./Src/system_stm32f30x.d 
+
+
+# Each subdirectory must supply rules for building sources it contributes
+Src/%.o: ../Src/%.c Src/subdir.mk
+	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DSTM32 -DSTM32F302R8Tx -DSTM32F3 -DNUCLEO_F302R8 -DDEBUG -DUSE_STDPERIPH_DRIVER=1 -c -I"C:/Users/chris/OneDrive/DTU/Semester 1/Programmeringsprojekt/Spil Filmappe/Game/BaseProject/SPL/inc" -I"C:/Users/chris/OneDrive/DTU/Semester 1/Programmeringsprojekt/Spil Filmappe/Game/BaseProject/Inc" -I"C:/Users/chris/OneDrive/DTU/Semester 1/Programmeringsprojekt/Spil Filmappe/Game/BaseProject/cmsis" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
+
+clean: clean-Src
+
+clean-Src:
+	-$(RM) ./Src/30010_io.d ./Src/30010_io.o ./Src/Plainmove.d ./Src/Plainmove.o ./Src/draw.d ./Src/draw.o ./Src/joystick.d ./Src/joystick.o ./Src/main.d ./Src/main.o ./Src/objects.d ./Src/objects.o ./Src/spaceship.d ./Src/spaceship.o ./Src/syscalls.d ./Src/syscalls.o ./Src/sysmem.d ./Src/sysmem.o ./Src/system_stm32f30x.d ./Src/system_stm32f30x.o
+
+.PHONY: clean-Src
+

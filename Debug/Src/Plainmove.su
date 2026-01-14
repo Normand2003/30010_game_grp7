@@ -1,0 +1,12 @@
+Plainmove.c:6:6:shoot	40	static
+Plainmove.c:42:6:Cockpit	4	static
+Plainmove.c:92:6:Planemove	32	static
+Plainmove.c:150:6:positions	408	static
+Plainmove.c:156:6:meteorite	16	static
+Plainmove.c:171:6:meteorite1	16	static
+Plainmove.c:181:6:meteorite2	16	static
+Plainmove.c:200:6:satelite	16	static
+Plainmove.c:232:6:satelite1	16	static
+Plainmove.c:265:6:spaceship	16	static
+Plainmove.c:287:6:enemy	16	static
+Plainmove.c:296:6:shot	16	static

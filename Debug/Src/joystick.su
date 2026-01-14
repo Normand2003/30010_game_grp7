@@ -1,0 +1,2 @@
+joystick.c:10:6:init_joystick	4	static
+joystick.c:61:5:detect_joystick	24	static
