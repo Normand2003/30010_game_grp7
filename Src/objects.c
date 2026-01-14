@@ -12,7 +12,7 @@
 
 void print_astroid(astroid_t *astroid){
 	gotoxy(astroid->pos_x,astroid->pos_y);
-	printf("#");
+	printf("###");
 }
 
 //void hit_astroid(astroid_t *astroid,spaceship_t *ship) {
