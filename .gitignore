@@ -54,3 +54,5 @@ dkms.conf
 # Windows
 .DS_Store
 
+# Extra
+.settings/*
