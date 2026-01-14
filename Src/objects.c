@@ -15,3 +15,5 @@ void print_astroid(astroid_t *astroid){
 	printf("#");
 }
 
+
+// hej
