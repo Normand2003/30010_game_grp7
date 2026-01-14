@@ -57,3 +57,4 @@ dkms.conf
 # Extra
 .settings\*
 /.settings
+.settings/language.settings.xml
