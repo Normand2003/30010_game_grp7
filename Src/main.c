@@ -7,7 +7,7 @@
 
 int main(void)
 {
-uart_init( 9600 ); // Initialize USB serial emulation at 9600 baud
+uart_init( 115200 ); // Initialize USB serial emulation at 9600 baud
 clrscr();
 init_joystick();
 
@@ -59,7 +59,7 @@ print_astroid(&small_stroid);
 print_astroid(&med_stroid);
 print_astroid(&big_stroid);
 
-
+//main loop
 while(1){
 	update_pos(&my_ship,detect_joystick());
 	print_ship(&my_ship);

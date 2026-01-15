@@ -2020,8 +2020,8 @@ int main(void)
  8000d98:	b590      	push	{r4, r7, lr}
  8000d9a:	b0a1      	sub	sp, #132	; 0x84
  8000d9c:	af04      	add	r7, sp, #16
-uart_init( 9600 ); // Initialize USB serial emulation at 9600 baud
- 8000d9e:	f44f 5016 	mov.w	r0, #9600	; 0x2580
+uart_init( 115200 ); // Initialize USB serial emulation at 9600 baud
+ 8000d9e:	f44f 30e1 	mov.w	r0, #115200	; 0x1c200
  8000da2:	f7ff fdcb 	bl	800093c <uart_init>
 clrscr();
  8000da6:	f7ff fee3 	bl	8000b70 <clrscr>
@@ -2130,7 +2130,7 @@ print_astroid(&big_stroid);
  8000e3a:	4618      	mov	r0, r3
  8000e3c:	f000 f89a 	bl	8000f74 <print_astroid>
 
-
+//main loop
 while(1){
 	update_pos(&my_ship,detect_joystick());
  8000e40:	f7ff ff64 	bl	8000d0c <detect_joystick>
