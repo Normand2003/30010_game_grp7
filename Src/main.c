@@ -7,7 +7,7 @@
 
 int main(void)
 {
-uart_init( 115200 ); // Initialize USB serial emulation at 9600 baud
+uart_init( 9600 ); // Initialize USB serial emulation at 9600 baud
 clrscr();
 init_joystick();
 

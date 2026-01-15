@@ -22,6 +22,7 @@
 "./SPL/src/stm32f30x_wwdg.o"
 "./Src/30010_io.o"
 "./Src/Plainmove.o"
+"./Src/Stopwatch.o"
 "./Src/draw.o"
 "./Src/joystick.o"
 "./Src/main.o"

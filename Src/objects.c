@@ -53,7 +53,7 @@ void print_astroid(astroid_t *astroid){
 
 void hit_astroid(astroid_t *astroid,bullet_t *bullet) {
 	if (astroid->type == 3){
-	if ((bullet->pos_x >= astroid->pos_x && bullet->pos_y >= astroid->pos_y) && (bullet->pos_x+2 <= astroid->pos_x+10 && bullet->pos_y <= astroid->pos_y+4)){
+	if ((bullet->pos_x-1 >= astroid->pos_x && bullet->pos_y >= astroid->pos_y) && (bullet->pos_x+2 <= astroid->pos_x+10 && bullet->pos_y <= astroid->pos_y+4)){
 		gotoxy(astroid->pos_x+4,astroid->pos_y+2); //this prints the explosion astroid type 3 (large)
 		printf("!!!!!");
 		gotoxy(astroid->pos_x,astroid->pos_y+1);
@@ -81,7 +81,7 @@ void hit_astroid(astroid_t *astroid,bullet_t *bullet) {
 	}
 
 	if (astroid->type == 2){
-	if ((bullet->pos_x >= astroid->pos_x && bullet->pos_y >= astroid->pos_y) && (bullet->pos_x+2 <= astroid->pos_x+6 && bullet->pos_y <= astroid->pos_y+3)){
+	if ((bullet->pos_x-1 >= astroid->pos_x && bullet->pos_y >= astroid->pos_y) && (bullet->pos_x+2 <= astroid->pos_x+6 && bullet->pos_y <= astroid->pos_y+3)){
 		gotoxy(astroid->pos_x+1,astroid->pos_y+1); //this prints the explosion astroid type 2 (medium)
 		printf("!!!!!");
 		gotoxy(astroid->pos_x,astroid->pos_y+1);
@@ -107,7 +107,7 @@ void hit_astroid(astroid_t *astroid,bullet_t *bullet) {
 	}
 
 	if (astroid->type == 1){
-	if ((bullet->pos_x >= astroid->pos_x && bullet->pos_y >= astroid->pos_y) && (bullet->pos_x+2 <= astroid->pos_x+5 && bullet->pos_y <= astroid->pos_y+2)){
+	if ((bullet->pos_x-1 >= astroid->pos_x && bullet->pos_y >= astroid->pos_y) && (bullet->pos_x+2 <= astroid->pos_x+5 && bullet->pos_y <= astroid->pos_y+2)){
 		gotoxy(astroid->pos_x,astroid->pos_y); //this prints the explosion astroid type 1 (small)
 		printf("!!!!");
 		gotoxy(astroid->pos_x,astroid->pos_y+1);
@@ -129,4 +129,5 @@ void hit_astroid(astroid_t *astroid,bullet_t *bullet) {
 	}
 	}
 }
+
 

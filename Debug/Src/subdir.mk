@@ -7,6 +7,7 @@
 C_SRCS += \
 ../Src/30010_io.c \
 ../Src/Plainmove.c \
+../Src/Stopwatch.c \
 ../Src/draw.c \
 ../Src/joystick.c \
 ../Src/main.c \
@@ -19,6 +20,7 @@ C_SRCS += \
 OBJS += \
 ./Src/30010_io.o \
 ./Src/Plainmove.o \
+./Src/Stopwatch.o \
 ./Src/draw.o \
 ./Src/joystick.o \
 ./Src/main.o \
@@ -31,6 +33,7 @@ OBJS += \
 C_DEPS += \
 ./Src/30010_io.d \
 ./Src/Plainmove.d \
+./Src/Stopwatch.d \
 ./Src/draw.d \
 ./Src/joystick.d \
 ./Src/main.d \
@@ -48,7 +51,7 @@ Src/%.o: ../Src/%.c Src/subdir.mk
 clean: clean-Src
 
 clean-Src:
-	-$(RM) ./Src/30010_io.d ./Src/30010_io.o ./Src/Plainmove.d ./Src/Plainmove.o ./Src/draw.d ./Src/draw.o ./Src/joystick.d ./Src/joystick.o ./Src/main.d ./Src/main.o ./Src/objects.d ./Src/objects.o ./Src/spaceship.d ./Src/spaceship.o ./Src/syscalls.d ./Src/syscalls.o ./Src/sysmem.d ./Src/sysmem.o ./Src/system_stm32f30x.d ./Src/system_stm32f30x.o
+	-$(RM) ./Src/30010_io.d ./Src/30010_io.o ./Src/Plainmove.d ./Src/Plainmove.o ./Src/Stopwatch.d ./Src/Stopwatch.o ./Src/draw.d ./Src/draw.o ./Src/joystick.d ./Src/joystick.o ./Src/main.d ./Src/main.o ./Src/objects.d ./Src/objects.o ./Src/spaceship.d ./Src/spaceship.o ./Src/syscalls.d ./Src/syscalls.o ./Src/sysmem.d ./Src/sysmem.o ./Src/system_stm32f30x.d ./Src/system_stm32f30x.o
 
 .PHONY: clean-Src
 

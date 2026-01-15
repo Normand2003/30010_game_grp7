@@ -113,74 +113,94 @@ else if (bullet5->vel_x == 0){
 
 
 //logic for moving bullet1
-	if (bullet1->pos_x < 156 && bullet1->vel_x != 0){
+	if (bullet1->pos_x < 158 && bullet1->vel_x != 0){
 		gotoxy(bullet1->pos_x,bullet1->pos_y);
-		printf("  o");
+		printf("o");
 
+		gotoxy(bullet1->pos_x-bullet1->vel_x,bullet1->pos_y-bullet1->vel_y);
+		printf(" ");
 		bullet1->pos_x = bullet1->pos_x + bullet1->vel_x;
+
 	}
-	if (bullet1->pos_x >= 156) {
+	if (bullet1->pos_x >= 158) {
 		gotoxy(bullet1->pos_x,bullet1->pos_y);
-		printf("   ");
+		gotoxy(bullet1->pos_x-bullet1->vel_x,bullet1->pos_y-bullet1->vel_y);
+		printf(" ");
 
 		bullet1->vel_x = 0;
 		bullet1->pos_x = 1;
 	}
 
 //logic for moving bullet2
-	if (bullet2->pos_x < 156 && bullet2->vel_x != 0){
+	if (bullet2->pos_x < 158 && bullet2->vel_x != 0){
 		gotoxy(bullet2->pos_x,bullet2->pos_y);
-		printf("  o");
+		printf("o");
 
+		gotoxy(bullet2->pos_x-bullet2->vel_x,bullet2->pos_y-bullet2->vel_y);
+		printf(" ");
 		bullet2->pos_x = bullet2->pos_x + bullet2->vel_x;
+
 	}
-	if (bullet2->pos_x >= 156) {
+	if (bullet2->pos_x >= 158) {
 		gotoxy(bullet2->pos_x,bullet2->pos_y);
-		printf("   ");
+		gotoxy(bullet2->pos_x-bullet2->vel_x,bullet2->pos_y-bullet2->vel_y);
+		printf(" ");
 
 		bullet2->vel_x = 0;
 		bullet2->pos_x = 1;
 	}
 //logic for moving bullet3
-	if (bullet3->pos_x < 156 && bullet3->vel_x != 0){
+	if (bullet3->pos_x < 158 && bullet3->vel_x != 0){
 		gotoxy(bullet3->pos_x,bullet3->pos_y);
-		printf("  o");
+		printf("o");
 
+		gotoxy(bullet3->pos_x-bullet3->vel_x,bullet3->pos_y-bullet3->vel_y);
+		printf(" ");
 		bullet3->pos_x = bullet3->pos_x + bullet3->vel_x;
+
 	}
-	if (bullet3->pos_x >= 156) {
+	if (bullet3->pos_x >= 158) {
 		gotoxy(bullet3->pos_x,bullet3->pos_y);
-		printf("   ");
+		gotoxy(bullet3->pos_x-bullet3->vel_x,bullet3->pos_y-bullet3->vel_y);
+		printf(" ");
 
 		bullet3->vel_x = 0;
 		bullet3->pos_x = 1;
 	}
 
 //logic for moving bullet4
-	if (bullet4->pos_x < 156 && bullet4->vel_x != 0){
+	if (bullet4->pos_x < 158 && bullet4->vel_x != 0){
 		gotoxy(bullet4->pos_x,bullet4->pos_y);
-		printf("  o");
+		printf("o");
 
+		gotoxy(bullet4->pos_x-bullet4->vel_x,bullet4->pos_y-bullet4->vel_y);
+		printf(" ");
 		bullet4->pos_x = bullet4->pos_x + bullet4->vel_x;
+
 	}
-	if (bullet4->pos_x >= 156) {
+	if (bullet4->pos_x >= 158) {
 		gotoxy(bullet4->pos_x,bullet4->pos_y);
-		printf("   ");
+		gotoxy(bullet4->pos_x-bullet4->vel_x,bullet4->pos_y-bullet4->vel_y);
+		printf(" ");
 
 		bullet4->vel_x = 0;
 		bullet4->pos_x = 1;
 	}
 
 //logic for moving bullet5
-	if (bullet5->pos_x < 156 && bullet5->vel_x != 0){
+	if (bullet5->pos_x < 158 && bullet5->vel_x != 0){
 		gotoxy(bullet5->pos_x,bullet5->pos_y);
-		printf("  o");
+		printf("o");
 
+		gotoxy(bullet5->pos_x-bullet5->vel_x,bullet5->pos_y-bullet5->vel_y);
+		printf(" ");
 		bullet5->pos_x = bullet5->pos_x + bullet5->vel_x;
+
 	}
-	if (bullet5->pos_x >= 156) {
+	if (bullet5->pos_x >= 158) {
 		gotoxy(bullet5->pos_x,bullet5->pos_y);
-		printf("   ");
+		gotoxy(bullet5->pos_x-bullet5->vel_x,bullet5->pos_y-bullet5->vel_y);
+		printf(" ");
 
 		bullet5->vel_x = 0;
 		bullet5->pos_x = 1;
