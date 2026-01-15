@@ -1,2 +1,2 @@
 spaceship.c:12:6:print_ship	16	static
-spaceship.c:36:6:update_pos	16	static
+spaceship.c:37:6:update_pos	16	static

@@ -19,6 +19,7 @@ print_ship(&my_ship);
 astroid_t lille_stroid;
 lille_stroid.pos_x = 100;
 lille_stroid.pos_y = 25;
+lille_stroid.type = 1;
 
 print_astroid(&lille_stroid);
 
