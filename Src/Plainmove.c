@@ -3,7 +3,7 @@
 #include "30010_io.h" // Input/output library for this course
 void underline(uint8_t on);
 
-void shoot(uint8_t x, uint8_t y){
+void shooot(uint8_t x, uint8_t y){
 	int t=0;
 	int i;
 	int shot1[3]={0,0,0}; // [0] i whether or not the shot has been fired

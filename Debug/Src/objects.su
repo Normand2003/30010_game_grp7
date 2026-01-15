@@ -1,1 +1,2 @@
 objects.c:13:6:print_astroid	16	static
+objects.c:54:6:hit_astroid	16	static

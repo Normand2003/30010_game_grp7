@@ -35,4 +35,10 @@ typedef struct {
 	int16_t type;
 } enemy_t;
 
+typedef struct {
+	int16_t pos_x, pos_y;
+	int16_t vel_x, vel_y;
+	int16_t enemy;
+}bullet_t;
+
 #endif /* STRUCTURES_H_ */

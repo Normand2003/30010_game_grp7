@@ -1,4 +1,4 @@
-Plainmove.c:6:6:shoot	40	static
+Plainmove.c:6:6:shooot	40	static
 Plainmove.c:42:6:Cockpit	4	static
 Plainmove.c:92:6:Planemove	32	static
 Plainmove.c:150:6:positions	408	static
