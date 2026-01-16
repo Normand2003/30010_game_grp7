@@ -199,31 +199,31 @@ void meteorite2(uint8_t mx, uint8_t my){
 
 void satelite(uint8_t mx, uint8_t my){
 
-	gotoxy(my-1,mx);
+	gotoxy(mx,my-1);
 	printf("       __");
-	gotoxy(my,mx);
+	gotoxy(mx,my);
 	printf("      ///");
 	underline(1);
-	gotoxy(my+1,mx+5);
+	gotoxy(mx+5,my+1);
 	printf("//");
 	underline(0);
-	gotoxy(my+1,mx+7);
+	gotoxy(mx+7,my+1);
 	printf("/");
-	gotoxy(my+2,mx);
+	gotoxy(mx,my+2);
 	printf("     /");
-	gotoxy(my+3,mx);
+	gotoxy(mx,my+3);
 	printf("   (O)");
 	underline(1);
-	gotoxy(my+4,mx+2);
+	gotoxy(mx+2,my+4);
 	printf(" /");
 	underline(0);
-	gotoxy(my+5,mx);
+	gotoxy(mx,my+5);
 	printf(" ///");
 	underline(1);
-	gotoxy(my+6,mx);
+	gotoxy(mx,my+6);
 	printf("//");
 	underline(0);
-	gotoxy(my+6,mx+2);
+	gotoxy(my+2,my+6);
 	printf("/");
 
 

@@ -32,6 +32,7 @@ void print_ship(spaceship_t *ship) {
 	printf("      ");
 }
 
+
 void update_pos(spaceship_t *ship,int direction) {
 
 	if (direction == 1) {
@@ -60,7 +61,6 @@ void update_pos(spaceship_t *ship,int direction) {
 }
 
 
-
 void shoot(spaceship_t *ship, int center,bullet_t *bullet1,bullet_t *bullet2,bullet_t *bullet3,bullet_t *bullet4,bullet_t *bullet5) {
 
 //logic for spawning bullets
@@ -68,7 +68,7 @@ void shoot(spaceship_t *ship, int center,bullet_t *bullet1,bullet_t *bullet2,bul
 if (bullet1->vel_x == 0){
 
 	if (center == 5) {
-		bullet1->pos_x = ship->pos_x+18;
+		bullet1->pos_x = ship->pos_x+16;
 		bullet1->pos_y = ship->pos_y+4;
 		bullet1->vel_x = 2;
 	}
@@ -77,7 +77,7 @@ if (bullet1->vel_x == 0){
 else if (bullet2->vel_x == 0){
 
 	if (center == 5) {
-		bullet2->pos_x = ship->pos_x+18;
+		bullet2->pos_x = ship->pos_x+16;
 		bullet2->pos_y = ship->pos_y+4;
 		bullet2->vel_x = 2;
 	}
@@ -86,7 +86,7 @@ else if (bullet2->vel_x == 0){
 else if (bullet3->vel_x == 0){
 
 	if (center == 5) {
-		bullet3->pos_x = ship->pos_x+18;
+		bullet3->pos_x = ship->pos_x+16;
 		bullet3->pos_y = ship->pos_y+4;
 		bullet3->vel_x = 2;
 	}
@@ -95,7 +95,7 @@ else if (bullet3->vel_x == 0){
 else if (bullet4->vel_x == 0){
 
 	if (center == 5) {
-		bullet4->pos_x = ship->pos_x+18;
+		bullet4->pos_x = ship->pos_x+16;
 		bullet4->pos_y = ship->pos_y+4;
 		bullet4->vel_x = 2;
 	}
@@ -104,7 +104,7 @@ else if (bullet4->vel_x == 0){
 else if (bullet5->vel_x == 0){
 
 	if (center == 5) {
-		bullet5->pos_x = ship->pos_x+18;
+		bullet5->pos_x = ship->pos_x+16;
 		bullet5->pos_y = ship->pos_y+4;
 		bullet5->vel_x = 2;
 	}

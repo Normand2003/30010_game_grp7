@@ -9,8 +9,11 @@
 #include "joystick.h"
 #include "structures.h"
 #include "draw.h"
+#include "stopwatch.h"
 
 void print_astroid(astroid_t *astroid){
+
+if (astroid->pos_x > 150){
 	gotoxy(astroid->pos_x,astroid->pos_y);
 
 	if (astroid->type == 1) {
@@ -50,16 +53,46 @@ void print_astroid(astroid_t *astroid){
 		underline(0);
 	}
 }
+}
+
+void deprint_astroid(astroid_t *astroid){
+	if (astroid->type == 3){
+		gotoxy(astroid->pos_x-astroid->vel_x,astroid->pos_y); //this prints the removal astroid type 3 (large)
+		printf("          ");
+		gotoxy(astroid->pos_x-astroid->vel_x,astroid->pos_y+1);
+		printf("           ");
+		gotoxy(astroid->pos_x-astroid->vel_x,astroid->pos_y+2);
+		printf("           ");
+		gotoxy(astroid->pos_x-astroid->vel_x,astroid->pos_y+3);
+		printf("          ");
+		gotoxy(astroid->pos_x-astroid->vel_x,astroid->pos_y+4);
+		printf("          ");
+	}
+
+	if (astroid->type == 2){
+		gotoxy(astroid->pos_x-astroid->vel_x,astroid->pos_y); //this prints the removal astroid type 2 (medium)
+		printf("       ");
+		gotoxy(astroid->pos_x-astroid->vel_x,astroid->pos_y+1);
+		printf("       ");
+		gotoxy(astroid->pos_x-astroid->vel_x,astroid->pos_y+2);
+		printf("       ");
+		gotoxy(astroid->pos_x-astroid->vel_x,astroid->pos_y+3);
+		printf("       ");
+	}
+
+	if (astroid->type == 1){
+	gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 1 (small)
+	printf("    ");
+	gotoxy(astroid->pos_x,astroid->pos_y+1);
+	printf("    ");
+	gotoxy(astroid->pos_x,astroid->pos_y+2);
+	printf("    ");
+	}
+}
 
 void hit_astroid(astroid_t *astroid,bullet_t *bullet) {
 	if (astroid->type == 3){
 	if ((bullet->pos_x-1 >= astroid->pos_x && bullet->pos_y >= astroid->pos_y) && (bullet->pos_x+2 <= astroid->pos_x+10 && bullet->pos_y <= astroid->pos_y+4)){
-		gotoxy(astroid->pos_x+4,astroid->pos_y+2); //this prints the explosion astroid type 3 (large)
-		printf("!!!!!");
-		gotoxy(astroid->pos_x,astroid->pos_y+1);
-		printf("BOOOOM");
-		gotoxy(astroid->pos_x,astroid->pos_y+2);
-		printf("!!!!!");
 
 		gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 3 (large)
 		printf("          ");
@@ -72,22 +105,16 @@ void hit_astroid(astroid_t *astroid,bullet_t *bullet) {
 		gotoxy(astroid->pos_x,astroid->pos_y+4);
 		printf("          ");
 		//moves the astroids postion waaaaayyyyy off-screen
-		astroid->pos_x = 1000;
-		astroid->pos_y = 1000;
+		astroid->pos_x += 100;
 
 		//destroys the bullet
 		bullet->vel_x = 0;
+
 	}
 	}
 
 	if (astroid->type == 2){
 	if ((bullet->pos_x-1 >= astroid->pos_x && bullet->pos_y >= astroid->pos_y) && (bullet->pos_x+2 <= astroid->pos_x+6 && bullet->pos_y <= astroid->pos_y+3)){
-		gotoxy(astroid->pos_x+1,astroid->pos_y+1); //this prints the explosion astroid type 2 (medium)
-		printf("!!!!!");
-		gotoxy(astroid->pos_x,astroid->pos_y+1);
-		printf("BOOOOM");
-		gotoxy(astroid->pos_x,astroid->pos_y+2);
-		printf("!!!!!");
 
 		gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 2 (medium)
 		printf("       ");
@@ -98,8 +125,7 @@ void hit_astroid(astroid_t *astroid,bullet_t *bullet) {
 		gotoxy(astroid->pos_x,astroid->pos_y+3);
 		printf("       ");
 		//moves the astroids postion waaaaayyyyy off-screen
-		astroid->pos_x = 1000;
-		astroid->pos_y = 1000;
+		astroid->pos_x += 100;
 
 		//destroys the bullet
 		bullet->vel_x = 0;
@@ -108,12 +134,7 @@ void hit_astroid(astroid_t *astroid,bullet_t *bullet) {
 
 	if (astroid->type == 1){
 	if ((bullet->pos_x-1 >= astroid->pos_x && bullet->pos_y >= astroid->pos_y) && (bullet->pos_x+2 <= astroid->pos_x+5 && bullet->pos_y <= astroid->pos_y+2)){
-		gotoxy(astroid->pos_x,astroid->pos_y); //this prints the explosion astroid type 1 (small)
-		printf("!!!!");
-		gotoxy(astroid->pos_x,astroid->pos_y+1);
-		printf("BOOM");
-		gotoxy(astroid->pos_x,astroid->pos_y+2);
-		printf("!!!!");
+
 		gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 1 (small)
 		printf("    ");
 		gotoxy(astroid->pos_x,astroid->pos_y+1);
@@ -121,13 +142,22 @@ void hit_astroid(astroid_t *astroid,bullet_t *bullet) {
 		gotoxy(astroid->pos_x,astroid->pos_y+2);
 		printf("    ");
 		//moves the astroids postion waaaaayyyyy off-screen
-		astroid->pos_x = 1000;
-		astroid->pos_y = 1000;
+		astroid->pos_x += 100;
 
 		//destroys the bullet
 		bullet->vel_x = 0;
 	}
 	}
 }
-
+//Lorte funktion, brug ikke.
+void update_stroid(astroid_t *astroid){
+	if ((astroid->pos_x > astroid->vel_x) || (astroid->pos_x > 1)){
+		astroid->pos_x += astroid->vel_x;
+		deprint_astroid(astroid);
+		print_astroid(astroid);
+	}
+	else {
+		astroid->pos_x += 200;
+	}
+}
 

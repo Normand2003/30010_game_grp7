@@ -12,7 +12,6 @@ volatile sw_time_t g_split2 = {0};
 volatile uint8_t g_running = 0;
 volatile uint8_t g_second_changed = 0;
 
-
 // ===== Hjælpefunktioner =====
 void copy_time_atomic(volatile sw_time_t *dst, volatile sw_time_t *src)
 {
@@ -71,4 +70,13 @@ void TIM1_BRK_TIM15_IRQHandler() {
 
     TIM15->SR &= ~0x0001;
 
+}
+
+int timer(int spou){
+	if ((g_time.hs % spou) == 0){
+		return 1;
+	}
+	else {
+		return 0;
+	}
 }

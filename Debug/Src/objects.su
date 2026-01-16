@@ -1,2 +1,4 @@
-objects.c:13:6:print_astroid	16	static
-objects.c:54:6:hit_astroid	16	static
+objects.c:14:6:print_astroid	16	static
+objects.c:58:6:deprint_astroid	16	static
+objects.c:93:6:hit_astroid	16	static
+objects.c:153:6:update_stroid	16	static
