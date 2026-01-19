@@ -28,5 +28,9 @@ void draw_alien(alien_t *alien);
 void alien_dying(alien_t *alien);
 void delete_alien(alien_t *alien);
 void enable_alien(alien_t *alien);
+void draw_asteroid(int x, int y, int size);
+void draw_spaceship1(int x, int y);
+void draw_spaceship2(int x, int y);
+
 
 #endif /* ALIENS_H_ */

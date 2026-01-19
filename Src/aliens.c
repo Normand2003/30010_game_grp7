@@ -2,6 +2,8 @@
 #include "30010_io.h" // Input/output library for this course
 #include "aliens.h"
 #include "stopwatch.h"
+#define ESC 0x1B
+#define block 0xDB
 
 
 
@@ -263,25 +265,546 @@ void enable_alien(alien_t *alien) {
 	bgcolor(0);
 }
 
-/* Følgende er brugt i main.c
 
-     alien_t alien1;
-    alien1.pos_x = 50;
-    alien1.pos_y = 20;
-    alien1.health = 1;
+void draw_spaceship1(int x, int y) {
 
 
+	gotoxy(x, y);
+	fgcolor(0);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(8);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+	printf("%c", block);
 
-   // start_screen();
+	gotoxy(x, y+1);
+	fgcolor(0);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(15);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+
+	gotoxy(x, y+2);
+	fgcolor(0);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+	fgcolor(15);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+
+	//første række med ild
+	gotoxy(x, y+3);
+	fgcolor(0);
+	printf("%c", block);
+	fgcolor(9);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(11);
+	printf("%c", block);
+	fgcolor(8);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+	fgcolor(8);
+	printf("%c", block);
+	fgcolor(12);
+	printf("%c", block);
+	fgcolor(15);
+	printf("%c", block);
+	printf("%c", block);
+
+	//anden række med ild
+	gotoxy(x, y+4);
+	fgcolor(9);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(11);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(8);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+	fgcolor(8);
+	printf("%c", block);
+	fgcolor(12);
+	printf("%c", block);
+	fgcolor(15);
+	printf("%c", block);
+	printf("%c", block);
+
+	gotoxy(x, y+5);
+	fgcolor(0);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+	fgcolor(15);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+
+	gotoxy(x, y+6);
+	fgcolor(0);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(15);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+
+	gotoxy(x, y+7);
+	fgcolor(0);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(8);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+	printf("%c", block);
 
 
-//    while (1) {
-//    	draw_alien(&alien1);
-//    	alien_dying(&alien1);
- //   }
+
+}
 
 
- */
+void draw_spaceship2(int x, int y) {
+	gotoxy(x, y);
+	fgcolor(0);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(8);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+	printf("%c", block);
+
+	gotoxy(x, y+1);
+	fgcolor(0);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(15);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+
+	gotoxy(x, y+2);
+	fgcolor(0);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+	fgcolor(15);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+
+	//første  række med ild
+	gotoxy(x, y+3);
+	fgcolor(1);
+	printf("%c", block);
+	fgcolor(9);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(11);
+	printf("%c", block);
+	fgcolor(8);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+	fgcolor(8);
+	printf("%c", block);
+	fgcolor(12);
+	printf("%c", block);
+	fgcolor(15);
+	printf("%c", block);
+	printf("%c", block);
+
+	//anden  række med ild
+	gotoxy(x, y+4);
+	fgcolor(0);
+	printf("%c", block);
+	fgcolor(9);
+	printf("%c", block);
+	fgcolor(11);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(8);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+	fgcolor(8);
+	printf("%c", block);
+	fgcolor(12);
+	printf("%c", block);
+	fgcolor(15);
+	printf("%c", block);
+	printf("%c", block);
+
+	gotoxy(x, y+5);
+	fgcolor(0);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+	fgcolor(15);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+
+	gotoxy(x, y+6);
+	fgcolor(0);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(15);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+
+	gotoxy(x, y+7);
+	fgcolor(0);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(8);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+	printf("%c", block);
+}
 
 
+
+
+
+void draw_asteroid(int x, int y, int size) {
+
+	// 1 = lille, 2 = mellem, 3 = stor
+
+
+	// lille
+	if (size == 1) {
+		//Første linje
+		gotoxy(x,y);
+		fgcolor(7);
+		printf("%c", block);
+		fgcolor(8);
+		printf("%c", block);
+		fgcolor(15);
+		printf("%c", block);
+		fgcolor(8);
+		printf("%c", block);
+
+		//Anden linje
+		gotoxy(x,y+1);
+		fgcolor(8);
+		printf("%c", block);
+		fgcolor(7);
+		printf("%c", block);
+		fgcolor(7);
+		printf("%c", block);
+		fgcolor(8);
+		printf("%c", block);
+
+
+		//Tredje linje
+		gotoxy(x,y+2);
+		fgcolor(8);
+		printf("%c", block);
+		fgcolor(8);
+		printf("%c", block);
+		fgcolor(7);
+		printf("%c", block);
+
+		//resetter farven
+		fgcolor(0);
+
+	}
+
+
+	// mellem
+	else if  (size == 2) {
+		//Første linje
+		gotoxy(x,y);
+		fgcolor(8);
+		printf("%c", block);
+		printf("%c", block);
+		fgcolor(7);
+		printf("%c", block);
+		fgcolor(8);
+		printf("%c", block);
+		printf("%c", block);
+		fgcolor(15);
+		printf("%c", block);
+
+		//Anden linje
+		gotoxy(x,y+1);
+		fgcolor(8);
+		printf("%c", block);
+		fgcolor(7);
+		printf("%c", block);
+		fgcolor(8);
+		printf("%c", block);
+		printf("%c", block);
+		fgcolor(7);
+		printf("%c", block);
+		printf("%c", block);
+		fgcolor(8);
+		printf("%c", block);
+
+		//Tredje linje
+		gotoxy(x,y+2);
+		fgcolor(7);
+		printf("%c", block);
+		fgcolor(8);
+		printf("%c", block);
+		printf("%c", block);
+		printf("%c", block);
+		printf("%c", block);
+		printf("%c", block);
+		printf("%c", block);
+
+
+		//Fjerde linje
+		gotoxy(x,y+3);
+		fgcolor(0);
+		printf("%c", block);
+		fgcolor(8);
+		printf("%c", block);
+		printf("%c", block);
+		fgcolor(7);
+		printf("%c", block);
+		printf("%c", block);
+
+
+		//resetter farven
+		fgcolor(0);
+
+	}
+	// stor
+	else if (size == 3) {
+		//Første linje
+		gotoxy(x,y);
+		fgcolor(0);
+		printf("%c", block);
+		fgcolor(7);
+		printf("%c", block);
+		printf("%c", block);
+		fgcolor(8);
+		printf("%c", block);
+		printf("%c", block);
+		printf("%c", block);
+
+		//Anden linje
+		gotoxy(x,y+1);
+		fgcolor(7);
+		printf("%c", block);
+		printf("%c", block);
+		printf("%c", block);
+		printf("%c", block);
+		printf("%c", block);
+		printf("%c", block);
+		fgcolor(15);
+		printf("%c", block);
+		fgcolor(8);
+		printf("%c", block);
+
+
+		//Tredje linje
+		gotoxy(x,y+2);
+		fgcolor(8);
+		printf("%c", block);
+		fgcolor(7);
+		printf("%c", block);
+		printf("%c", block);
+		printf("%c", block);
+		printf("%c", block);
+		printf("%c", block);
+		printf("%c", block);
+		printf("%c", block);
+		printf("%c", block);
+		fgcolor(8);
+		printf("%c", block);
+
+		//Fjerde linje
+		gotoxy(x,y+3);
+		fgcolor(8);
+		printf("%c", block);
+		printf("%c", block);
+		fgcolor(7);
+		printf("%c", block);
+		printf("%c", block);
+		fgcolor(8);
+		printf("%c", block);
+		fgcolor(7);
+		printf("%c", block);
+		printf("%c", block);
+		printf("%c", block);
+		fgcolor(8);
+		printf("%c", block);
+
+		//Femte linje
+		gotoxy(x+1,y+4);
+		fgcolor(8);
+		printf("%c", block);
+		printf("%c", block);
+		printf("%c", block);
+		fgcolor(7);
+		printf("%c", block);
+		printf("%c", block);
+		printf("%c", block);
+		fgcolor(8);
+		printf("%c", block);
+
+
+		//resetter farven
+		fgcolor(0);
+
+	}
+
+
+	else if (size == 4) {
+		gotoxy(x,y);
+		fgcolor(12);
+		printf("%c", block);
+		gotoxy(x+8,y);
+		fgcolor(4);
+		printf("%c", block);
+
+		gotoxy(x,y+1);
+		fgcolor(12);
+		printf("%c", block);
+		printf("%c", block);
+		gotoxy(x+7,y+1);
+		fgcolor(4);
+		printf("%c", block);
+		printf("%c", block);
+
+		gotoxy(x,y+2);
+		fgcolor(12);
+		printf("%c", block);
+		printf("%c", block);
+		gotoxy(x+7,y+2);
+		fgcolor(4);
+		printf("%c", block);
+		fgcolor(12);
+		printf("%c", block);
+
+		gotoxy(x,y+3);
+		fgcolor(4);
+		printf("%c", block);
+		fgcolor(12);
+		printf("%c", block);
+		fgcolor(7);
+		printf("%c", block);
+		fgcolor(8);
+		printf("%c", block);
+		printf("%c", block);
+		printf("%c", block);
+		fgcolor(7);
+		printf("%c", block);
+		fgcolor(12);
+		printf("%c", block);
+		fgcolor(4);
+		printf("%c", block);
+
+
+		gotoxy(x,y+4);
+		fgcolor(4);
+		printf("%c", block);
+		fgcolor(12);
+		printf("%c", block);
+		fgcolor(7);
+		printf("%c", block);
+		fgcolor(8);
+		printf("%c", block);
+		printf("%c", block);
+		printf("%c", block);
+		fgcolor(7);
+		printf("%c", block);
+		fgcolor(12);
+		printf("%c", block);
+		printf("%c", block);
+
+		gotoxy(x,y+5);
+		fgcolor(4);
+		printf("%c", block);
+		printf("%c", block);
+		gotoxy(x+7,y+5);
+		fgcolor(12);
+		printf("%c", block);
+		printf("%c", block);
+
+		gotoxy(x,y+6);
+		fgcolor(4);
+		printf("%c", block);
+		printf("%c", block);
+		gotoxy(x+7,y+6);
+		fgcolor(12);
+		printf("%c", block);
+		printf("%c", block);
+
+		gotoxy(x,y+7);
+		fgcolor(4);
+		printf("%c", block);
+		gotoxy(x+8,y+7);
+		fgcolor(12);
+		printf("%c", block);
+
+		//resetter farven
+		fgcolor(0);
+	}
+
+
+}
 
