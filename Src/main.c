@@ -16,7 +16,6 @@ init_joystick();
 //enables timer
 initTimer();
 g_running = 1;
-int i = 0;
 
 //creates and enables the spaceship
 spaceship_t my_ship;
@@ -99,9 +98,15 @@ print_astroid(&big_stroid);
 //satelite(20,20);
 
 
+//creates "level select" variable
+int lvl_select = 0;
 
-//main loop
-while(1){
+while(lvl_select == 1){
+
+}
+
+//main gameplay loop
+while(lvl_select == 0){
 	while (timer(10) == 1){
 	update_pos(&my_ship,detect_joystick());
 	print_ship(&my_ship);
