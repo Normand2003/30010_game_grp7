@@ -137,10 +137,10 @@ void window(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2) {
 //goes to position x1,y1 and writes top line+text
 
 	printf("%c[%d;%dH",ESC,y1,x1);
-	printf("%c%cWindow title%c",ltcor,txtstart,txtend);
+	printf("%c%c%c",ltcor,txtstart,txtend);
 
 	int16_t windowlen = x2 - x1;
-	int16_t i = 15;
+	int16_t i = 3;
 	while (i < windowlen) {
 		i++;
 		printf("%c",hline);
@@ -170,5 +170,7 @@ void window(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2) {
 			l++;
 			printf("%c",hline);
 		}
+	printf("%c[%d;%dH",ESC,y2,x2);
+	printf("%c",rbcor);
 }
 

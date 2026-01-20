@@ -38,24 +38,28 @@ void update_pos(spaceship_t *ship,int direction) {
 
 	if (direction == 1) {
 		if (ship->pos_y>0){
+			undraw_spaceship1(ship);
 			ship->pos_y = ship->pos_y-1;
 		}
 	} // up
 
 	if (direction == 3) {
 		if (ship->pos_y<41){
+			undraw_spaceship1(ship);
 			ship->pos_y = ship->pos_y+1;
 		}
 	} // down
 
 	if (direction == 2) {
-		if (ship->pos_x < 140) {
+		if (ship->pos_x < 230) {
+			undraw_spaceship1(ship);
 			ship->pos_x = ship->pos_x+2;
 		}
 	} // right
 
 	if (direction == 4) {
 		if (ship->pos_x > 0) {
+			undraw_spaceship1(ship);
 			ship->pos_x = ship->pos_x-2;
 		}
 	} // left
@@ -71,7 +75,7 @@ if (ship->powerup == 0){
 if (bullet1->vel_x == 0){
 
 	if (center == 5) {
-		bullet1->pos_x = ship->pos_x+16;
+		bullet1->pos_x = ship->pos_x+12;
 		bullet1->pos_y = ship->pos_y+4;
 		bullet1->vel_x = 2;
 	}
@@ -80,7 +84,7 @@ if (bullet1->vel_x == 0){
 else if (bullet2->vel_x == 0){
 
 	if (center == 5) {
-		bullet2->pos_x = ship->pos_x+16;
+		bullet2->pos_x = ship->pos_x+12;
 		bullet2->pos_y = ship->pos_y+4;
 		bullet2->vel_x = 2;
 	}
@@ -89,7 +93,7 @@ else if (bullet2->vel_x == 0){
 else if (bullet3->vel_x == 0){
 
 	if (center == 5) {
-		bullet3->pos_x = ship->pos_x+16;
+		bullet3->pos_x = ship->pos_x+12;
 		bullet3->pos_y = ship->pos_y+4;
 		bullet3->vel_x = 2;
 	}
@@ -98,7 +102,7 @@ else if (bullet3->vel_x == 0){
 else if (bullet4->vel_x == 0){
 
 	if (center == 5) {
-		bullet4->pos_x = ship->pos_x+16;
+		bullet4->pos_x = ship->pos_x+12;
 		bullet4->pos_y = ship->pos_y+4;
 		bullet4->vel_x = 2;
 	}
@@ -107,7 +111,7 @@ else if (bullet4->vel_x == 0){
 else if (bullet5->vel_x == 0){
 
 	if (center == 5) {
-		bullet5->pos_x = ship->pos_x+16;
+		bullet5->pos_x = ship->pos_x+12;
 		bullet5->pos_y = ship->pos_y+4;
 		bullet5->vel_x = 2;
 	}
@@ -116,16 +120,16 @@ else if (bullet5->vel_x == 0){
 
 
 //logic for moving bullet1
-	if (bullet1->pos_x < 158 && bullet1->vel_x != 0){
+	if (bullet1->pos_x < 235 && bullet1->vel_x != 0){
 		gotoxy(bullet1->pos_x,bullet1->pos_y);
-		printf("o");
+		printf("0");
 
 		gotoxy(bullet1->pos_x-bullet1->vel_x,bullet1->pos_y-bullet1->vel_y);
 		printf(" ");
 		bullet1->pos_x = bullet1->pos_x + bullet1->vel_x;
 
 	}
-	if (bullet1->pos_x >= 158) {
+	if (bullet1->pos_x >= 235) {
 		gotoxy(bullet1->pos_x,bullet1->pos_y);
 		gotoxy(bullet1->pos_x-bullet1->vel_x,bullet1->pos_y-bullet1->vel_y);
 		printf(" ");
@@ -135,16 +139,16 @@ else if (bullet5->vel_x == 0){
 	}
 
 //logic for moving bullet2
-	if (bullet2->pos_x < 158 && bullet2->vel_x != 0){
+	if (bullet2->pos_x < 235 && bullet2->vel_x != 0){
 		gotoxy(bullet2->pos_x,bullet2->pos_y);
-		printf("o");
+		printf("0");
 
 		gotoxy(bullet2->pos_x-bullet2->vel_x,bullet2->pos_y-bullet2->vel_y);
 		printf(" ");
 		bullet2->pos_x = bullet2->pos_x + bullet2->vel_x;
 
 	}
-	if (bullet2->pos_x >= 158) {
+	if (bullet2->pos_x >= 235) {
 		gotoxy(bullet2->pos_x,bullet2->pos_y);
 		gotoxy(bullet2->pos_x-bullet2->vel_x,bullet2->pos_y-bullet2->vel_y);
 		printf(" ");
@@ -153,16 +157,16 @@ else if (bullet5->vel_x == 0){
 		bullet2->pos_x = 1;
 	}
 //logic for moving bullet3
-	if (bullet3->pos_x < 158 && bullet3->vel_x != 0){
+	if (bullet3->pos_x < 235 && bullet3->vel_x != 0){
 		gotoxy(bullet3->pos_x,bullet3->pos_y);
-		printf("o");
+		printf("0");
 
 		gotoxy(bullet3->pos_x-bullet3->vel_x,bullet3->pos_y-bullet3->vel_y);
 		printf(" ");
 		bullet3->pos_x = bullet3->pos_x + bullet3->vel_x;
 
 	}
-	if (bullet3->pos_x >= 158) {
+	if (bullet3->pos_x >= 235) {
 		gotoxy(bullet3->pos_x,bullet3->pos_y);
 		gotoxy(bullet3->pos_x-bullet3->vel_x,bullet3->pos_y-bullet3->vel_y);
 		printf(" ");
@@ -172,16 +176,16 @@ else if (bullet5->vel_x == 0){
 	}
 
 //logic for moving bullet4
-	if (bullet4->pos_x < 158 && bullet4->vel_x != 0){
+	if (bullet4->pos_x < 235 && bullet4->vel_x != 0){
 		gotoxy(bullet4->pos_x,bullet4->pos_y);
-		printf("o");
+		printf("0");
 
 		gotoxy(bullet4->pos_x-bullet4->vel_x,bullet4->pos_y-bullet4->vel_y);
 		printf(" ");
 		bullet4->pos_x = bullet4->pos_x + bullet4->vel_x;
 
 	}
-	if (bullet4->pos_x >= 158) {
+	if (bullet4->pos_x >= 235) {
 		gotoxy(bullet4->pos_x,bullet4->pos_y);
 		gotoxy(bullet4->pos_x-bullet4->vel_x,bullet4->pos_y-bullet4->vel_y);
 		printf(" ");
@@ -191,16 +195,16 @@ else if (bullet5->vel_x == 0){
 	}
 
 //logic for moving bullet5
-	if (bullet5->pos_x < 158 && bullet5->vel_x != 0){
+	if (bullet5->pos_x < 235 && bullet5->vel_x != 0){
 		gotoxy(bullet5->pos_x,bullet5->pos_y);
-		printf("o");
+		printf("0");
 
 		gotoxy(bullet5->pos_x-bullet5->vel_x,bullet5->pos_y-bullet5->vel_y);
 		printf(" ");
 		bullet5->pos_x = bullet5->pos_x + bullet5->vel_x;
 
 	}
-	if (bullet5->pos_x >= 158) {
+	if (bullet5->pos_x >= 235) {
 		gotoxy(bullet5->pos_x,bullet5->pos_y);
 		gotoxy(bullet5->pos_x-bullet5->vel_x,bullet5->pos_y-bullet5->vel_y);
 		printf(" ");
@@ -218,19 +222,19 @@ void laser(spaceship_t *ship, int center,laser_t *laser, int *laser_shot){
 		if (center == 5){
 			ship->laser_shot = 1;
 			laser->pos_y = ship->pos_y+4;
-			laser->pos_x = ship->pos_x+17;
-			while (length < (150-laser->pos_x)){
+			laser->pos_x = ship->pos_x+12;
+			while (length < (228-laser->pos_x)){
 				gotoxy(laser->pos_x+length,laser->pos_y);
 				bgcolor(1);
 				printf("          ");
-				length = length + 10;
+				length = length + 5;
 			}
 			length = 0;
-			while (length < (150-laser->pos_x)){
+			while (length < (228-laser->pos_x)){
 				gotoxy(laser->pos_x+length,laser->pos_y);
 				bgcolor(0);
 				printf("          ");
-				length = length + 10;
+				length = length + 5;
 			}
 			length = 0;
 			bgcolor(0);
@@ -246,17 +250,17 @@ void spread_shot(spaceship_t *ship, int center, bullet_t *bullet_spread1, bullet
 	if ((bullet_spread1->vel_x == 0) && (bullet_spread2->vel_x == 0) && (bullet_spread3->vel_x == 0)){
 
 		if (center == 5) {
-			bullet_spread1->pos_x = ship->pos_x+16;
+			bullet_spread1->pos_x = ship->pos_x+12;
 			bullet_spread1->pos_y = ship->pos_y+3;
 			bullet_spread1->vel_x = 2;
 			bullet_spread1->vel_y = -1;
 
-			bullet_spread2->pos_x = ship->pos_x+16;
+			bullet_spread2->pos_x = ship->pos_x+12;
 			bullet_spread2->pos_y = ship->pos_y+4;
 			bullet_spread2->vel_x = 2;
 			bullet_spread2->vel_y = 0;
 
-			bullet_spread3->pos_x = ship->pos_x+16;
+			bullet_spread3->pos_x = ship->pos_x+12;
 			bullet_spread3->pos_y = ship->pos_y+5;
 			bullet_spread3->vel_x = 2;
 			bullet_spread3->vel_y = 1;

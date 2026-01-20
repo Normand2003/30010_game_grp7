@@ -2,4 +2,4 @@ objects.c:14:6:print_astroid	16	static
 objects.c:58:6:deprint_astroid	16	static
 objects.c:93:6:hit_astroid	16	static
 objects.c:159:6:laser_hit	16	static
-objects.c:182:6:update_stroid	16	static
+objects.c:176:6:spaceship_hit	16	static

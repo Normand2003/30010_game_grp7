@@ -173,22 +173,62 @@ void laser_hit(astroid_t *astroid, laser_t *laser){
 	}
 }
 
+void spaceship_hit(astroid_t *astroid,spaceship_t *ship){
+if (astroid->type == 3){
+	if((ship->pos_x+9 >= astroid->pos_x) && (ship->pos_x <= astroid->pos_x+6 )){
+		if((ship->pos_y+8 >= astroid->pos_y) && (ship->pos_y <= astroid->pos_y+4)){
+			ship->health = ship->health - 1;
 
-
-
-
-
-//Lorte funktion, brug ikke.
-void update_stroid(astroid_t *astroid){
-	if ((astroid->pos_x > astroid->vel_x) || (astroid->pos_x > 1)){
-		astroid->pos_x += astroid->vel_x;
-		deprint_astroid(astroid);
-		print_astroid(astroid);
-	}
-	else {
-		astroid->pos_x += 200;
+			gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 3 (large)
+			printf("          ");
+			gotoxy(astroid->pos_x,astroid->pos_y+1);
+			printf("           ");
+			gotoxy(astroid->pos_x,astroid->pos_y+2);
+			printf("           ");
+			gotoxy(astroid->pos_x,astroid->pos_y+3);
+			printf("          ");
+			gotoxy(astroid->pos_x,astroid->pos_y+4);
+			printf("          ");
+			//moves the astroids postion waaaaayyyyy off-screen
+			astroid->pos_x += 100;
+		}
 	}
 }
+if (astroid->type == 2){
+	if((ship->pos_x+9 >= astroid->pos_x) && (ship->pos_x <= astroid->pos_x+5 )){
+		if((ship->pos_y+8 >= astroid->pos_y) && (ship->pos_y <= astroid->pos_y+3)){
 
+			ship->health = ship->health - 1;
 
+			gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 2 (medium)
+			printf("       ");
+			gotoxy(astroid->pos_x,astroid->pos_y+1);
+			printf("       ");
+			gotoxy(astroid->pos_x,astroid->pos_y+2);
+			printf("       ");
+			gotoxy(astroid->pos_x,astroid->pos_y+3);
+			printf("       ");
+			//moves the astroids postion waaaaayyyyy off-screen
+			astroid->pos_x += 100;
+		}
+	}
+}
+if (astroid->type == 1){
+	if((ship->pos_x+9 >= astroid->pos_x) && (ship->pos_x <= astroid->pos_x+4 )){
+		if((ship->pos_y+8 >= astroid->pos_y) && (ship->pos_y <= astroid->pos_y+2)){
+
+			ship->health = ship->health - 1;
+
+			gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 1 (small)
+			printf("    ");
+			gotoxy(astroid->pos_x,astroid->pos_y+1);
+			printf("    ");
+			gotoxy(astroid->pos_x,astroid->pos_y+2);
+			printf("    ");
+			//moves the astroids postion waaaaayyyyy off-screen
+			astroid->pos_x += 100;
+		}
+	}
+}
+}
 
