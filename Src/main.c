@@ -7,6 +7,8 @@
 #include "stopwatch.h"
 #include "aliens.h"
 #include "gui_hud.h"
+#include "lcd.h"
+#include <string.h>
 
 //game screen is 235 x 65 pixels
 
@@ -22,11 +24,23 @@ fgcolor(15);
 //enables timer
 initTimer();
 g_running = 1;
+//enables lcd
+lcd_init();
+lcd_reset();
+//resets lcd
+memset(lcd_buffer,0x00,512);
+
 //creates "level select" variable
 int lvl_select = 0;
 
+//creates strings on lcd
+char health_string[25] = "Health: ";
+char health[2] = "";
 
+char score_string[10] = "Score: ";
+char score[6] = "";
 
+//keeps start screen running
 while(1){
 
 if(lvl_select == 0){
@@ -38,7 +52,8 @@ while(lvl_select == 0){
 		lvl_select = start_select(detect_joystick());
 	}
 }
-
+//
+//Keeps help screen running
 if(lvl_select == 2){
 	help_screen();
 }
@@ -55,10 +70,16 @@ while(lvl_select == 2){
 spaceship_t my_ship;
 my_ship.pos_x = 20;
 my_ship.pos_y = 32;
-my_ship.powerup = 1; //0 standard, 1 laser, 2 spread
+my_ship.powerup = 0; //0 standard, 1 laser, 2 spread
 my_ship.laser_shot = 0;
 my_ship.health = 3;
+my_ship.score = 100;
 
+//clears and fixes lcd screen
+memset(lcd_buffer,0x00,512);
+lcd_write_string(0,1,health_string);
+number_to_string(my_ship.health,health,2);
+lcd_write_string(1,1,score_string);
 
 //creates and enables the astroids
 //big astroid
@@ -147,23 +168,23 @@ while(lvl_select == 1){
 	laser_hit(&small_stroid,&ship_laser);
 	spread_shot(&my_ship,detect_joystick(),&bullet_spread1,&bullet_spread2,&bullet_spread3);
 
-	hit_astroid(&small_stroid,&ship_bullet1);
-	hit_astroid(&small_stroid,&ship_bullet2);
-	hit_astroid(&small_stroid,&ship_bullet3);
-	hit_astroid(&small_stroid,&ship_bullet4);
-	hit_astroid(&small_stroid,&ship_bullet5);
+	hit_astroid(&small_stroid,&ship_bullet1,&my_ship);
+	hit_astroid(&small_stroid,&ship_bullet2,&my_ship);
+	hit_astroid(&small_stroid,&ship_bullet3,&my_ship);
+	hit_astroid(&small_stroid,&ship_bullet4,&my_ship);
+	hit_astroid(&small_stroid,&ship_bullet5,&my_ship);
 
-	hit_astroid(&med_stroid,&ship_bullet1);
-	hit_astroid(&med_stroid,&ship_bullet2);
-	hit_astroid(&med_stroid,&ship_bullet3);
-	hit_astroid(&med_stroid,&ship_bullet4);
-	hit_astroid(&med_stroid,&ship_bullet5);
+	hit_astroid(&med_stroid,&ship_bullet1,&my_ship);
+	hit_astroid(&med_stroid,&ship_bullet2,&my_ship);
+	hit_astroid(&med_stroid,&ship_bullet3,&my_ship);
+	hit_astroid(&med_stroid,&ship_bullet4,&my_ship);
+	hit_astroid(&med_stroid,&ship_bullet5,&my_ship);
 
-	hit_astroid(&big_stroid,&ship_bullet1);
-	hit_astroid(&big_stroid,&ship_bullet2);
-	hit_astroid(&big_stroid,&ship_bullet3);
-	hit_astroid(&big_stroid,&ship_bullet4);
-	hit_astroid(&big_stroid,&ship_bullet5);
+	hit_astroid(&big_stroid,&ship_bullet1,&my_ship);
+	hit_astroid(&big_stroid,&ship_bullet2,&my_ship);
+	hit_astroid(&big_stroid,&ship_bullet3,&my_ship);
+	hit_astroid(&big_stroid,&ship_bullet4,&my_ship);
+	hit_astroid(&big_stroid,&ship_bullet5,&my_ship);
 
 	hit_astroid(&small_stroid,&bullet_spread1);
 	hit_astroid(&med_stroid,&bullet_spread1);
@@ -180,8 +201,15 @@ while(lvl_select == 1){
 	spaceship_hit(&big_stroid,&my_ship);
 	spaceship_hit(&med_stroid,&my_ship);
 	spaceship_hit(&small_stroid,&my_ship);
+
 	gotoxy(1,1);
 	printf("Ship Health: %d",my_ship.health);
+
+	number_to_string(my_ship.health, health,2);
+	lcd_write_string(0,40,health);
+
+	number_to_string(my_ship.score, score ,6);
+	lcd_write_string(1,35,score);
 
 	if(my_ship.health == 0){
 		lvl_select = 0;

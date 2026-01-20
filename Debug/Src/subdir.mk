@@ -9,12 +9,14 @@ C_SRCS += \
 ../Src/Plainmove.c \
 ../Src/Stopwatch.c \
 ../Src/aliens.c \
+../Src/asteroids.c \
+../Src/charset.c \
 ../Src/draw.c \
 ../Src/gui_hud.c \
 ../Src/joystick.c \
+../Src/lcd.c \
 ../Src/main.c \
 ../Src/menu.c \
-../Src/objects.c \
 ../Src/spaceship.c \
 ../Src/syscalls.c \
 ../Src/sysmem.c \
@@ -25,12 +27,14 @@ OBJS += \
 ./Src/Plainmove.o \
 ./Src/Stopwatch.o \
 ./Src/aliens.o \
+./Src/asteroids.o \
+./Src/charset.o \
 ./Src/draw.o \
 ./Src/gui_hud.o \
 ./Src/joystick.o \
+./Src/lcd.o \
 ./Src/main.o \
 ./Src/menu.o \
-./Src/objects.o \
 ./Src/spaceship.o \
 ./Src/syscalls.o \
 ./Src/sysmem.o \
@@ -41,12 +45,14 @@ C_DEPS += \
 ./Src/Plainmove.d \
 ./Src/Stopwatch.d \
 ./Src/aliens.d \
+./Src/asteroids.d \
+./Src/charset.d \
 ./Src/draw.d \
 ./Src/gui_hud.d \
 ./Src/joystick.d \
+./Src/lcd.d \
 ./Src/main.d \
 ./Src/menu.d \
-./Src/objects.d \
 ./Src/spaceship.d \
 ./Src/syscalls.d \
 ./Src/sysmem.d \
@@ -60,7 +66,7 @@ Src/%.o: ../Src/%.c Src/subdir.mk
 clean: clean-Src
 
 clean-Src:
-	-$(RM) ./Src/30010_io.d ./Src/30010_io.o ./Src/Plainmove.d ./Src/Plainmove.o ./Src/Stopwatch.d ./Src/Stopwatch.o ./Src/aliens.d ./Src/aliens.o ./Src/draw.d ./Src/draw.o ./Src/gui_hud.d ./Src/gui_hud.o ./Src/joystick.d ./Src/joystick.o ./Src/main.d ./Src/main.o ./Src/menu.d ./Src/menu.o ./Src/objects.d ./Src/objects.o ./Src/spaceship.d ./Src/spaceship.o ./Src/syscalls.d ./Src/syscalls.o ./Src/sysmem.d ./Src/sysmem.o ./Src/system_stm32f30x.d ./Src/system_stm32f30x.o
+	-$(RM) ./Src/30010_io.d ./Src/30010_io.o ./Src/Plainmove.d ./Src/Plainmove.o ./Src/Stopwatch.d ./Src/Stopwatch.o ./Src/aliens.d ./Src/aliens.o ./Src/asteroids.d ./Src/asteroids.o ./Src/charset.d ./Src/charset.o ./Src/draw.d ./Src/draw.o ./Src/gui_hud.d ./Src/gui_hud.o ./Src/joystick.d ./Src/joystick.o ./Src/lcd.d ./Src/lcd.o ./Src/main.d ./Src/main.o ./Src/menu.d ./Src/menu.o ./Src/spaceship.d ./Src/spaceship.o ./Src/syscalls.d ./Src/syscalls.o ./Src/sysmem.d ./Src/sysmem.o ./Src/system_stm32f30x.d ./Src/system_stm32f30x.o
 
 .PHONY: clean-Src
 

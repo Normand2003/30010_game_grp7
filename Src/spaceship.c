@@ -10,6 +10,7 @@
 #include "structures.h"
 #include "draw.h"
 
+//function not used
 void print_ship(spaceship_t *ship) {
 
 	//prints ship and "air" around it
@@ -37,13 +38,13 @@ void print_ship(spaceship_t *ship) {
 void update_pos(spaceship_t *ship,int direction) {
 
 	if (direction == 1) {
-		if (ship->pos_y>0){
+		if (ship->pos_y>2){
 			ship->pos_y = ship->pos_y-1;
 		}
 	} // up
 
 	if (direction == 3) {
-		if (ship->pos_y<41){
+		if (ship->pos_y<55){
 			ship->pos_y = ship->pos_y+1;
 		}
 	} // down
@@ -54,13 +55,12 @@ void update_pos(spaceship_t *ship,int direction) {
 		}
 	} // right
 
-	if (direction == 4) {
-		if (ship->pos_x > 0) {
-			ship->pos_x = ship->pos_x-2;
-		}
-	} // left
+	//if (direction == 4) {
+	//	if (ship->pos_x > 0) {
+	//		ship->pos_x = ship->pos_x-2;
+	//	}
+	//} // left
 }
-
 
 void shoot(spaceship_t *ship, int center,bullet_t *bullet1,bullet_t *bullet2,bullet_t *bullet3,bullet_t *bullet4,bullet_t *bullet5) {
 

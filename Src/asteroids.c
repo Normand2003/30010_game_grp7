@@ -1,275 +1,249 @@
-#include "stm32f30x_conf.h" // STM32 config
-#include "30010_io.h" // Input/output library for this course
-#include "aliens.h"
-#include "stopwatch.h"
+/*
+ * objects.c
+ *
+ *  Created on: 13. jan. 2026
+ *      Author: chris & Jeppe
+ */
+
+#include "spaceship.h"
+#include "joystick.h"
 #include "structures.h"
 #include "draw.h"
+#include "stopwatch.h"
 #define ESC 0x1B
 #define block 0xDB
 
 
+//function not used
+void print_astroid(astroid_t *astroid){
 
-void draw_alien(alien_t *alien) {
-	//printer linje 1
+if (astroid->pos_x < 150){
+	gotoxy(astroid->pos_x,astroid->pos_y);
 
-	int i = 1;
-	static int start = 0;
-
-	if (alien->health == 1) {
-		//printer linje 3
-		enable_alien(alien);
-		start = 1;
+	if (astroid->type == 1) {
+		gotoxy(astroid->pos_x,astroid->pos_y); //this prints the astroid type 1 (small)
+		printf(" __");
+		gotoxy(astroid->pos_x,astroid->pos_y+1);
+		printf("/\xF8 \\");
+		gotoxy(astroid->pos_x,astroid->pos_y+2);
+		printf("\\__/");
 	}
 
+	if (astroid->type == 2) {
+		gotoxy(astroid->pos_x,astroid->pos_y); // this prints the astroid type 2 (medium)
+		printf(" ____");
+		gotoxy(astroid->pos_x,astroid->pos_y+1);
+		printf("/   \xA7\\");
+		gotoxy(astroid->pos_x,astroid->pos_y+2);
+		printf("\\\xF8   \xA7\\");
+		gotoxy(astroid->pos_x,astroid->pos_y+3);
+		printf(" \\____/");
+	}
 
-		// sletter alienen hvis den dør
-		if (alien->health == 0) {
-			if (start == 1) {
-			delete_alien(alien);
-			start = 0;
-			}
+	if (astroid->type == 3) {
+		gotoxy(astroid->pos_x,astroid->pos_y); // this prints the astroid type 3 (large)
+		printf("    ______");
+		gotoxy(astroid->pos_x,astroid->pos_y+1);
+		printf("   /   \xF8  \\");
+		gotoxy(astroid->pos_x,astroid->pos_y+2);
+		printf("  /\xA7      /");
+		gotoxy(astroid->pos_x,astroid->pos_y+3);
+		printf(" /     \xF8 /");
+		gotoxy(astroid->pos_x,astroid->pos_y+4);
+		printf(" \\_______)");
+		underline(1);
+		gotoxy(astroid->pos_x+3,astroid->pos_y+4);
+		printf("\xA7");
+		underline(0);
+	}
+}
+}
+
+//function not used? i think
+void deprint_astroid(astroid_t *astroid){
+	if (astroid->type == 3){
+		gotoxy(astroid->pos_x-astroid->vel_x,astroid->pos_y); //this prints the removal astroid type 3 (large)
+		printf("          ");
+		gotoxy(astroid->pos_x-astroid->vel_x,astroid->pos_y+1);
+		printf("           ");
+		gotoxy(astroid->pos_x-astroid->vel_x,astroid->pos_y+2);
+		printf("           ");
+		gotoxy(astroid->pos_x-astroid->vel_x,astroid->pos_y+3);
+		printf("          ");
+		gotoxy(astroid->pos_x-astroid->vel_x,astroid->pos_y+4);
+		printf("          ");
+	}
+
+	if (astroid->type == 2){
+		gotoxy(astroid->pos_x-astroid->vel_x,astroid->pos_y); //this prints the removal astroid type 2 (medium)
+		printf("       ");
+		gotoxy(astroid->pos_x-astroid->vel_x,astroid->pos_y+1);
+		printf("       ");
+		gotoxy(astroid->pos_x-astroid->vel_x,astroid->pos_y+2);
+		printf("       ");
+		gotoxy(astroid->pos_x-astroid->vel_x,astroid->pos_y+3);
+		printf("       ");
+	}
+
+	if (astroid->type == 1){
+	gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 1 (small)
+	printf("    ");
+	gotoxy(astroid->pos_x,astroid->pos_y+1);
+	printf("    ");
+	gotoxy(astroid->pos_x,astroid->pos_y+2);
+	printf("    ");
+	}
+}
+
+void hit_astroid(astroid_t *astroid,bullet_t *bullet, spaceship_t *ship) {
+	if (astroid->type == 3){
+	if ((bullet->pos_x-1 >= astroid->pos_x && bullet->pos_y >= astroid->pos_y) && (bullet->pos_x <= astroid->pos_x+10 && bullet->pos_y <= astroid->pos_y+4)){
+
+		gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 3 (large)
+		printf("          ");
+		gotoxy(astroid->pos_x,astroid->pos_y+1);
+		printf("           ");
+		gotoxy(astroid->pos_x,astroid->pos_y+2);
+		printf("           ");
+		gotoxy(astroid->pos_x,astroid->pos_y+3);
+		printf("          ");
+		gotoxy(astroid->pos_x,astroid->pos_y+4);
+		printf("          ");
+		//moves the astroids postion waaaaayyyyy off-screen
+		astroid->pos_x += 100;
+		//increases score
+		ship->score += 3;
+
+		//destroys the bullet
+		gotoxy(bullet->pos_x-bullet->vel_x,bullet->pos_y-bullet->vel_y);
+		printf(" ");
+		bullet->vel_x = 0;
+
+	}
+	}
+
+	if (astroid->type == 2){
+	if ((bullet->pos_x-1 >= astroid->pos_x && bullet->pos_y >= astroid->pos_y) && (bullet->pos_x <= astroid->pos_x+6 && bullet->pos_y <= astroid->pos_y+3)){
+
+		gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 2 (medium)
+		printf("       ");
+		gotoxy(astroid->pos_x,astroid->pos_y+1);
+		printf("       ");
+		gotoxy(astroid->pos_x,astroid->pos_y+2);
+		printf("       ");
+		gotoxy(astroid->pos_x,astroid->pos_y+3);
+		printf("       ");
+		//moves the astroids postion waaaaayyyyy off-screen
+		astroid->pos_x += 100;
+		//increases score
+		ship->score += 2;
+
+		//destroys the bullet
+		gotoxy(bullet->pos_x-bullet->vel_x,bullet->pos_y-bullet->vel_y);
+		printf(" ");
+		bullet->vel_x = 0;
+	}
+	}
+
+	if (astroid->type == 1){
+	if ((bullet->pos_x-1 >= astroid->pos_x && bullet->pos_y >= astroid->pos_y) && (bullet->pos_x <= astroid->pos_x+5 && bullet->pos_y <= astroid->pos_y+2)){
+
+		gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 1 (small)
+		printf("    ");
+		gotoxy(astroid->pos_x,astroid->pos_y+1);
+		printf("    ");
+		gotoxy(astroid->pos_x,astroid->pos_y+2);
+		printf("    ");
+		//moves the astroids postion waaaaayyyyy off-screen
+		astroid->pos_x += 100;
+		//increases score
+		ship->score += 1;
+
+		//destroys the bullet
+		gotoxy(bullet->pos_x-bullet->vel_x,bullet->pos_y-bullet->vel_y);
+		printf(" ");
+		bullet->vel_x = 0;
+	}
+	}
+}
+
+void laser_hit(astroid_t *astroid, laser_t *laser){
+	if (laser->pos_y >= astroid->pos_y && laser->pos_y <= astroid->pos_y+4){
+		gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 3 (large)
+		printf("          ");
+		gotoxy(astroid->pos_x,astroid->pos_y+1);
+		printf("           ");
+		gotoxy(astroid->pos_x,astroid->pos_y+2);
+		printf("           ");
+		gotoxy(astroid->pos_x,astroid->pos_y+3);
+		printf("          ");
+		gotoxy(astroid->pos_x,astroid->pos_y+4);
+		printf("          ");
+		//moves the astroids postion waaaaayyyyy off-screen
+		astroid->pos_x += 100;
+		laser->pos_y = 70;
+	}
+}
+
+void spaceship_hit(astroid_t *astroid,spaceship_t *ship){
+if (astroid->type == 3){
+	if((ship->pos_x+9 >= astroid->pos_x) && (ship->pos_x <= astroid->pos_x+6 )){
+		if((ship->pos_y+8 >= astroid->pos_y) && (ship->pos_y <= astroid->pos_y+4)){
+			ship->health = ship->health - 1;
+
+			gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 3 (large)
+			printf("          ");
+			gotoxy(astroid->pos_x,astroid->pos_y+1);
+			printf("           ");
+			gotoxy(astroid->pos_x,astroid->pos_y+2);
+			printf("           ");
+			gotoxy(astroid->pos_x,astroid->pos_y+3);
+			printf("          ");
+			gotoxy(astroid->pos_x,astroid->pos_y+4);
+			printf("          ");
+			//moves the astroids postion waaaaayyyyy off-screen
+			astroid->pos_x += 100;
 		}
-
-
-
-
-
-}
-
-void alien_dying(alien_t *alien) {
-
-	int bullet_pos_x = 3;
-	int bullet_pos_y = 3;
-
-	int death = 0; // ret til 0 for at trigger death animation
-	int tid = 0;
-	int start = 0;
-
-
-
-	if ((bullet_pos_x >= alien->pos_x) && (bullet_pos_x <= alien->pos_x+5) && (bullet_pos_y >= alien->pos_y) && (bullet_pos_y <= alien->pos_y+10)) {
-		death = 1;
 	}
+}
+if (astroid->type == 2){
+	if((ship->pos_x+9 >= astroid->pos_x) && (ship->pos_x <= astroid->pos_x+5 )){
+		if((ship->pos_y+8 >= astroid->pos_y) && (ship->pos_y <= astroid->pos_y+3)){
 
-	if (death == 1){
+			ship->health = ship->health - 1;
 
-		if (start == 0) {
-			int tid = g_time.s;
-
+			gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 2 (medium)
+			printf("       ");
+			gotoxy(astroid->pos_x,astroid->pos_y+1);
+			printf("       ");
+			gotoxy(astroid->pos_x,astroid->pos_y+2);
+			printf("       ");
+			gotoxy(astroid->pos_x,astroid->pos_y+3);
+			printf("       ");
+			//moves the astroids postion waaaaayyyyy off-screen
+			astroid->pos_x += 100;
 		}
-			if (g_time.s == tid + 1) {
-				alien->health = 0;
-				start = 1;
-				}
-			if ((g_time.s - tid < 1)) {
-				enable_alien(alien);
-				delete_alien(alien);
-			}
 	}
 }
+if (astroid->type == 1){
+	if((ship->pos_x+9 >= astroid->pos_x) && (ship->pos_x <= astroid->pos_x+4 )){
+		if((ship->pos_y+8 >= astroid->pos_y) && (ship->pos_y <= astroid->pos_y+2)){
 
-void delete_alien(alien_t *alien) {
+			ship->health = ship->health - 1;
 
-		gotoxy(alien->pos_x, alien->pos_y);
-		bgcolor(0);
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		gotoxy(alien->pos_x, alien->pos_y+1);
-		bgcolor(0);
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		gotoxy(alien->pos_x, alien->pos_y+2);
-		bgcolor(0);
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		gotoxy(alien->pos_x, alien->pos_y+3);
-		bgcolor(0);
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		gotoxy(alien->pos_x, alien->pos_y+4);
-		bgcolor(0);
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		gotoxy(alien->pos_x, alien->pos_y+5);
-		bgcolor(0);
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		printf(" ");
-		bgcolor(0);
+			gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 1 (small)
+			printf("    ");
+			gotoxy(astroid->pos_x,astroid->pos_y+1);
+			printf("    ");
+			gotoxy(astroid->pos_x,astroid->pos_y+2);
+			printf("    ");
+			//moves the astroids postion waaaaayyyyy off-screen
+			astroid->pos_x += 100;
+		}
+	}
+}
 }
 
-void enable_alien(alien_t *alien) {
-	int i = 1;
-	//printer linje 3
-	gotoxy(alien->pos_x, alien->pos_y);
-	bgcolor(0);
-	printf(" ");
-	printf(" ");
-	bgcolor(i);
-	printf(" ");
-	printf(" ");
-	printf(" ");
-	printf(" ");
-	printf(" ");
-	printf(" ");
-	printf(" ");
-	bgcolor(0);
-	printf(" ");
-	printf(" ");
-
-	//printer linje 4
-	gotoxy(alien->pos_x,alien->pos_y+1);
-	bgcolor(0);
-	printf(" ");
-	bgcolor(i);
-	printf(" ");
-	printf(" ");
-	bgcolor(0);
-	printf(" ");
-	bgcolor(i);
-	printf(" ");
-	printf(" ");
-	printf(" ");
-	bgcolor(0);
-	printf(" ");
-	bgcolor(i);
-	printf(" ");
-	printf(" ");
-	bgcolor(0);
-	printf(" ");
-
-	//printer linje 5
-	gotoxy(alien->pos_x,alien->pos_y+2);
-	bgcolor(i);
-	printf(" ");
-	printf(" ");
-	printf(" ");
-	printf(" ");
-	printf(" ");
-	printf(" ");
-	printf(" ");
-	printf(" ");
-	printf(" ");
-	printf(" ");
-	printf(" ");
-
-	//printer linje 6
-	gotoxy(alien->pos_x,alien->pos_y+3);
-	bgcolor(i);
-	printf(" ");
-	bgcolor(0);
-	printf(" ");
-	bgcolor(i);
-	printf(" ");
-	printf(" ");
-	printf(" ");
-	printf(" ");
-	printf(" ");
-	printf(" ");
-	printf(" ");
-	bgcolor(0);
-	printf(" ");
-	bgcolor(i);
-	printf(" ");
-
-	//printer linje 7
-	gotoxy(alien->pos_x,alien->pos_y+4);
-	bgcolor(i);
-	printf(" ");
-	bgcolor(0);
-	printf(" ");
-	bgcolor(i);
-	printf(" ");
-	bgcolor(0);
-	printf(" ");
-	printf(" ");
-	printf(" ");
-	printf(" ");
-	printf(" ");
-	bgcolor(i);
-	printf(" ");
-	bgcolor(0);
-	printf(" ");
-	bgcolor(i);
-	printf(" ");
-
-	//printer linje 8
-	gotoxy(alien->pos_x,alien->pos_y+5);
-	bgcolor(0);
-	printf(" ");
-	printf(" ");
-	printf(" ");
-	bgcolor(i);
-	printf(" ");
-	printf(" ");
-	bgcolor(0);
-	printf(" ");
-	bgcolor(i);
-	printf(" ");
-	printf(" ");
-	bgcolor(0);
-	printf(" ");
-	printf(" ");
-	printf(" ");
-	bgcolor(0);
-}
-
-
-//functions moved to objects.c
-/*
 void draw_spaceship1(spaceship_t *ship) {
 
 	gotoxy(ship->pos_x, ship->pos_y-1);
@@ -550,11 +524,6 @@ void draw_spaceship2(int x, int y) {
 	printf("%c", block);
 	printf("%c", block);
 }
-
-
-
-
-
 
 void draw_asteroid(astroid_t *astroid) {
 
@@ -837,5 +806,3 @@ void draw_asteroid(astroid_t *astroid) {
 
 }
 
-
-*/

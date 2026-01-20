@@ -5,9 +5,9 @@
  *      Author: chris
  */
 
-#ifndef OBJECTS_H_
-#define OBJECTS_H_
+#ifndef ASTEROIDS_H_
+#define ASTEROIDS_H_
 #include <stdint.h>
 
 
-#endif /* OBJECTS_H_ */
+#endif /* ASTEROIDS_H_ */
