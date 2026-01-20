@@ -270,6 +270,8 @@ void enable_alien(alien_t *alien) {
 
 void draw_spaceship1(spaceship_t *ship) {
 
+	gotoxy(ship->pos_x, ship->pos_y-1);
+	printf("       ");
 
 	gotoxy(ship->pos_x, ship->pos_y);
 	fgcolor(0);
@@ -281,7 +283,7 @@ void draw_spaceship1(spaceship_t *ship) {
 	printf("%c", block);
 	fgcolor(7);
 	printf("%c", block);
-	printf("%c", block);
+	printf("%c ", block);
 
 	gotoxy(ship->pos_x, ship->pos_y+1);
 	fgcolor(0);
@@ -295,7 +297,7 @@ void draw_spaceship1(spaceship_t *ship) {
 	printf("%c", block);
 	printf("%c", block);
 	fgcolor(7);
-	printf("%c", block);
+	printf("%c ", block);
 
 	gotoxy(ship->pos_x, ship->pos_y+2);
 	fgcolor(0);
@@ -310,7 +312,7 @@ void draw_spaceship1(spaceship_t *ship) {
 	printf("%c", block);
 	printf("%c", block);
 	fgcolor(7);
-	printf("%c", block);
+	printf("%c ", block);
 
 	//første række med ild
 	gotoxy(ship->pos_x, ship->pos_y+3);
@@ -331,7 +333,7 @@ void draw_spaceship1(spaceship_t *ship) {
 	printf("%c", block);
 	fgcolor(15);
 	printf("%c", block);
-	printf("%c", block);
+	printf("%c ", block);
 
 	//anden række med ild
 	gotoxy(ship->pos_x, ship->pos_y+4);
@@ -351,7 +353,7 @@ void draw_spaceship1(spaceship_t *ship) {
 	printf("%c", block);
 	fgcolor(15);
 	printf("%c", block);
-	printf("%c", block);
+	printf("%c ", block);
 
 	//Tredje række med ild
 	gotoxy(ship->pos_x, ship->pos_y+5);
@@ -371,7 +373,7 @@ void draw_spaceship1(spaceship_t *ship) {
 	printf("%c", block);
 	fgcolor(15);
 	printf("%c", block);
-	printf("%c", block);
+	printf("%c ", block);
 
 	gotoxy(ship->pos_x, ship->pos_y+6);
 	fgcolor(0);
@@ -386,7 +388,7 @@ void draw_spaceship1(spaceship_t *ship) {
 	printf("%c", block);
 	printf("%c", block);
 	fgcolor(7);
-	printf("%c", block);
+	printf("%c ", block);
 
 	gotoxy(ship->pos_x, ship->pos_y+7);
 	fgcolor(0);
@@ -400,7 +402,7 @@ void draw_spaceship1(spaceship_t *ship) {
 	printf("%c", block);
 	printf("%c", block);
 	fgcolor(7);
-	printf("%c", block);
+	printf("%c ", block);
 
 	gotoxy(ship->pos_x, ship->pos_y+8);
 	fgcolor(0);
@@ -412,7 +414,9 @@ void draw_spaceship1(spaceship_t *ship) {
 	printf("%c", block);
 	fgcolor(7);
 	printf("%c", block);
-	printf("%c", block);
+	printf("%c ", block);
+	gotoxy(ship->pos_x, ship->pos_y+9);
+	printf("       ");
 
 fgcolor(15);
 

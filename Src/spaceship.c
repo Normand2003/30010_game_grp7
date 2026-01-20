@@ -38,28 +38,24 @@ void update_pos(spaceship_t *ship,int direction) {
 
 	if (direction == 1) {
 		if (ship->pos_y>0){
-			undraw_spaceship1(ship);
 			ship->pos_y = ship->pos_y-1;
 		}
 	} // up
 
 	if (direction == 3) {
 		if (ship->pos_y<41){
-			undraw_spaceship1(ship);
 			ship->pos_y = ship->pos_y+1;
 		}
 	} // down
 
 	if (direction == 2) {
 		if (ship->pos_x < 230) {
-			undraw_spaceship1(ship);
 			ship->pos_x = ship->pos_x+2;
 		}
 	} // right
 
 	if (direction == 4) {
 		if (ship->pos_x > 0) {
-			undraw_spaceship1(ship);
 			ship->pos_x = ship->pos_x-2;
 		}
 	} // left
@@ -222,7 +218,7 @@ void laser(spaceship_t *ship, int center,laser_t *laser, int *laser_shot){
 		if (center == 5){
 			ship->laser_shot = 1;
 			laser->pos_y = ship->pos_y+4;
-			laser->pos_x = ship->pos_x+12;
+			laser->pos_x = ship->pos_x+11;
 			while (length < (228-laser->pos_x)){
 				gotoxy(laser->pos_x+length,laser->pos_y);
 				bgcolor(1);
