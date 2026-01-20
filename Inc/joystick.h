@@ -8,9 +8,11 @@
 #ifndef JOYSTICK_H_
 #define JOYSTICK_H_
 #include <stdint.h>
+#include "structures.h"
 
 int detect_joystick();
 void init_joystick();
-void init_RGB();
+void init_led();
+void lives_RGB(spaceship_t *ship);
 
 #endif /* JOYSTICK_H_ */

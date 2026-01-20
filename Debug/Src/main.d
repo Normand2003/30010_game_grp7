@@ -33,8 +33,8 @@ Src/main.o: ../Src/main.c \
  C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/draw.h \
  C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/joystick.h \
  C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/structures.h \
- C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/spaceship.h \
  C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/structures.h \
+ C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/spaceship.h \
  C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/stopwatch.h \
  C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/aliens.h \
  C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/30010_io.h \
@@ -114,9 +114,9 @@ C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Gam
 
 C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/structures.h:
 
-C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/spaceship.h:
-
 C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/structures.h:
+
+C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/spaceship.h:
 
 C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/stopwatch.h:
 

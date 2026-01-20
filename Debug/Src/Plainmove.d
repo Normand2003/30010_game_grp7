@@ -1,5 +1,6 @@
 Src/Plainmove.o: ../Src/Plainmove.c \
  C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/joystick.h \
+ C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/structures.h \
  C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/stm32f30x_conf.h \
  C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/SPL/inc/stm32f30x_adc.h \
  C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/stm32f30x.h \
@@ -33,6 +34,8 @@ Src/Plainmove.o: ../Src/Plainmove.c \
  C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/30010_io.h
 
 C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/joystick.h:
+
+C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/structures.h:
 
 C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/stm32f30x_conf.h:
 

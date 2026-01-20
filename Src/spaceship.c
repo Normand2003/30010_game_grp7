@@ -9,6 +9,8 @@
 #include "joystick.h"
 #include "structures.h"
 #include "draw.h"
+#define ESC 0x1B
+#define block 0xDB
 
 //function not used
 void print_ship(spaceship_t *ship) {
@@ -328,5 +330,159 @@ void spread_shot(spaceship_t *ship, int center, bullet_t *bullet_spread1, bullet
 			bullet_spread3->pos_x = 1;
 			bullet_spread3->pos_y = 1;
 		}
+
+}
+
+void draw_spaceship1(spaceship_t *ship) {
+
+	gotoxy(ship->pos_x, ship->pos_y-1);
+	printf("       ");
+
+	gotoxy(ship->pos_x, ship->pos_y);
+	fgcolor(0);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(8);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+	printf("%c ", block);
+
+	gotoxy(ship->pos_x, ship->pos_y+1);
+	fgcolor(0);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(15);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c ", block);
+
+	gotoxy(ship->pos_x, ship->pos_y+2);
+	fgcolor(0);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+	fgcolor(15);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c ", block);
+
+	//første række med ild
+	gotoxy(ship->pos_x, ship->pos_y+3);
+	fgcolor(0);
+	printf("%c", block);
+	fgcolor(9);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(11);
+	printf("%c", block);
+	fgcolor(8);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+	fgcolor(8);
+	printf("%c", block);
+	fgcolor(12);
+	printf("%c", block);
+	fgcolor(15);
+	printf("%c", block);
+	printf("%c ", block);
+
+	//anden række med ild
+	gotoxy(ship->pos_x, ship->pos_y+4);
+	fgcolor(9);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(11);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(8);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+	fgcolor(8);
+	printf("%c", block);
+	fgcolor(12);
+	printf("%c", block);
+	fgcolor(15);
+	printf("%c", block);
+	printf("%c ", block);
+
+	//Tredje række med ild
+	gotoxy(ship->pos_x, ship->pos_y+5);
+	fgcolor(9);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(11);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(8);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+	fgcolor(8);
+	printf("%c", block);
+	fgcolor(12);
+	printf("%c", block);
+	fgcolor(15);
+	printf("%c", block);
+	printf("%c ", block);
+
+	gotoxy(ship->pos_x, ship->pos_y+6);
+	fgcolor(0);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+	fgcolor(15);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c ", block);
+
+	gotoxy(ship->pos_x, ship->pos_y+7);
+	fgcolor(0);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(15);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c ", block);
+
+	gotoxy(ship->pos_x, ship->pos_y+8);
+	fgcolor(0);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(8);
+	printf("%c", block);
+	printf("%c", block);
+	printf("%c", block);
+	fgcolor(7);
+	printf("%c", block);
+	printf("%c ", block);
+	gotoxy(ship->pos_x, ship->pos_y+9);
+	printf("       ");
+
+fgcolor(15);
 
 }

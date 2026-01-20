@@ -1,2 +1,5 @@
-joystick.c:10:6:init_joystick	4	static
-joystick.c:61:5:detect_joystick	24	static
+joystick.c:11:6:init_joystick	4	static
+joystick.c:62:5:detect_joystick	24	static
+joystick.c:101:6:init_led	4	static
+joystick.c:135:6:lives_RGB	16	static
+joystick.c:167:5:keyboard	272	static

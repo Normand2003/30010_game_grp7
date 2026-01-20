@@ -18,4 +18,5 @@ void update_pos(spaceship_t *ship,int direction);
 void print_ship(spaceship_t *ship);
 
 
+
 #endif /* SPACESHIP_H_ */

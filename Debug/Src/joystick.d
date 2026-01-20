@@ -1,5 +1,6 @@
 Src/joystick.o: ../Src/joystick.c \
  C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/joystick.h \
+ C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/structures.h \
  C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/SPL/inc/stm32f30x_rcc.h \
  C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/stm32f30x.h \
  C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/cmsis/core_cm4.h \
@@ -28,9 +29,12 @@ Src/joystick.o: ../Src/joystick.c \
  C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/SPL/inc/stm32f30x_tim.h \
  C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/SPL/inc/stm32f30x_usart.h \
  C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/SPL/inc/stm32f30x_wwdg.h \
- C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/SPL/inc/stm32f30x_misc.h
+ C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/SPL/inc/stm32f30x_misc.h \
+ C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/structures.h
 
 C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/joystick.h:
+
+C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/structures.h:
 
 C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/SPL/inc/stm32f30x_rcc.h:
 
@@ -89,3 +93,5 @@ C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Gam
 C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/SPL/inc/stm32f30x_wwdg.h:
 
 C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/SPL/inc/stm32f30x_misc.h:
+
+C:/Users/chris/OneDrive/DTU/Semester\ 1/Programmeringsprojekt/Spil\ Filmappe/Game/30010_game_grp7/Inc/structures.h:

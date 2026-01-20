@@ -29,6 +29,8 @@ lcd_init();
 lcd_reset();
 //resets lcd
 memset(lcd_buffer,0x00,512);
+//enables LED
+init_led();
 
 //creates "level select" variable
 int lvl_select = 0;
@@ -50,6 +52,10 @@ if(lvl_select == 0){
 while(lvl_select == 0){
 	while (timer(10) == 1){
 		lvl_select = start_select(detect_joystick());
+		if(keyboard()==120){
+			gotoxy(1,1);
+			printf("AAAAAAAAAAAA");
+		}
 	}
 }
 //
@@ -61,8 +67,9 @@ if(lvl_select == 2){
 while(lvl_select == 2){
 	if(detect_joystick() == 5){
 		lvl_select = 0;
+		}
 	}
-}
+
 
 
 
@@ -78,7 +85,6 @@ my_ship.score = 100;
 //clears and fixes lcd screen
 memset(lcd_buffer,0x00,512);
 lcd_write_string(0,1,health_string);
-number_to_string(my_ship.health,health,2);
 lcd_write_string(1,1,score_string);
 
 //creates and enables the astroids
@@ -210,6 +216,10 @@ while(lvl_select == 1){
 
 	number_to_string(my_ship.score, score ,6);
 	lcd_write_string(1,35,score);
+
+	keyboard(&my_ship);
+
+	lives_RGB(&my_ship);
 
 	if(my_ship.health == 0){
 		lvl_select = 0;
