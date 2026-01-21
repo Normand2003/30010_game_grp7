@@ -27,7 +27,6 @@ void lcd_write_string(int y, int x, char *p) {
     lcd_push_buffer(lcd_buffer);
 }
 
-
 void lcd_update(char *p, char *q) {
 	int old_len = strlen(p);
 	int new_len = strlen(q);

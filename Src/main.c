@@ -35,13 +35,6 @@ init_led();
 //creates "level select" variable
 int lvl_select = 0;
 
-//creates strings on lcd
-char health_string[25] = "Health: ";
-char health[2] = "";
-
-char score_string[10] = "Score: ";
-char score[6] = "";
-
 //keeps start screen running
 while(1){
 
@@ -51,13 +44,10 @@ if(lvl_select == 0){
 
 while(lvl_select == 0){
 	while (timer(10) == 1){
-		lvl_select = start_select(detect_joystick());
-		if(keyboard()==120){
-			gotoxy(1,1);
-			printf("AAAAAAAAAAAA");
+		lvl_select = start_select(detect_joystick(), keyboard2());
 		}
 	}
-}
+
 //
 //Keeps help screen running
 if(lvl_select == 2){
@@ -65,7 +55,7 @@ if(lvl_select == 2){
 }
 
 while(lvl_select == 2){
-	if(detect_joystick() == 5){
+	if(detect_joystick() == 5 || keyboard2() == 32){
 		lvl_select = 0;
 		}
 	}
@@ -77,15 +67,22 @@ while(lvl_select == 2){
 spaceship_t my_ship;
 my_ship.pos_x = 20;
 my_ship.pos_y = 32;
-my_ship.powerup = 0; //0 standard, 1 laser, 2 spread
-my_ship.laser_shot = 0;
+my_ship.powerup = 1; //0 standard, 1 laser, 2 spread
+my_ship.laser_shot = 3;
 my_ship.health = 3;
 my_ship.score = 100;
 
+//creates strings on lcd
+char health_string[25] = "Health: ";
+char health[2] = "";
+
+char score_string[10] = "Score: ";
+char score[6] = "";
 //clears and fixes lcd screen
 memset(lcd_buffer,0x00,512);
 lcd_write_string(0,1,health_string);
 lcd_write_string(1,1,score_string);
+
 
 //creates and enables the astroids
 //big astroid
@@ -161,18 +158,27 @@ draw_asteroid(&big_stroid);
 //satelite(20,20);
 }
 
+int key;
 //main gameplay loop
 while(lvl_select == 1){
 	while (timer(10) == 1){
-	update_pos(&my_ship,detect_joystick());
+	key = keyboard2();
+
+	update_pos(&my_ship,detect_joystick(),key);
 	draw_spaceship1(&my_ship);
 
-	shoot(&my_ship,detect_joystick(),&ship_bullet1,&ship_bullet2,&ship_bullet3,&ship_bullet4,&ship_bullet5);
-	laser(&my_ship,detect_joystick(),&ship_laser);
+	shoot(&my_ship,detect_joystick(),key,&ship_bullet1,&ship_bullet2,&ship_bullet3,&ship_bullet4,&ship_bullet5);
+
+	laser(&my_ship,detect_joystick(),key,&ship_laser);
+
+
+
+
 	laser_hit(&big_stroid,&ship_laser);
 	laser_hit(&med_stroid,&ship_laser);
 	laser_hit(&small_stroid,&ship_laser);
-	spread_shot(&my_ship,detect_joystick(),&bullet_spread1,&bullet_spread2,&bullet_spread3);
+
+	spread_shot(&my_ship,detect_joystick(),key,&bullet_spread1,&bullet_spread2,&bullet_spread3);
 
 	hit_astroid(&small_stroid,&ship_bullet1,&my_ship);
 	hit_astroid(&small_stroid,&ship_bullet2,&my_ship);

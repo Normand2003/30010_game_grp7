@@ -197,3 +197,64 @@ int keyboard() {
 	uart_clear();
 
 }
+
+int keyboard2() {
+
+	// pil op = 27 91 "65"
+	// pil ned = 27 91 "66"
+	// pil højre = 27 91 "67"
+	// pil venstre = 27 91 "68"
+    // space = 32
+	// x(bosskey) = 120
+
+	int x = 0;
+	int i = 0;
+	char buffer[255];
+	while (uart_get_count() != 0) {
+		x = uart_get_char();
+		buffer[i]=x;
+
+		if (x == 65) {
+			i++;
+			buffer[254] = 0x00;
+			uart_clear();
+			return 65;
+		}
+		if (x == 66) {
+			i++;
+			buffer[254] = 0x00;
+			uart_clear();
+			return 66;
+		}
+		if (x == 120) {
+			i++;
+			buffer[254] = 0x00;
+			uart_clear();
+			return 120;
+		}
+		if (x == 67) {
+			i++;
+			buffer[254] = 0x00;
+			uart_clear();
+			return 67;
+		}
+		if (x == 68) {
+			i++;
+			buffer[254] = 0x00;
+			uart_clear();
+			return 68;
+		}
+		if (x == 32) {
+			i++;
+			buffer[254] = 0x00;
+			uart_clear();
+			return 32;
+		}
+		i++;
+	}
+
+
+	buffer[254] = 0x00;
+	uart_clear();
+	return 0;
+}

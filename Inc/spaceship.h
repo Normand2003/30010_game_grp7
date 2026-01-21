@@ -12,10 +12,12 @@
 #include <stdint.h>
 #include <stdio.h>
 #include "structures.h"
+#include "joystick.h"
 
 //functions
-void update_pos(spaceship_t *ship,int direction);
+void update_pos(spaceship_t *ship,int direction, int direction2);
 void print_ship(spaceship_t *ship);
+void laser(spaceship_t *ship, int joystick, int space, laser_t *laser);
 
 
 

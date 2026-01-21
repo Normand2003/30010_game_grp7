@@ -3,3 +3,4 @@ joystick.c:62:5:detect_joystick	24	static
 joystick.c:101:6:init_led	4	static
 joystick.c:135:6:lives_RGB	16	static
 joystick.c:167:5:keyboard	272	static
+joystick.c:201:5:keyboard2	272	static

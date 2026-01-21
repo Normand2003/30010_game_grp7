@@ -37,25 +37,26 @@ void print_ship(spaceship_t *ship) {
 }
 
 
-void update_pos(spaceship_t *ship,int direction) {
+void update_pos(spaceship_t *ship,int joystick, int keyboard) {
 
-	if (direction == 1) {
+
+	if (joystick == 1 || keyboard == 65) {
 		if (ship->pos_y>2){
 			ship->pos_y = ship->pos_y-1;
 		}
 	} // up
 
-	if (direction == 3) {
+	if (joystick == 3 || keyboard == 66) {
 		if (ship->pos_y<55){
 			ship->pos_y = ship->pos_y+1;
 		}
 	} // down
 
-	if (direction == 2) {
-		if (ship->pos_x < 230) {
-			ship->pos_x = ship->pos_x+2;
-		}
-	} // right
+	//if (direction == 2) {
+	//	if (ship->pos_x < 230) {
+	//		ship->pos_x = ship->pos_x+2;
+	//	}
+	//} // right
 
 	//if (direction == 4) {
 	//	if (ship->pos_x > 0) {
@@ -64,7 +65,7 @@ void update_pos(spaceship_t *ship,int direction) {
 	//} // left
 }
 
-void shoot(spaceship_t *ship, int center,bullet_t *bullet1,bullet_t *bullet2,bullet_t *bullet3,bullet_t *bullet4,bullet_t *bullet5) {
+void shoot(spaceship_t *ship, int joystick,int space,bullet_t *bullet1,bullet_t *bullet2,bullet_t *bullet3,bullet_t *bullet4,bullet_t *bullet5) {
 
 if (ship->powerup == 0){
 
@@ -72,7 +73,7 @@ if (ship->powerup == 0){
 //bullet1 logic
 if (bullet1->vel_x == 0){
 
-	if (center == 5) {
+	if ((joystick == 5 || space == 32)) {
 		bullet1->pos_x = ship->pos_x+12;
 		bullet1->pos_y = ship->pos_y+4;
 		bullet1->vel_x = 2;
@@ -81,7 +82,7 @@ if (bullet1->vel_x == 0){
 //bullet2 logic
 else if (bullet2->vel_x == 0){
 
-	if (center == 5) {
+	if (joystick == 5 || space == 32) {
 		bullet2->pos_x = ship->pos_x+12;
 		bullet2->pos_y = ship->pos_y+4;
 		bullet2->vel_x = 2;
@@ -90,7 +91,7 @@ else if (bullet2->vel_x == 0){
 //bullet3 logic
 else if (bullet3->vel_x == 0){
 
-	if (center == 5) {
+	if (joystick == 5 || space == 32) {
 		bullet3->pos_x = ship->pos_x+12;
 		bullet3->pos_y = ship->pos_y+4;
 		bullet3->vel_x = 2;
@@ -99,7 +100,7 @@ else if (bullet3->vel_x == 0){
 //bullet4 logic
 else if (bullet4->vel_x == 0){
 
-	if (center == 5) {
+	if (joystick == 5 || space == 32) {
 		bullet4->pos_x = ship->pos_x+12;
 		bullet4->pos_y = ship->pos_y+4;
 		bullet4->vel_x = 2;
@@ -108,7 +109,7 @@ else if (bullet4->vel_x == 0){
 //bullet5 logic
 else if (bullet5->vel_x == 0){
 
-	if (center == 5) {
+	if (joystick == 5 || space == 32) {
 		bullet5->pos_x = ship->pos_x+12;
 		bullet5->pos_y = ship->pos_y+4;
 		bullet5->vel_x = 2;
@@ -213,12 +214,12 @@ else if (bullet5->vel_x == 0){
 }
 }
 
-void laser(spaceship_t *ship, int center,laser_t *laser, int *laser_shot){
+void laser(spaceship_t *ship, int joystick,int space,laser_t *laser){
 	//logic for spawning laser
 	int length;
-	if (ship->powerup == 1){
-		if (center == 5){
-			ship->laser_shot = 1;
+	if (ship->powerup == 1 && ship->laser_shot != 0){
+		if (joystick == 5 || space ==  32) {
+			ship->laser_shot -= 1;
 			laser->pos_y = ship->pos_y+4;
 			laser->pos_x = ship->pos_x+11;
 			while (length < (228-laser->pos_x)){
@@ -240,14 +241,14 @@ void laser(spaceship_t *ship, int center,laser_t *laser, int *laser_shot){
 	}
 }
 
-void spread_shot(spaceship_t *ship, int center, bullet_t *bullet_spread1, bullet_t *bullet_spread2, bullet_t *bullet_spread3){
+void spread_shot(spaceship_t *ship, int center,int space, bullet_t *bullet_spread1, bullet_t *bullet_spread2, bullet_t *bullet_spread3){
 	if (ship->powerup == 2){
 
 	//logic for spawning bullets
 	//bullet_spread1&2&3 logic
 	if ((bullet_spread1->vel_x == 0) && (bullet_spread2->vel_x == 0) && (bullet_spread3->vel_x == 0)){
 
-		if (center == 5) {
+		if (center == 5 || space == 32) {
 			bullet_spread1->pos_x = ship->pos_x+12;
 			bullet_spread1->pos_y = ship->pos_y+3;
 			bullet_spread1->vel_x = 2;
@@ -278,7 +279,7 @@ void spread_shot(spaceship_t *ship, int center, bullet_t *bullet_spread1, bullet
 			bullet_spread1->pos_y = bullet_spread1->pos_y + bullet_spread1->vel_y;
 
 		}
-		if ((bullet_spread1->pos_x >= 158) || (bullet_spread1->pos_y >= 50) || (bullet_spread1->pos_y <= 0)) {
+		if ((bullet_spread1->pos_x >= 158) || (bullet_spread1->pos_y >= 64) || (bullet_spread1->pos_y <= 0)) {
 			gotoxy(bullet_spread1->pos_x,bullet_spread1->pos_y);
 			gotoxy(bullet_spread1->pos_x-bullet_spread1->vel_x,bullet_spread1->pos_y-bullet_spread1->vel_y);
 			printf(" ");
@@ -299,7 +300,7 @@ void spread_shot(spaceship_t *ship, int center, bullet_t *bullet_spread1, bullet
 			bullet_spread2->pos_y = bullet_spread2->pos_y + bullet_spread2->vel_y;
 
 		}
-		if ((bullet_spread2->pos_x >= 158) || (bullet_spread2->pos_y >= 50) || (bullet_spread2->pos_y <= 0)) {
+		if ((bullet_spread2->pos_x >= 158) || (bullet_spread2->pos_y >= 64) || (bullet_spread2->pos_y <= 0)) {
 			gotoxy(bullet_spread2->pos_x,bullet_spread2->pos_y);
 			gotoxy(bullet_spread2->pos_x-bullet_spread2->vel_x,bullet_spread2->pos_y-bullet_spread2->vel_y);
 			printf(" ");
@@ -320,7 +321,7 @@ void spread_shot(spaceship_t *ship, int center, bullet_t *bullet_spread1, bullet
 			bullet_spread3->pos_y = bullet_spread3->pos_y + bullet_spread3->vel_y;
 
 		}
-		if ((bullet_spread3->pos_x >= 158) || (bullet_spread3->pos_y >= 50) || (bullet_spread3->pos_y <= 0)) {
+		if ((bullet_spread3->pos_x >= 158) || (bullet_spread3->pos_y >= 64) || (bullet_spread3->pos_y <= 0)) {
 			gotoxy(bullet_spread3->pos_x,bullet_spread3->pos_y);
 			gotoxy(bullet_spread3->pos_x-bullet_spread3->vel_x,bullet_spread3->pos_y-bullet_spread3->vel_y);
 			printf(" ");

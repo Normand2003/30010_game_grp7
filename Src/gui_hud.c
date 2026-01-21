@@ -93,28 +93,28 @@ void start_screen() {
 
 }
 
-int start_select(int joystick){
+int start_select(int joystick, int keyboard){
 	int static selector;
 
-	if(joystick == 1){
+	if(joystick == 1 || keyboard == 65){
 		selector = 1;
 	}
-	else if(joystick == 3){
+	else if(joystick == 3 || keyboard == 66){
 		selector = 2;
 	}
 
-	if ((joystick == 5) && (selector == 1)){
+	if ((joystick == 5 || keyboard == 32) && (selector == 1)){
 		gotoxy(1,1);
 		printf("play selected");
 		return 1;
 	}
-	if ((joystick == 5) && (selector == 2)){
+	if ((joystick == 5 || keyboard == 32) && (selector == 2)){
 		gotoxy(1,1);
 		printf("help selected");
 		return 2;
 	}
 
-	if (joystick == 1){
+	if (joystick == 1 || keyboard == 65){
 		blink(1);
 	    gotoxy(110, 16);
 	    printf(" ____  _            ");
@@ -144,7 +144,7 @@ int start_select(int joystick){
 	    printf("             |_|    ");
 	}
 
-	if (joystick == 3){
+	if (joystick == 3 || keyboard == 66){
 		blink(1);
 	    gotoxy(110, 31);
 	    printf(" _   _      _       ");
