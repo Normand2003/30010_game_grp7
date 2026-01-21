@@ -3,6 +3,7 @@
 #include "Stopwatch.h"
 #include "stm32f30x_rcc.h"
 #include <stdio.h>
+#include "structures.h"
 
 // ===== Globale variabler (definitions - kun her!) =====
 volatile sw_time_t g_time = {0};
@@ -78,5 +79,36 @@ int timer(int spou){
 	}
 	else {
 		return 0;
+	}
+}
+
+
+
+
+//silas clock
+
+int clockvalue=5;
+
+int tick=0;
+int updated=0; // holder styr på hvilke objekter der allerede er opdateret i given clockperiode
+
+void clock(gtimer_t *gtimer){
+
+
+	  //if((g_time.hs%clockvalue)==0)
+	  if((g_time.hs & 0b1) == 1)
+		gtimer->tick=1;
+	  	else{
+			gtimer->tick=0;
+			gtimer->updated=0; //resetter update så den kan opdatere igen i næste clockperiode
+	}
+}
+
+void run_functions(){
+	if((tick==1)&&(updated==0)){
+	player();
+	update_positions();
+	print();
+	updated=1;
 	}
 }

@@ -14,50 +14,6 @@
 #define block 0xDB
 
 
-//function not used
-void print_astroid(astroid_t *astroid){
-
-if (astroid->pos_x < 150){
-	gotoxy(astroid->pos_x,astroid->pos_y);
-
-	if (astroid->type == 1) {
-		gotoxy(astroid->pos_x,astroid->pos_y); //this prints the astroid type 1 (small)
-		printf(" __");
-		gotoxy(astroid->pos_x,astroid->pos_y+1);
-		printf("/\xF8 \\");
-		gotoxy(astroid->pos_x,astroid->pos_y+2);
-		printf("\\__/");
-	}
-
-	if (astroid->type == 2) {
-		gotoxy(astroid->pos_x,astroid->pos_y); // this prints the astroid type 2 (medium)
-		printf(" ____");
-		gotoxy(astroid->pos_x,astroid->pos_y+1);
-		printf("/   \xA7\\");
-		gotoxy(astroid->pos_x,astroid->pos_y+2);
-		printf("\\\xF8   \xA7\\");
-		gotoxy(astroid->pos_x,astroid->pos_y+3);
-		printf(" \\____/");
-	}
-
-	if (astroid->type == 3) {
-		gotoxy(astroid->pos_x,astroid->pos_y); // this prints the astroid type 3 (large)
-		printf("    ______");
-		gotoxy(astroid->pos_x,astroid->pos_y+1);
-		printf("   /   \xF8  \\");
-		gotoxy(astroid->pos_x,astroid->pos_y+2);
-		printf("  /\xA7      /");
-		gotoxy(astroid->pos_x,astroid->pos_y+3);
-		printf(" /     \xF8 /");
-		gotoxy(astroid->pos_x,astroid->pos_y+4);
-		printf(" \\_______)");
-		underline(1);
-		gotoxy(astroid->pos_x+3,astroid->pos_y+4);
-		printf("\xA7");
-		underline(0);
-	}
-}
-}
 
 //function not used? i think
 void deprint_astroid(astroid_t *astroid){
@@ -109,8 +65,9 @@ void hit_astroid(astroid_t *astroid,bullet_t *bullet, spaceship_t *ship) {
 		printf("          ");
 		gotoxy(astroid->pos_x,astroid->pos_y+4);
 		printf("          ");
-		//moves the astroids postion waaaaayyyyy off-screen
-		astroid->pos_x += 100;
+		//respawns astroid
+		astroid->pos_x = 230;
+		astroid->pos_y = (rand() % 57)+4;
 		//increases score
 		ship->score += 3;
 
@@ -118,6 +75,8 @@ void hit_astroid(astroid_t *astroid,bullet_t *bullet, spaceship_t *ship) {
 		gotoxy(bullet->pos_x-bullet->vel_x,bullet->pos_y-bullet->vel_y);
 		printf(" ");
 		bullet->vel_x = 0;
+		bullet->pos_x = 0;
+		bullet->pos_y = 0;
 
 	}
 	}
@@ -133,8 +92,9 @@ void hit_astroid(astroid_t *astroid,bullet_t *bullet, spaceship_t *ship) {
 		printf("       ");
 		gotoxy(astroid->pos_x,astroid->pos_y+3);
 		printf("       ");
-		//moves the astroids postion waaaaayyyyy off-screen
-		astroid->pos_x += 100;
+		//respawns astroid
+		astroid->pos_x = 230;
+		astroid->pos_y = (rand() % 57)+4;
 		//increases score
 		ship->score += 2;
 
@@ -142,6 +102,8 @@ void hit_astroid(astroid_t *astroid,bullet_t *bullet, spaceship_t *ship) {
 		gotoxy(bullet->pos_x-bullet->vel_x,bullet->pos_y-bullet->vel_y);
 		printf(" ");
 		bullet->vel_x = 0;
+		bullet->pos_x = 0;
+		bullet->pos_y = 0;
 	}
 	}
 
@@ -154,8 +116,9 @@ void hit_astroid(astroid_t *astroid,bullet_t *bullet, spaceship_t *ship) {
 		printf("    ");
 		gotoxy(astroid->pos_x,astroid->pos_y+2);
 		printf("    ");
-		//moves the astroids postion waaaaayyyyy off-screen
-		astroid->pos_x += 100;
+		//respawns astroid
+		astroid->pos_x = 230;
+		astroid->pos_y = (rand() % 57)+4;
 		//increases score
 		ship->score += 1;
 
@@ -163,6 +126,8 @@ void hit_astroid(astroid_t *astroid,bullet_t *bullet, spaceship_t *ship) {
 		gotoxy(bullet->pos_x-bullet->vel_x,bullet->pos_y-bullet->vel_y);
 		printf(" ");
 		bullet->vel_x = 0;
+		bullet->pos_x = 0;
+		bullet->pos_y = 0;
 	}
 	}
 }
@@ -201,8 +166,9 @@ if (astroid->type == 3){
 			printf("          ");
 			gotoxy(astroid->pos_x,astroid->pos_y+4);
 			printf("          ");
-			//moves the astroids postion waaaaayyyyy off-screen
-			astroid->pos_x += 100;
+			//respawns astroid
+			astroid->pos_x = 230;
+			astroid->pos_y = (rand() % 57)+4;
 		}
 	}
 }
@@ -220,8 +186,9 @@ if (astroid->type == 2){
 			printf("       ");
 			gotoxy(astroid->pos_x,astroid->pos_y+3);
 			printf("       ");
-			//moves the astroids postion waaaaayyyyy off-screen
-			astroid->pos_x += 100;
+			//respawns astroid
+			astroid->pos_x = 230;
+			astroid->pos_y = (rand() % 57)+4;
 		}
 	}
 }
@@ -237,139 +204,14 @@ if (astroid->type == 1){
 			printf("    ");
 			gotoxy(astroid->pos_x,astroid->pos_y+2);
 			printf("    ");
-			//moves the astroids postion waaaaayyyyy off-screen
-			astroid->pos_x += 100;
+			//respawns astroid
+			astroid->pos_x = 230;
+			astroid->pos_y = (rand() % 57)+4;
 		}
 	}
 }
 }
 
-//function not used
-void draw_spaceship2(int x, int y) {
-	gotoxy(x, y);
-	fgcolor(0);
-	printf("%c", block);
-	printf("%c", block);
-	fgcolor(8);
-	printf("%c", block);
-	printf("%c", block);
-	printf("%c", block);
-	fgcolor(7);
-	printf("%c", block);
-	printf("%c", block);
-
-	gotoxy(x, y+1);
-	fgcolor(0);
-	printf("%c", block);
-	printf("%c", block);
-	printf("%c", block);
-	fgcolor(7);
-	printf("%c", block);
-	printf("%c", block);
-	fgcolor(15);
-	printf("%c", block);
-	printf("%c", block);
-	fgcolor(7);
-	printf("%c", block);
-
-	gotoxy(x, y+2);
-	fgcolor(0);
-	printf("%c", block);
-	printf("%c", block);
-	printf("%c", block);
-	printf("%c", block);
-	fgcolor(7);
-	printf("%c", block);
-	fgcolor(15);
-	printf("%c", block);
-	printf("%c", block);
-	printf("%c", block);
-	fgcolor(7);
-	printf("%c", block);
-
-	//første  række med ild
-	gotoxy(x, y+3);
-	fgcolor(1);
-	printf("%c", block);
-	fgcolor(9);
-	printf("%c", block);
-	printf("%c", block);
-	fgcolor(11);
-	printf("%c", block);
-	fgcolor(8);
-	printf("%c", block);
-	fgcolor(7);
-	printf("%c", block);
-	fgcolor(8);
-	printf("%c", block);
-	fgcolor(12);
-	printf("%c", block);
-	fgcolor(15);
-	printf("%c", block);
-	printf("%c", block);
-
-	//anden  række med ild
-	gotoxy(x, y+4);
-	fgcolor(0);
-	printf("%c", block);
-	fgcolor(9);
-	printf("%c", block);
-	fgcolor(11);
-	printf("%c", block);
-	printf("%c", block);
-	fgcolor(8);
-	printf("%c", block);
-	fgcolor(7);
-	printf("%c", block);
-	fgcolor(8);
-	printf("%c", block);
-	fgcolor(12);
-	printf("%c", block);
-	fgcolor(15);
-	printf("%c", block);
-	printf("%c", block);
-
-	gotoxy(x, y+5);
-	fgcolor(0);
-	printf("%c", block);
-	printf("%c", block);
-	printf("%c", block);
-	printf("%c", block);
-	fgcolor(7);
-	printf("%c", block);
-	fgcolor(15);
-	printf("%c", block);
-	printf("%c", block);
-	printf("%c", block);
-	fgcolor(7);
-	printf("%c", block);
-
-	gotoxy(x, y+6);
-	fgcolor(0);
-	printf("%c", block);
-	printf("%c", block);
-	printf("%c", block);
-	fgcolor(7);
-	printf("%c", block);
-	printf("%c", block);
-	fgcolor(15);
-	printf("%c", block);
-	printf("%c", block);
-	fgcolor(7);
-	printf("%c", block);
-
-	gotoxy(x, y+7);
-	fgcolor(0);
-	printf("%c", block);
-	printf("%c", block);
-	fgcolor(8);
-	printf("%c", block);
-	printf("%c", block);
-	printf("%c", block);
-	fgcolor(7);
-	printf("%c", block);
-	printf("%c", block);
-}
 
 void draw_asteroid(astroid_t *astroid) {
 
@@ -387,7 +229,7 @@ void draw_asteroid(astroid_t *astroid) {
 		fgcolor(15);
 		printf("%c", block);
 		fgcolor(8);
-		printf("%c", block);
+		printf("%c  ", block);
 
 		//Anden linje
 		gotoxy(astroid->pos_x,astroid->pos_y+1);
@@ -398,7 +240,7 @@ void draw_asteroid(astroid_t *astroid) {
 		fgcolor(7);
 		printf("%c", block);
 		fgcolor(8);
-		printf("%c", block);
+		printf("%c  ", block);
 
 
 		//Tredje linje
@@ -408,7 +250,7 @@ void draw_asteroid(astroid_t *astroid) {
 		fgcolor(8);
 		printf("%c", block);
 		fgcolor(7);
-		printf("%c", block);
+		printf("%c  ", block);
 
 		//resetter farven
 		fgcolor(15);
@@ -429,7 +271,7 @@ void draw_asteroid(astroid_t *astroid) {
 		printf("%c", block);
 		printf("%c", block);
 		fgcolor(15);
-		printf("%c", block);
+		printf("%c  ", block);
 
 		//Anden linje
 		gotoxy(astroid->pos_x,astroid->pos_y+1);
@@ -444,7 +286,7 @@ void draw_asteroid(astroid_t *astroid) {
 		printf("%c", block);
 		printf("%c", block);
 		fgcolor(8);
-		printf("%c", block);
+		printf("%c  ", block);
 
 		//Tredje linje
 		gotoxy(astroid->pos_x,astroid->pos_y+2);
@@ -456,7 +298,7 @@ void draw_asteroid(astroid_t *astroid) {
 		printf("%c", block);
 		printf("%c", block);
 		printf("%c", block);
-		printf("%c", block);
+		printf("%c  ", block);
 
 
 		//Fjerde linje
@@ -468,7 +310,7 @@ void draw_asteroid(astroid_t *astroid) {
 		printf("%c", block);
 		fgcolor(7);
 		printf("%c", block);
-		printf("%c", block);
+		printf("%c  ", block);
 
 
 		//resetter farven
@@ -487,7 +329,7 @@ void draw_asteroid(astroid_t *astroid) {
 		fgcolor(8);
 		printf("%c", block);
 		printf("%c", block);
-		printf("%c", block);
+		printf("%c  ", block);
 
 		//Anden linje
 		gotoxy(astroid->pos_x,astroid->pos_y+1);
@@ -501,7 +343,7 @@ void draw_asteroid(astroid_t *astroid) {
 		fgcolor(15);
 		printf("%c", block);
 		fgcolor(8);
-		printf("%c", block);
+		printf("%c  ", block);
 
 
 		//Tredje linje
@@ -518,7 +360,7 @@ void draw_asteroid(astroid_t *astroid) {
 		printf("%c", block);
 		printf("%c", block);
 		fgcolor(8);
-		printf("%c", block);
+		printf("%c  ", block);
 
 		//Fjerde linje
 		gotoxy(astroid->pos_x,astroid->pos_y+3);
@@ -535,7 +377,7 @@ void draw_asteroid(astroid_t *astroid) {
 		printf("%c", block);
 		printf("%c", block);
 		fgcolor(8);
-		printf("%c", block);
+		printf("%c  ", block);
 
 		//Femte linje
 		gotoxy(astroid->pos_x+1,astroid->pos_y+4);
@@ -548,7 +390,7 @@ void draw_asteroid(astroid_t *astroid) {
 		printf("%c", block);
 		printf("%c", block);
 		fgcolor(8);
-		printf("%c", block);
+		printf("%c  ", block);
 
 
 		//resetter farven
@@ -652,3 +494,22 @@ void draw_asteroid(astroid_t *astroid) {
 
 }
 
+void update_pos_asteroid(astroid_t *astroid){
+	if (astroid->pos_x > 1){
+	astroid->pos_x = astroid->pos_x + astroid->vel_x;
+	}
+	else{
+		gotoxy(astroid->pos_x,astroid->pos_y);
+		printf("       ");
+		gotoxy(astroid->pos_x,astroid->pos_y+1);
+		printf("        ");
+		gotoxy(astroid->pos_x,astroid->pos_y+2);
+		printf("          ");
+		gotoxy(astroid->pos_x,astroid->pos_y+3);
+		printf("         ");
+		gotoxy(astroid->pos_x,astroid->pos_y+4);
+		printf("        ");
+		astroid->pos_x = 235;
+		astroid->pos_y = (rand() % 56)+4;
+	}
+}

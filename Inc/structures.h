@@ -49,4 +49,11 @@ typedef struct {
 	int16_t enemy;
 }laser_t;
 
+typedef struct {
+	int tick;
+	int updated;
+}gtimer_t;
+
+
+
 #endif /* STRUCTURES_H_ */
