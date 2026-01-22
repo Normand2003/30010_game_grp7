@@ -248,7 +248,6 @@ if (astroid->type == 1){
 }
 }
 
-
 void draw_asteroid(astroid_t *astroid) {
 
 	// 1 = lille, 2 = mellem, 3 = stor, 4 = satellite

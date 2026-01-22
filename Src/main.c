@@ -120,7 +120,7 @@ bullet_t all_bullets[5]={
 		{0,0,0,-3,0},
 		{0,0,0,-31,0},
 };
-//creates array of bullets
+//creates array of spread bullets
 bullet_t spread_bullets[3]={
 		{0,0,0,0,0},
 		{0,0,0,0,0},
