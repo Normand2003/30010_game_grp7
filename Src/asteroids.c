@@ -53,7 +53,7 @@ void deprint_astroid(astroid_t *astroid){
 
 void hit_astroid(astroid_t *astroid,bullet_t *bullet, spaceship_t *ship) {
 	if (astroid->type == 3){
-	if ((bullet->pos_x-1 >= astroid->pos_x && bullet->pos_y >= astroid->pos_y) && (bullet->pos_x <= astroid->pos_x+10 && bullet->pos_y <= astroid->pos_y+4)){
+	if ((bullet->pos_x-1 >= astroid->pos_x && bullet->pos_y>>5 >= astroid->pos_y) && (bullet->pos_x <= astroid->pos_x+10 && bullet->pos_y>>5 <= astroid->pos_y+4)){
 
 		gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 3 (large)
 		printf("          ");
@@ -72,7 +72,7 @@ void hit_astroid(astroid_t *astroid,bullet_t *bullet, spaceship_t *ship) {
 		ship->score += 1;
 
 		//destroys the bullet
-		gotoxy(bullet->pos_x-bullet->vel_x,bullet->pos_y-bullet->vel_y);
+		gotoxy(bullet->pos_x-bullet->vel_x,(bullet->pos_y-bullet->vel_y)>>5);
 		printf(" ");
 		bullet->vel_x = 0;
 		bullet->pos_x = 0;
@@ -82,7 +82,7 @@ void hit_astroid(astroid_t *astroid,bullet_t *bullet, spaceship_t *ship) {
 	}
 
 	if (astroid->type == 2){
-	if ((bullet->pos_x-1 >= astroid->pos_x && bullet->pos_y >= astroid->pos_y) && (bullet->pos_x <= astroid->pos_x+6 && bullet->pos_y <= astroid->pos_y+3)){
+	if ((bullet->pos_x-1 >= astroid->pos_x && bullet->pos_y>>5 >= astroid->pos_y) && (bullet->pos_x <= astroid->pos_x+6 && bullet->pos_y>>5 <= astroid->pos_y+3)){
 
 		gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 2 (medium)
 		printf("       ");
@@ -99,7 +99,7 @@ void hit_astroid(astroid_t *astroid,bullet_t *bullet, spaceship_t *ship) {
 		ship->score += 2;
 
 		//destroys the bullet
-		gotoxy(bullet->pos_x-bullet->vel_x,bullet->pos_y-bullet->vel_y);
+		gotoxy(bullet->pos_x-bullet->vel_x,(bullet->pos_y-bullet->vel_y)>>5);
 		printf(" ");
 		bullet->vel_x = 0;
 		bullet->pos_x = 0;
@@ -108,7 +108,7 @@ void hit_astroid(astroid_t *astroid,bullet_t *bullet, spaceship_t *ship) {
 	}
 
 	if (astroid->type == 1){
-	if ((bullet->pos_x-1 >= astroid->pos_x && bullet->pos_y >= astroid->pos_y) && (bullet->pos_x <= astroid->pos_x+5 && bullet->pos_y <= astroid->pos_y+2)){
+	if ((bullet->pos_x-1 >= astroid->pos_x && bullet->pos_y>>5 >= astroid->pos_y) && (bullet->pos_x <= astroid->pos_x+5 && bullet->pos_y>>5 <= astroid->pos_y+2)){
 
 		gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 1 (small)
 		printf("    ");
@@ -123,7 +123,7 @@ void hit_astroid(astroid_t *astroid,bullet_t *bullet, spaceship_t *ship) {
 		ship->score += 3;
 
 		//destroys the bullet
-		gotoxy(bullet->pos_x-bullet->vel_x,bullet->pos_y-bullet->vel_y);
+		gotoxy(bullet->pos_x-bullet->vel_x,(bullet->pos_y-bullet->vel_y)>>5);
 		printf(" ");
 		bullet->vel_x = 0;
 		bullet->pos_x = 0;

@@ -76,7 +76,7 @@ if (bullet1->vel_x == 0){
 
 	if ((joystick == 5 || space == 32)) {
 		bullet1->pos_x = ship->pos_x+12;
-		bullet1->pos_y = ship->pos_y+4;
+		bullet1->pos_y = (ship->pos_y+4)<<5;
 		bullet1->vel_x = 2;
 	}
 }
@@ -85,7 +85,7 @@ else if (bullet2->vel_x == 0){
 
 	if (joystick == 5 || space == 32) {
 		bullet2->pos_x = ship->pos_x+12;
-		bullet2->pos_y = ship->pos_y+4;
+		bullet2->pos_y = (ship->pos_y+4)<<5;
 		bullet2->vel_x = 2;
 	}
 }
@@ -94,7 +94,7 @@ else if (bullet3->vel_x == 0){
 
 	if (joystick == 5 || space == 32) {
 		bullet3->pos_x = ship->pos_x+12;
-		bullet3->pos_y = ship->pos_y+4;
+		bullet3->pos_y = (ship->pos_y+4)<<5;
 		bullet3->vel_x = 2;
 	}
 }
@@ -103,7 +103,7 @@ else if (bullet4->vel_x == 0){
 
 	if (joystick == 5 || space == 32) {
 		bullet4->pos_x = ship->pos_x+12;
-		bullet4->pos_y = ship->pos_y+4;
+		bullet4->pos_y = (ship->pos_y+4)<<5;
 		bullet4->vel_x = 2;
 	}
 }
@@ -112,7 +112,7 @@ else if (bullet5->vel_x == 0){
 
 	if (joystick == 5 || space == 32) {
 		bullet5->pos_x = ship->pos_x+12;
-		bullet5->pos_y = ship->pos_y+4;
+		bullet5->pos_y = (ship->pos_y+4)<<5;
 		bullet5->vel_x = 2;
 	}
 }
@@ -121,108 +121,112 @@ else if (bullet5->vel_x == 0){
 
 //logic for moving bullet1
 	if (bullet1->pos_x < 235 && bullet1->vel_x != 0){
-		gotoxy(bullet1->pos_x,bullet1->pos_y);
+		gotoxy(bullet1->pos_x,(bullet1->pos_y)>>5);
 		fgcolor(12);
 		printf("%c",skud);
 		fgcolor(15);
 
-		gotoxy(bullet1->pos_x-bullet1->vel_x,bullet1->pos_y-bullet1->vel_y);
+		gotoxy(bullet1->pos_x-bullet1->vel_x,(bullet1->pos_y-bullet1->vel_y)>>5);
 		printf(" ");
 		bullet1->pos_x = bullet1->pos_x + bullet1->vel_x;
+		bullet1->pos_y = bullet1->pos_y + bullet1->vel_y;
 
 	}
 	if (bullet1->pos_x >= 235) {
-		gotoxy(bullet1->pos_x,bullet1->pos_y);
-		gotoxy(bullet1->pos_x-bullet1->vel_x,bullet1->pos_y-bullet1->vel_y);
+		gotoxy(bullet1->pos_x-bullet1->vel_x,(bullet1->pos_y-bullet1->vel_y)>>5);
 		printf(" ");
 
+		bullet1->vel_y = 0;
 		bullet1->vel_x = 0;
 		bullet1->pos_x = 1;
 	}
 
 //logic for moving bullet2
 	if (bullet2->pos_x < 235 && bullet2->vel_x != 0){
-		gotoxy(bullet2->pos_x,bullet2->pos_y);
+		gotoxy(bullet2->pos_x,(bullet2->pos_y)>>5);
 		fgcolor(12);
 		printf("%c",skud);
-		fgcolor(0);
+		fgcolor(15);
 
-		gotoxy(bullet2->pos_x-bullet2->vel_x,bullet2->pos_y-bullet2->vel_y);
+		gotoxy(bullet2->pos_x-bullet2->vel_x,(bullet2->pos_y-bullet2->vel_y)>>5);
 		printf(" ");
 		bullet2->pos_x = bullet2->pos_x + bullet2->vel_x;
+		bullet2->pos_y = bullet2->pos_y + bullet2->vel_y;
 
 	}
 	if (bullet2->pos_x >= 235) {
-		gotoxy(bullet2->pos_x,bullet2->pos_y);
-		gotoxy(bullet2->pos_x-bullet2->vel_x,bullet2->pos_y-bullet2->vel_y);
+		gotoxy(bullet2->pos_x-bullet2->vel_x,(bullet2->pos_y-bullet2->vel_y)>>5);
 		printf(" ");
 
+		bullet2->vel_y = 0;
 		bullet2->vel_x = 0;
 		bullet2->pos_x = 1;
 	}
 //logic for moving bullet3
 	if (bullet3->pos_x < 235 && bullet3->vel_x != 0){
-		gotoxy(bullet3->pos_x,bullet3->pos_y);
+		gotoxy(bullet3->pos_x,(bullet3->pos_y)>>5);
 		fgcolor(12);
 		printf("%c",skud);
-		fgcolor(0);
+		fgcolor(15);
 
-		gotoxy(bullet3->pos_x-bullet3->vel_x,bullet3->pos_y-bullet3->vel_y);
+		gotoxy(bullet3->pos_x-bullet3->vel_x,(bullet3->pos_y-bullet3->vel_y)>>5);
 		printf(" ");
 		bullet3->pos_x = bullet3->pos_x + bullet3->vel_x;
+		bullet3->pos_y = bullet3->pos_y + bullet3->vel_y;
 
 	}
 	if (bullet3->pos_x >= 235) {
-		gotoxy(bullet3->pos_x,bullet3->pos_y);
-		gotoxy(bullet3->pos_x-bullet3->vel_x,bullet3->pos_y-bullet3->vel_y);
+		gotoxy(bullet3->pos_x-bullet3->vel_x,(bullet3->pos_y-bullet3->vel_y)>>5);
 		printf(" ");
 
+		bullet3->vel_y = 0;
 		bullet3->vel_x = 0;
 		bullet3->pos_x = 1;
 	}
-
 //logic for moving bullet4
-	if (bullet4->pos_x < 235 && bullet4->vel_x != 0){
-		gotoxy(bullet4->pos_x,bullet4->pos_y);
-		fgcolor(12);
-		printf("%c",skud);
-		fgcolor(0);
+		if (bullet4->pos_x < 235 && bullet4->vel_x != 0){
+			gotoxy(bullet4->pos_x,(bullet4->pos_y)>>5);
+			fgcolor(12);
+			printf("%c",skud);
+			fgcolor(15);
 
-		gotoxy(bullet4->pos_x-bullet4->vel_x,bullet4->pos_y-bullet4->vel_y);
-		printf(" ");
-		bullet4->pos_x = bullet4->pos_x + bullet4->vel_x;
+			gotoxy(bullet4->pos_x-bullet4->vel_x,(bullet4->pos_y-bullet4->vel_y)>>5);
+			printf(" ");
+			bullet4->pos_x = bullet4->pos_x + bullet4->vel_x;
+			bullet4->pos_y = bullet4->pos_y + bullet4->vel_y;
 
-	}
-	if (bullet4->pos_x >= 235) {
-		gotoxy(bullet4->pos_x,bullet4->pos_y);
-		gotoxy(bullet4->pos_x-bullet4->vel_x,bullet4->pos_y-bullet4->vel_y);
-		printf(" ");
+		}
+		if (bullet4->pos_x >= 235) {
+			gotoxy(bullet4->pos_x-bullet4->vel_x,(bullet4->pos_y-bullet4->vel_y)>>5);
+			printf(" ");
 
-		bullet4->vel_x = 0;
-		bullet4->pos_x = 1;
-	}
+			bullet4->vel_y = 0;
+			bullet4->vel_x = 0;
+			bullet4->pos_x = 1;
 
+		}
 //logic for moving bullet5
-	if (bullet5->pos_x < 235 && bullet5->vel_x != 0){
-		gotoxy(bullet5->pos_x,bullet5->pos_y);
-		fgcolor(12);
-		printf("%c",skud);
-		fgcolor(0);
+		if (bullet5->pos_x < 235 && bullet5->vel_x != 0){
+			gotoxy(bullet5->pos_x,(bullet5->pos_y)>>5);
+			fgcolor(12);
+			printf("%c",skud);
+			fgcolor(15);
 
-		gotoxy(bullet5->pos_x-bullet5->vel_x,bullet5->pos_y-bullet5->vel_y);
-		printf(" ");
-		bullet5->pos_x = bullet5->pos_x + bullet5->vel_x;
+			gotoxy(bullet5->pos_x-bullet5->vel_x,(bullet5->pos_y-bullet5->vel_y)>>5);
+			printf(" ");
+			bullet5->pos_x = bullet5->pos_x + bullet5->vel_x;
+			bullet5->pos_y = bullet5->pos_y + bullet5->vel_y;
 
-	}
-	if (bullet5->pos_x >= 235) {
-		gotoxy(bullet5->pos_x,bullet5->pos_y);
-		gotoxy(bullet5->pos_x-bullet5->vel_x,bullet5->pos_y-bullet5->vel_y);
-		printf(" ");
+			}
+		if (bullet5->pos_x >= 235) {
+			gotoxy(bullet5->pos_x-bullet5->vel_x,(bullet5->pos_y-bullet5->vel_y)>>5);
+			printf(" ");
 
-		bullet5->vel_x = 0;
-		bullet5->pos_x = 1;
-	}
-}
+			bullet5->vel_y = 0;
+			bullet5->vel_x = 0;
+			bullet5->pos_x = 1;
+
+		}}
 }
 
 void laser(spaceship_t *ship, int joystick,int keyboard,laser_t *laser){

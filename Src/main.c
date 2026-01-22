@@ -114,11 +114,11 @@ astroid_t all_stroids[8]={
 };
 //creates array of bullets
 bullet_t all_bullets[5]={
-		{0,0,0,0,0},
-		{0,0,0,0,0},
-		{0,0,0,0,0},
-		{0,0,0,0,0},
-		{0,0,0,0,0},
+		{0,0,0,15,0},
+		{0,0,0,10,0},
+		{0,0,0,5,0},
+		{0,0,0,-3,0},
+		{0,0,0,-31,0},
 };
 //creates array of bullets
 bullet_t spread_bullets[3]={
