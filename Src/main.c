@@ -48,8 +48,11 @@ if(lvl_select == 0){
 }
 
 while(lvl_select == 0){
-	while (timer(10) == 1){
+	clock(&global_timer);
+	if((global_timer.tick==1)&&(global_timer.updated==0)){
+
 		lvl_select = start_select(detect_joystick(), keyboard2());
+	global_timer.updated=1;
 		}
 	}
 
@@ -74,8 +77,9 @@ my_ship.pos_x = 20;
 my_ship.pos_y = 32;
 my_ship.powerup = 0; //0 standard, 1 laser, 2 spread
 my_ship.laser_shot = 3;
+my_ship.spread_shot = 3;
 my_ship.health = 3;
-my_ship.score = 100;
+my_ship.score = 0;
 
 //creates strings on lcd
 char health_string[25] = "Health: ";
@@ -83,31 +87,19 @@ char health[2] = "";
 
 char score_string[10] = "Score: ";
 char score[6] = "";
+
+char laser_string[20] = "Laser Ammo: ";
+char laserammo[6] = "";
+
+char spread_string[20] = "Spread Ammo: ";
+char spreadammo[6] = "";
+
 //clears and fixes lcd screen
 memset(lcd_buffer,0x00,512);
 lcd_write_string(0,1,health_string);
 lcd_write_string(1,1,score_string);
-
-
-//creates and enables the astroids
-//big astroid
-astroid_t small_stroid;
-small_stroid.pos_x = 130;
-small_stroid.pos_y = 20;
-small_stroid.type = 1;
-small_stroid.vel_x = -2;
-//big astroid
-astroid_t med_stroid;
-med_stroid.pos_x = 90;
-med_stroid.pos_y = 25;
-med_stroid.type = 2;
-med_stroid.vel_x = -1;
-//big astroid
-astroid_t big_stroid;
-big_stroid.pos_x = 70;
-big_stroid.pos_y = 35;
-big_stroid.type = 3;
-big_stroid.vel_x = -1;
+lcd_write_string(2,1,laser_string);
+lcd_write_string(3,1,spread_string);
 
 //creates array of astroids:
 astroid_t all_stroids[8]={
@@ -128,50 +120,17 @@ bullet_t all_bullets[5]={
 		{0,0,0,0,0},
 		{0,0,0,0,0},
 };
-
-//Ship Bullets
-bullet_t ship_bullet1;
-ship_bullet1.vel_x = 0;
-ship_bullet1.vel_y = 0;
-ship_bullet1.pos_x = 0;
-bullet_t ship_bullet2;
-ship_bullet2.vel_x = 0;
-ship_bullet2.vel_y = 0;
-ship_bullet2.pos_x = 0;
-bullet_t ship_bullet3;
-ship_bullet3.vel_x = 0;
-ship_bullet3.vel_y = 0;
-ship_bullet3.pos_x = 0;
-bullet_t ship_bullet4;
-ship_bullet4.vel_x = 0;
-ship_bullet4.vel_y = 0;
-ship_bullet4.pos_x = 0;
-bullet_t ship_bullet5;
-ship_bullet5.vel_x = 0;
-ship_bullet5.vel_y = 0;
-ship_bullet5.pos_x = 0;
+//creates array of bullets
+bullet_t spread_bullets[3]={
+		{0,0,0,0,0},
+		{0,0,0,0,0},
+		{0,0,0,0,0},
+};
 
 //Ship Laser
 laser_t ship_laser;
 ship_laser.pos_x = 0;
 ship_laser.pos_y = 0;
-
-//Ship Spread Gun
-bullet_t bullet_spread1;
-bullet_spread1.vel_x = 0;
-bullet_spread1.vel_y = 0;
-bullet_spread1.pos_x = 0;
-bullet_spread1.pos_y = 0;
-bullet_t bullet_spread2;
-bullet_spread2.vel_x = 0;
-bullet_spread2.vel_y = 0;
-bullet_spread2.pos_x = 0;
-bullet_spread2.pos_y = 0;
-bullet_t bullet_spread3;
-bullet_spread3.vel_x = 0;
-bullet_spread3.vel_y = 0;
-bullet_spread3.pos_x = 0;
-bullet_spread3.pos_y = 0;
 
 if (lvl_select == 1){
 clrscr();
@@ -188,7 +147,7 @@ while(lvl_select == 1){
 	key = keyboard2();
 
 	//updates astroid positions and draws
-	for (int i = 0; i < 9; ++i){
+	for (int i = 0; i < 8; ++i){
 		update_pos_asteroid(&all_stroids[i]);
 		draw_asteroid(&all_stroids[i]);
 	}
@@ -196,176 +155,55 @@ while(lvl_select == 1){
 	update_pos(&my_ship,detect_joystick(),key);
 	draw_spaceship1(&my_ship);
 	//tracks if spaceship is hit
-	for (int i = 0; i < 9; ++i){
+	for (int i = 0; i < 8; ++i){
 	spaceship_hit(&all_stroids[i],&my_ship);
 	}
 	//shoot function and detect if asteroid is hit function
 	shoot(&my_ship,detect_joystick(),key,&all_bullets[0],&all_bullets[1],&all_bullets[2],&all_bullets[3],&all_bullets[4]);
-	for (int k = 0; k < 6; ++k){
-		for (int j = 0; j < 9; ++j){
+	for (int k = 0; k < 5; ++k){
+		for (int j = 0; j < 8; ++j){
 		hit_astroid(&all_stroids[j],&all_bullets[k],&my_ship);
 	}
 	}
-
-	//health system - displays current health and goes to main menu if health = 0
-	gotoxy(1,1);
-	printf("Ship Health: %d",my_ship.health);
-	number_to_string(my_ship.health, health,2);
-	lcd_write_string(0,40,health);
-	if(my_ship.health == 0){
-		lvl_select = 0;
-	}
-	//rgb lives
-	lives_RGB(&my_ship);
-
-
-	/*
-	update_pos_asteroid(&big_stroid);
-	update_pos_asteroid(&med_stroid);
-	update_pos_asteroid(&small_stroid);
-	draw_asteroid(&big_stroid);
-	draw_asteroid(&med_stroid);
-	draw_asteroid(&small_stroid);
-
-	//tracks normal shots and updates if it hits asteroid
-	shoot(&my_ship,detect_joystick(),key,&ship_bullet1,&ship_bullet2,&ship_bullet3,&ship_bullet4,&ship_bullet5);
-	hit_astroid(&small_stroid,&ship_bullet1,&my_ship);
-	hit_astroid(&small_stroid,&ship_bullet2,&my_ship);
-	hit_astroid(&small_stroid,&ship_bullet3,&my_ship);
-	hit_astroid(&small_stroid,&ship_bullet4,&my_ship);
-	hit_astroid(&small_stroid,&ship_bullet5,&my_ship);
-
-	hit_astroid(&med_stroid,&ship_bullet1,&my_ship);
-	hit_astroid(&med_stroid,&ship_bullet2,&my_ship);
-	hit_astroid(&med_stroid,&ship_bullet3,&my_ship);
-	hit_astroid(&med_stroid,&ship_bullet4,&my_ship);
-	hit_astroid(&med_stroid,&ship_bullet5,&my_ship);
-
-	hit_astroid(&big_stroid,&ship_bullet1,&my_ship);
-	hit_astroid(&big_stroid,&ship_bullet2,&my_ship);
-	hit_astroid(&big_stroid,&ship_bullet3,&my_ship);
-	hit_astroid(&big_stroid,&ship_bullet4,&my_ship);
-	hit_astroid(&big_stroid,&ship_bullet5,&my_ship);
-
-	//laser shot
+	//laser system
 	laser(&my_ship,detect_joystick(),key,&ship_laser);
-
-	laser_hit(&big_stroid,&ship_laser);
-	laser_hit(&med_stroid,&ship_laser);
-	laser_hit(&small_stroid,&ship_laser);
-
-
+	for (int l = 0; l < 8; ++l){
+		laser_hit(&all_stroids[l],&ship_laser,&my_ship);
+	}
 	//spread shot
-	spread_shot(&my_ship,detect_joystick(),key,&bullet_spread1,&bullet_spread2,&bullet_spread3);
-	hit_astroid(&small_stroid,&bullet_spread1);
-	hit_astroid(&med_stroid,&bullet_spread1);
-	hit_astroid(&big_stroid,&bullet_spread1);
-
-	hit_astroid(&small_stroid,&bullet_spread2);
-	hit_astroid(&med_stroid,&bullet_spread2);
-	hit_astroid(&big_stroid,&bullet_spread2);
-
-	hit_astroid(&small_stroid,&bullet_spread3);
-	hit_astroid(&med_stroid,&bullet_spread3);
-	hit_astroid(&big_stroid,&bullet_spread3);
-
-
-	//updates spaceship position and draws
-	update_pos(&my_ship,detect_joystick(),key);
-	draw_spaceship1(&my_ship);
-
-	//tracks if spaceship is hit
-	spaceship_hit(&big_stroid,&my_ship);
-	spaceship_hit(&med_stroid,&my_ship);
-	spaceship_hit(&small_stroid,&my_ship);
+	spread_shot(&my_ship,detect_joystick(),key,&spread_bullets[0],&spread_bullets[1],&spread_bullets[2]);
+	for (int f = 0; f < 3; ++f){
+		for (int g = 0; g < 8; ++g){
+		hit_astroid(&all_stroids[g],&spread_bullets[f],&my_ship);
+		}
+	}
 
 
 	//health system - displays current health and goes to main menu if health = 0
 	gotoxy(1,1);
+	fgcolor(15);
 	printf("Ship Health: %d",my_ship.health);
+	printf("\nLaser Shot: %d",my_ship.laser_shot);
+	printf("\nSpread Shot: %d",my_ship.spread_shot);
 	number_to_string(my_ship.health, health,2);
 	lcd_write_string(0,40,health);
 	if(my_ship.health == 0){
 		lvl_select = 0;
 	}
-
 	//rgb lives
 	lives_RGB(&my_ship);
-	*/
-	global_timer.updated=1;
-	}
 
-	/*
-	while (timer(10) == 1){
-	key = keyboard2();
-
-	update_pos(&my_ship,detect_joystick(),key);
-	draw_spaceship1(&my_ship);
-
-	shoot(&my_ship,detect_joystick(),key,&ship_bullet1,&ship_bullet2,&ship_bullet3,&ship_bullet4,&ship_bullet5);
-
-	laser(&my_ship,detect_joystick(),key,&ship_laser);
-
-
-
-
-	laser_hit(&big_stroid,&ship_laser);
-	laser_hit(&med_stroid,&ship_laser);
-	laser_hit(&small_stroid,&ship_laser);
-
-	spread_shot(&my_ship,detect_joystick(),key,&bullet_spread1,&bullet_spread2,&bullet_spread3);
-
-	hit_astroid(&small_stroid,&ship_bullet1,&my_ship);
-	hit_astroid(&small_stroid,&ship_bullet2,&my_ship);
-	hit_astroid(&small_stroid,&ship_bullet3,&my_ship);
-	hit_astroid(&small_stroid,&ship_bullet4,&my_ship);
-	hit_astroid(&small_stroid,&ship_bullet5,&my_ship);
-
-	hit_astroid(&med_stroid,&ship_bullet1,&my_ship);
-	hit_astroid(&med_stroid,&ship_bullet2,&my_ship);
-	hit_astroid(&med_stroid,&ship_bullet3,&my_ship);
-	hit_astroid(&med_stroid,&ship_bullet4,&my_ship);
-	hit_astroid(&med_stroid,&ship_bullet5,&my_ship);
-
-	hit_astroid(&big_stroid,&ship_bullet1,&my_ship);
-	hit_astroid(&big_stroid,&ship_bullet2,&my_ship);
-	hit_astroid(&big_stroid,&ship_bullet3,&my_ship);
-	hit_astroid(&big_stroid,&ship_bullet4,&my_ship);
-	hit_astroid(&big_stroid,&ship_bullet5,&my_ship);
-
-	hit_astroid(&small_stroid,&bullet_spread1);
-	hit_astroid(&med_stroid,&bullet_spread1);
-	hit_astroid(&big_stroid,&bullet_spread1);
-
-	hit_astroid(&small_stroid,&bullet_spread2);
-	hit_astroid(&med_stroid,&bullet_spread2);
-	hit_astroid(&big_stroid,&bullet_spread2);
-
-	hit_astroid(&small_stroid,&bullet_spread3);
-	hit_astroid(&med_stroid,&bullet_spread3);
-	hit_astroid(&big_stroid,&bullet_spread3);
-
-	spaceship_hit(&big_stroid,&my_ship);
-	spaceship_hit(&med_stroid,&my_ship);
-	spaceship_hit(&small_stroid,&my_ship);
-
-	gotoxy(1,1);
-	printf("Ship Health: %d",my_ship.health);
-
-	number_to_string(my_ship.health, health,2);
-	lcd_write_string(0,40,health);
-
+	//score
 	number_to_string(my_ship.score, score ,6);
 	lcd_write_string(1,35,score);
 
-	lives_RGB(&my_ship);
-
-	if(my_ship.health == 0){
-		lvl_select = 0;
+	//ammunition
+	number_to_string(my_ship.laser_shot,laserammo,6);
+	lcd_write_string(2,60,laserammo);
+	number_to_string(my_ship.spread_shot,spreadammo,6);
+	lcd_write_string(3,65,spreadammo);
+	global_timer.updated=1;
 	}
-	}
-}
-*/
 }
 }
 }

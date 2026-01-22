@@ -69,7 +69,7 @@ void hit_astroid(astroid_t *astroid,bullet_t *bullet, spaceship_t *ship) {
 		astroid->pos_x = 230;
 		astroid->pos_y = (rand() % 57)+4;
 		//increases score
-		ship->score += 3;
+		ship->score += 1;
 
 		//destroys the bullet
 		gotoxy(bullet->pos_x-bullet->vel_x,bullet->pos_y-bullet->vel_y);
@@ -120,7 +120,7 @@ void hit_astroid(astroid_t *astroid,bullet_t *bullet, spaceship_t *ship) {
 		astroid->pos_x = 230;
 		astroid->pos_y = (rand() % 57)+4;
 		//increases score
-		ship->score += 1;
+		ship->score += 3;
 
 		//destroys the bullet
 		gotoxy(bullet->pos_x-bullet->vel_x,bullet->pos_y-bullet->vel_y);
@@ -132,7 +132,8 @@ void hit_astroid(astroid_t *astroid,bullet_t *bullet, spaceship_t *ship) {
 	}
 }
 
-void laser_hit(astroid_t *astroid, laser_t *laser){
+void laser_hit(astroid_t *astroid, laser_t *laser,spaceship_t *ship){
+	if (astroid->type == 3){
 	if (laser->pos_y >= astroid->pos_y && laser->pos_y <= astroid->pos_y+4){
 		gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 3 (large)
 		printf("          ");
@@ -144,9 +145,44 @@ void laser_hit(astroid_t *astroid, laser_t *laser){
 		printf("          ");
 		gotoxy(astroid->pos_x,astroid->pos_y+4);
 		printf("          ");
-		//moves the astroids postion waaaaayyyyy off-screen
-		astroid->pos_x += 100;
+		//respawns the asteroid
+		astroid->pos_y = (rand() % 57)+4;
+		astroid->pos_x = 234;
 		laser->pos_y = 70;
+		ship->score += 1;
+	}
+	}
+	if (astroid->type == 2){
+	if (laser->pos_y >= astroid->pos_y && laser->pos_y <= astroid->pos_y+3){
+		gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 2 (med)
+		printf("        ");
+		gotoxy(astroid->pos_x,astroid->pos_y+1);
+		printf("         ");
+		gotoxy(astroid->pos_x,astroid->pos_y+2);
+		printf("         ");
+		gotoxy(astroid->pos_x,astroid->pos_y+3);
+		printf("        ");
+		//respawns the asteroid
+		astroid->pos_y = (rand() % 57)+4;
+		astroid->pos_x = 234;
+		laser->pos_y = 70;
+		ship->score += 2;
+	}
+	}
+	if (astroid->type == 1){
+	if (laser->pos_y >= astroid->pos_y && laser->pos_y <= astroid->pos_y+2){
+		gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 2 (med)
+		printf("       ");
+		gotoxy(astroid->pos_x,astroid->pos_y+1);
+		printf("        ");
+		gotoxy(astroid->pos_x,astroid->pos_y+2);
+		printf("        ");
+		//respawns the asteroid
+		astroid->pos_y = (rand() % 57)+4;
+		astroid->pos_x = 234;
+		laser->pos_y = 70;
+		ship->score += 3;
+	}
 	}
 }
 

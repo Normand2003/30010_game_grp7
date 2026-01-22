@@ -1,6 +1,6 @@
-spaceship.c:16:6:print_ship	16	static
-spaceship.c:40:6:update_pos	24	static
-spaceship.c:68:6:shoot	24	static
-spaceship.c:217:6:laser	32	static
-spaceship.c:244:6:spread_shot	24	static
-spaceship.c:337:6:draw_spaceship1	16	static
+spaceship.c:17:6:print_ship	16	static
+spaceship.c:41:6:update_pos	24	static
+spaceship.c:69:6:shoot	24	static
+spaceship.c:228:6:laser	32	static
+spaceship.c:255:6:spread_shot	24	static
+spaceship.c:354:6:draw_spaceship1	16	static
