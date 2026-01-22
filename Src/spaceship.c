@@ -271,19 +271,19 @@ void spread_shot(spaceship_t *ship, int joystick,int keyboard, bullet_t *bullet_
 		if (joystick == 4 || keyboard == 68) {
 			ship->spread_shot -= 1;
 			bullet_spread1->pos_x = ship->pos_x+12;
-			bullet_spread1->pos_y = ship->pos_y+3;
+			bullet_spread1->pos_y = (ship->pos_y+3)<<5;
 			bullet_spread1->vel_x = 2;
-			bullet_spread1->vel_y = -1;
+			bullet_spread1->vel_y = -1<<5;
 
 			bullet_spread2->pos_x = ship->pos_x+12;
-			bullet_spread2->pos_y = ship->pos_y+4;
+			bullet_spread2->pos_y = (ship->pos_y+4)<<5;
 			bullet_spread2->vel_x = 2;
-			bullet_spread2->vel_y = 0;
+			bullet_spread2->vel_y = 0<<5;
 
 			bullet_spread3->pos_x = ship->pos_x+12;
-			bullet_spread3->pos_y = ship->pos_y+5;
+			bullet_spread3->pos_y = (ship->pos_y+5)<<5;
 			bullet_spread3->vel_x = 2;
-			bullet_spread3->vel_y = 1;
+			bullet_spread3->vel_y = 1<<5;
 		}
 	}
 
@@ -291,20 +291,20 @@ void spread_shot(spaceship_t *ship, int joystick,int keyboard, bullet_t *bullet_
 
 	//logic for moving bullet_spread1
 		if (bullet_spread1->pos_x < 230 && bullet_spread1->vel_x != 0){
-			gotoxy(bullet_spread1->pos_x,bullet_spread1->pos_y);
+			gotoxy(bullet_spread1->pos_x,bullet_spread1->pos_y>>5);
 			fgcolor(12);
 			printf("%c",skud);
 			fgcolor(15);
 
-			gotoxy(bullet_spread1->pos_x-bullet_spread1->vel_x,bullet_spread1->pos_y-bullet_spread1->vel_y);
+			gotoxy(bullet_spread1->pos_x-bullet_spread1->vel_x,(bullet_spread1->pos_y-bullet_spread1->vel_y)>>5);
 			printf(" ");
 			bullet_spread1->pos_x = bullet_spread1->pos_x + bullet_spread1->vel_x;
 			bullet_spread1->pos_y = bullet_spread1->pos_y + bullet_spread1->vel_y;
 
 		}
-		if ((bullet_spread1->pos_x >= 230) || (bullet_spread1->pos_y >= 64) || (bullet_spread1->pos_y <= 0)) {
-			gotoxy(bullet_spread1->pos_x,bullet_spread1->pos_y);
-			gotoxy(bullet_spread1->pos_x-bullet_spread1->vel_x,bullet_spread1->pos_y-bullet_spread1->vel_y);
+		if ((bullet_spread1->pos_x >= 230) || (bullet_spread1->pos_y>>5 >= 64) || (bullet_spread1->pos_y>>5 <= 0)) {
+			gotoxy(bullet_spread1->pos_x,bullet_spread1->pos_y>>5);
+			gotoxy(bullet_spread1->pos_x-bullet_spread1->vel_x,(bullet_spread1->pos_y-bullet_spread1->vel_y)>>5);
 			printf(" ");
 
 			bullet_spread1->vel_x = 0;
@@ -312,52 +312,52 @@ void spread_shot(spaceship_t *ship, int joystick,int keyboard, bullet_t *bullet_
 			bullet_spread1->pos_x = 1;
 			bullet_spread1->pos_y = 1;
 		}
-	//logic for moving bullet_spread2
-		if (bullet_spread2->pos_x < 230 && bullet_spread2->vel_x != 0){
-			gotoxy(bullet_spread2->pos_x,bullet_spread2->pos_y);
-			fgcolor(12);
-			printf("%c",skud);
-			fgcolor(15);
+		//logic for moving bullet_spread1
+			if (bullet_spread2->pos_x < 230 && bullet_spread2->vel_x != 0){
+				gotoxy(bullet_spread2->pos_x,bullet_spread2->pos_y>>5);
+				fgcolor(12);
+				printf("%c",skud);
+				fgcolor(15);
 
-			gotoxy(bullet_spread2->pos_x-bullet_spread2->vel_x,bullet_spread2->pos_y-bullet_spread2->vel_y);
-			printf(" ");
-			bullet_spread2->pos_x = bullet_spread2->pos_x + bullet_spread2->vel_x;
-			bullet_spread2->pos_y = bullet_spread2->pos_y + bullet_spread2->vel_y;
+				gotoxy(bullet_spread2->pos_x-bullet_spread2->vel_x,(bullet_spread2->pos_y-bullet_spread2->vel_y)>>5);
+				printf(" ");
+				bullet_spread2->pos_x = bullet_spread2->pos_x + bullet_spread2->vel_x;
+				bullet_spread2->pos_y = bullet_spread2->pos_y + bullet_spread2->vel_y;
 
-		}
-		if ((bullet_spread2->pos_x >= 230) || (bullet_spread2->pos_y >= 64) || (bullet_spread2->pos_y <= 0)) {
-			gotoxy(bullet_spread2->pos_x,bullet_spread2->pos_y);
-			gotoxy(bullet_spread2->pos_x-bullet_spread2->vel_x,bullet_spread2->pos_y-bullet_spread2->vel_y);
-			printf(" ");
+			}
+			if ((bullet_spread2->pos_x >= 230) || (bullet_spread2->pos_y>>5 >= 64) || (bullet_spread2->pos_y>>5 <= 0)) {
+				gotoxy(bullet_spread2->pos_x,bullet_spread2->pos_y>>5);
+				gotoxy(bullet_spread2->pos_x-bullet_spread2->vel_x,(bullet_spread2->pos_y-bullet_spread2->vel_y)>>5);
+				printf(" ");
 
-			bullet_spread2->vel_x = 0;
-			bullet_spread2->vel_y = 0;
-			bullet_spread2->pos_x = 1;
-			bullet_spread2->pos_y = 1;
-		}
-	//logic for moving bullet_spread3
-		if (bullet_spread3->pos_x < 230 && bullet_spread3->vel_x != 0){
-			gotoxy(bullet_spread3->pos_x,bullet_spread3->pos_y);
-			fgcolor(12);
-			printf("%c",skud);
-			fgcolor(15);
+				bullet_spread2->vel_x = 0;
+				bullet_spread2->vel_y = 0;
+				bullet_spread2->pos_x = 1;
+				bullet_spread2->pos_y = 1;
+			}
+			//logic for moving bullet_spread1
+				if (bullet_spread3->pos_x < 230 && bullet_spread3->vel_x != 0){
+					gotoxy(bullet_spread3->pos_x,bullet_spread3->pos_y>>5);
+					fgcolor(12);
+					printf("%c",skud);
+					fgcolor(15);
 
-			gotoxy(bullet_spread3->pos_x-bullet_spread3->vel_x,bullet_spread3->pos_y-bullet_spread3->vel_y);
-			printf(" ");
-			bullet_spread3->pos_x = bullet_spread3->pos_x + bullet_spread3->vel_x;
-			bullet_spread3->pos_y = bullet_spread3->pos_y + bullet_spread3->vel_y;
+					gotoxy(bullet_spread3->pos_x-bullet_spread3->vel_x,(bullet_spread3->pos_y-bullet_spread3->vel_y)>>5);
+					printf(" ");
+					bullet_spread3->pos_x = bullet_spread3->pos_x + bullet_spread3->vel_x;
+					bullet_spread3->pos_y = bullet_spread3->pos_y + bullet_spread3->vel_y;
 
-		}
-		if ((bullet_spread3->pos_x >= 230) || (bullet_spread3->pos_y >= 64) || (bullet_spread3->pos_y <= 0)) {
-			gotoxy(bullet_spread3->pos_x,bullet_spread3->pos_y);
-			gotoxy(bullet_spread3->pos_x-bullet_spread3->vel_x,bullet_spread3->pos_y-bullet_spread3->vel_y);
-			printf(" ");
+				}
+				if ((bullet_spread3->pos_x >= 230) || (bullet_spread3->pos_y>>5 >= 64) || (bullet_spread3->pos_y>>5 <= 0)) {
+					gotoxy(bullet_spread3->pos_x,bullet_spread3->pos_y>>5);
+					gotoxy(bullet_spread3->pos_x-bullet_spread3->vel_x,(bullet_spread3->pos_y-bullet_spread3->vel_y)>>5);
+					printf(" ");
 
-			bullet_spread3->vel_x = 0;
-			bullet_spread3->vel_y = 0;
-			bullet_spread3->pos_x = 1;
-			bullet_spread3->pos_y = 1;
-		}
+					bullet_spread3->vel_x = 0;
+					bullet_spread3->vel_y = 0;
+					bullet_spread3->pos_x = 1;
+					bullet_spread3->pos_y = 1;
+				}
 
 }
 
