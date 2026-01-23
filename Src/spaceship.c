@@ -37,7 +37,6 @@ void print_ship(spaceship_t *ship) {
 	printf("      ");
 }
 
-
 void update_pos(spaceship_t *ship,int joystick, int keyboard) {
 
 
@@ -78,7 +77,7 @@ if (bullet1->vel_x == 0){
 		bullet1->pos_x = ship->pos_x+12;
 		bullet1->pos_y = (ship->pos_y+4)<<5;
 		bullet1->vel_x = 2;
-		bullet1->vel_y = 10;
+		bullet1->vel_y = 0;
 	}
 }
 //bullet2 logic
@@ -88,6 +87,7 @@ else if (bullet2->vel_x == 0){
 		bullet2->pos_x = ship->pos_x+12;
 		bullet2->pos_y = (ship->pos_y+4)<<5;
 		bullet2->vel_x = 2;
+		bullet2->vel_y = 0;
 	}
 }
 //bullet3 logic
@@ -97,6 +97,7 @@ else if (bullet3->vel_x == 0){
 		bullet3->pos_x = ship->pos_x+12;
 		bullet3->pos_y = (ship->pos_y+4)<<5;
 		bullet3->vel_x = 2;
+		bullet3->vel_y = 0;
 	}
 }
 //bullet4 logic
@@ -106,6 +107,7 @@ else if (bullet4->vel_x == 0){
 		bullet4->pos_x = ship->pos_x+12;
 		bullet4->pos_y = (ship->pos_y+4)<<5;
 		bullet4->vel_x = 2;
+		bullet4->vel_y = 0;
 	}
 }
 //bullet5 logic
@@ -115,6 +117,7 @@ else if (bullet5->vel_x == 0){
 		bullet5->pos_x = ship->pos_x+12;
 		bullet5->pos_y = (ship->pos_y+4)<<5;
 		bullet5->vel_x = 2;
+		bullet5->vel_y = 0;
 	}
 }
 
@@ -272,17 +275,17 @@ void spread_shot(spaceship_t *ship, int joystick,int keyboard, bullet_t *bullet_
 			ship->spread_shot -= 1;
 			bullet_spread1->pos_x = ship->pos_x+12;
 			bullet_spread1->pos_y = (ship->pos_y+3)<<5;
-			bullet_spread1->vel_x = 2;
+			bullet_spread1->vel_x = 3;
 			bullet_spread1->vel_y = -1<<5;
 
 			bullet_spread2->pos_x = ship->pos_x+12;
 			bullet_spread2->pos_y = (ship->pos_y+4)<<5;
-			bullet_spread2->vel_x = 2;
+			bullet_spread2->vel_x = 3;
 			bullet_spread2->vel_y = 0<<5;
 
 			bullet_spread3->pos_x = ship->pos_x+12;
 			bullet_spread3->pos_y = (ship->pos_y+5)<<5;
-			bullet_spread3->vel_x = 2;
+			bullet_spread3->vel_x = 3;
 			bullet_spread3->vel_y = 1<<5;
 		}
 	}
@@ -302,7 +305,7 @@ void spread_shot(spaceship_t *ship, int joystick,int keyboard, bullet_t *bullet_
 			bullet_spread1->pos_y = bullet_spread1->pos_y + bullet_spread1->vel_y;
 
 		}
-		if ((bullet_spread1->pos_x >= 230) || (bullet_spread1->pos_y>>5 >= 64) || (bullet_spread1->pos_y>>5 <= 0)) {
+		if ((bullet_spread1->pos_x >= 120) || (bullet_spread1->pos_y>>5 >= 64) || (bullet_spread1->pos_y>>5 <= 0)) {
 			gotoxy(bullet_spread1->pos_x,bullet_spread1->pos_y>>5);
 			gotoxy(bullet_spread1->pos_x-bullet_spread1->vel_x,(bullet_spread1->pos_y-bullet_spread1->vel_y)>>5);
 			printf(" ");
@@ -325,7 +328,7 @@ void spread_shot(spaceship_t *ship, int joystick,int keyboard, bullet_t *bullet_
 				bullet_spread2->pos_y = bullet_spread2->pos_y + bullet_spread2->vel_y;
 
 			}
-			if ((bullet_spread2->pos_x >= 230) || (bullet_spread2->pos_y>>5 >= 64) || (bullet_spread2->pos_y>>5 <= 0)) {
+			if ((bullet_spread2->pos_x >= 120) || (bullet_spread2->pos_y>>5 >= 64) || (bullet_spread2->pos_y>>5 <= 0)) {
 				gotoxy(bullet_spread2->pos_x,bullet_spread2->pos_y>>5);
 				gotoxy(bullet_spread2->pos_x-bullet_spread2->vel_x,(bullet_spread2->pos_y-bullet_spread2->vel_y)>>5);
 				printf(" ");
@@ -348,7 +351,7 @@ void spread_shot(spaceship_t *ship, int joystick,int keyboard, bullet_t *bullet_
 					bullet_spread3->pos_y = bullet_spread3->pos_y + bullet_spread3->vel_y;
 
 				}
-				if ((bullet_spread3->pos_x >= 230) || (bullet_spread3->pos_y>>5 >= 64) || (bullet_spread3->pos_y>>5 <= 0)) {
+				if ((bullet_spread3->pos_x >= 120) || (bullet_spread3->pos_y>>5 >= 64) || (bullet_spread3->pos_y>>5 <= 0)) {
 					gotoxy(bullet_spread3->pos_x,bullet_spread3->pos_y>>5);
 					gotoxy(bullet_spread3->pos_x-bullet_spread3->vel_x,(bullet_spread3->pos_y-bullet_spread3->vel_y)>>5);
 					printf(" ");
@@ -513,4 +516,30 @@ void draw_spaceship1(spaceship_t *ship) {
 
 fgcolor(15);
 
+}
+
+void lorentzforce(bullet_t *bullets, astroid_t *stroids)
+{
+    for (int i = 0; i < 5; i++) {
+        for (int t = 0; t < 8; t++) {
+
+            int bx = bullets[i].pos_x;
+            int by = bullets[i].pos_y >> 5;   // only if pos_y is fixed-point
+            int ax = stroids[t].pos_x;
+            int ay = stroids[t].pos_y;
+
+            // X inside asteroid width [ax, ax+5]
+            if ((bullets[i].vel_x !=0)&&(bx >= ax && bx <= ax + 5)) {
+
+                // example: if bullet is in band ay..ay+8 -> push down
+                if (by <= ay && by >= ay - 4) {
+                    bullets[i].vel_y+=3;
+
+                // example: if bullet is in band ay+6..ay+10 -> push up
+                } else if (by >= ay + 3 && by <= ay + 12) {
+                    bullets[i].vel_y-=3;
+                }
+            }
+        }
+    }
 }

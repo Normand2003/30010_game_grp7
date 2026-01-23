@@ -111,7 +111,7 @@ int start_select(int joystick, int keyboard){
 	if ((joystick == 5 || keyboard == 32) && (selector == 2)){
 		gotoxy(1,1);
 		printf("help selected");
-		return 2;
+		return 10;
 	}
 
 	if (joystick == 1 || keyboard == 65){
@@ -179,6 +179,7 @@ int start_select(int joystick, int keyboard){
 }
 
 void help_screen(){
+
 	blink(0);
     clrscr();
 
@@ -248,7 +249,7 @@ void help_screen(){
     gotoxy(71,42);
     	printf(" like the laser and spread-shot to kill all who oppose you!");
     gotoxy(71,43);
-    	printf(" However! Powerups don't last forever! Use them wisely");
+    	printf(" However! You only have a limited amount! Use them wisely");
 
     //printer "back" knap
 
@@ -265,3 +266,218 @@ void help_screen(){
     printf("|____/ \\__,_|\\___|_|\\_\\");
     blink(0);
 }
+
+void money_bag(int x, int y) {
+
+	//printer pengepose 2 = dark green, 10 = light green, brown = 3
+	gotoxy(x+5,y);
+	fgcolor(3);
+	printf("%c%c%c%c%c",block,block,block,block,block);
+
+
+	gotoxy(x+4,y+1);
+	fgcolor(3);
+	printf("%c", block);
+	fgcolor(10);
+	printf("%c%c%c%c%c", block,block,block,block,block);
+
+	fgcolor(3);
+	printf("%c", block);
+
+	gotoxy(x+5,y+2);
+	fgcolor(3);
+	printf("%c", block);
+	fgcolor(10);
+	printf("%c%c%c", block,block,block);
+	fgcolor(3);
+	printf("%c", block);
+
+	gotoxy(x+6,y+3);
+	fgcolor(3);
+	printf("%c%c%c", block,block,block);
+
+	gotoxy(x+5,y+4);
+	printf("%c%c%c%c%c", block,block,block,block,block);
+
+	gotoxy(x+4,y+5);
+	printf("%c", block);
+	fgcolor(10);
+	printf("%c%c%c%c%c", block,block,block,block,block);
+	fgcolor(3);
+	printf("%c", block);
+
+	gotoxy(x+3,y+6);
+	printf("%c", block);
+	fgcolor(10);
+	printf("%c%c%c", block,block,block);
+	fgcolor(3);
+	printf("%c", block);
+	fgcolor(10);
+	printf("%c%c%c", block,block,block);
+	fgcolor(3);
+	printf("%c", block);
+
+	gotoxy(x+2,y+7);
+	printf("%c", block);
+	fgcolor(10);
+	printf("%c%c%c", block,block,block);
+	fgcolor(3);
+	printf("%c%c%c", block,block,block);
+	fgcolor(10);
+	printf("%c%c%c", block,block,block);
+	fgcolor(3);
+	printf("%c", block);
+
+	gotoxy(x+1,y+8);
+	printf("%c", block);
+	fgcolor(10);
+	printf("%c%c%c%c", block,block,block,block);
+	fgcolor(3);
+	printf("%c", block);
+	fgcolor(10);
+	printf("%c%c%c%c%c%c", block,block,block,block,block,block);
+	fgcolor(3);
+	printf("%c", block);
+
+	gotoxy(x+1,y+9);
+	printf("%c", block);
+	fgcolor(10);
+	printf("%c%c%c%c", block,block,block,block);
+	fgcolor(3);
+	printf("%c%c%c", block,block,block);
+	fgcolor(10);
+	printf("%c%c%c%c", block,block,block,block);
+	fgcolor(3);
+	printf("%c", block);
+
+	gotoxy(x+1,y+10);
+	printf("%c", block);
+	fgcolor(10);
+	printf("%c%c%c%c%c%c%c", block,block,block,block,block,block,block);
+	fgcolor(3);
+	printf("%c", block);
+	fgcolor(10);
+	printf("%c%c", block,block);
+	fgcolor(3);
+	printf("%c%c%c%c", block,block,block,block);
+
+	gotoxy(x,y+11);
+	printf("%c", block);
+	fgcolor(2);
+	printf("%c", block);
+	fgcolor(10);
+	printf("%c%c%c%c", block,block,block,block);
+	fgcolor(3);
+	printf("%c%c%c", block,block,block);
+	fgcolor(10);
+	printf("%c%c", block,block);
+	fgcolor(3);
+	printf("%c", block);
+	fgcolor(11);
+	printf("%c%c%c", block,block,block);
+	fgcolor(3);
+	printf("%c", block);
+
+	gotoxy(x,y+12);
+	printf("%c", block);
+	fgcolor(2);
+	printf("%c", block);
+	fgcolor(10);
+	printf("%c%c%c%c%c", block,block,block,block,block);
+	fgcolor(3);
+	printf("%c", block);
+	fgcolor(10);
+	printf("%c%c%c", block,block,block);
+	fgcolor(3);
+	printf("%c", block);
+	fgcolor(11);
+	printf("%c%c%c", block,block,block);
+	fgcolor(3);
+	printf("%c", block);
+
+	gotoxy(x,y+13);
+	printf("%c", block);
+	fgcolor(2);
+	printf("%c", block);
+	fgcolor(10);
+	printf("%c%c%c%c%c%c%c%c%c",block,block,block,block,block,block,block,block,block,block);
+	fgcolor(2);
+	printf("%c%c%c%c%c", block,block,block,block,block);
+
+	gotoxy(x,y+13);
+	fgcolor(3);
+	printf("%c", block);
+	fgcolor(2);
+	printf("%c%c", block,block);
+	fgcolor(10);
+	printf("%c%c%c%c%c%c%c%c", block,block,block,block,block,block,block,block);
+	fgcolor(3);
+	printf("%c", block);
+	fgcolor(11);
+	printf("%c%c%c", block,block,block);
+	fgcolor(3);
+	printf("%c", block);
+
+	gotoxy(x+1,y+14);
+	printf("%c", block);
+	fgcolor(2);
+	printf("%c%c%c%c%c%c%c%c%c", block,block,block,block,block,block,block,block,block);
+	fgcolor(3);
+	printf("%c", block);
+	fgcolor(11);
+	printf("%c%c%c", block,block,block);
+	fgcolor(3);
+	printf("%c", block);
+
+	gotoxy(x+2,y+15);
+	printf("%c%c%c%c%c%c%c%c%c", block,block,block,block,block,block,block,block,block);
+	fgcolor(0);
+	printf("%c", block);
+	fgcolor(3);
+	printf("%c%c%c", block,block,block);
+
+
+}
+
+void bosskey_gfx() {
+	fgcolor(2);
+	window(20,20,215,50);
+	gotoxy(25,25);
+	printf("*Very important redacted engineer documents*");
+	gotoxy(25,26);
+	printf("I enjoy maximizing shareholder value for ILuvM0ney Inc.");
+	gotoxy(85, 5);
+	printf("8 8888888888   `8.`8888.      ,8'  ,o888888o.    8 8888888888   8 8888");
+	gotoxy(85, 6);
+	printf("8 8888          `8.`8888.    ,8'  8888     `88.  8 8888         8 8888");
+	gotoxy(85, 7);
+	printf("8 8888           `8.`8888.  ,8',8 8888       `8. 8 8888         8 8888");
+	gotoxy(85, 8);
+	printf("8 8888            `8.`8888.,8' 88 8888           8 8888         8 8888");
+	gotoxy(85, 9);
+	printf("8 888888888888     `8.`88888'  88 8888           8 888888888888 8 8888");
+	gotoxy(85, 10);
+	printf("8 888888888888     `8.`88888'  88 8888           8 888888888888 8 8888");
+	gotoxy(85, 11);
+	printf("8 8888             .88.`8888.  88 8888           8 8888         8 8888");
+	gotoxy(85, 12);
+	printf("8 8888            .8'`8.`8888. 88 8888           8 8888         8 8888");
+	gotoxy(85, 13);
+	printf("8 8888            .8'`8.`8888. 88 8888           8 8888         8 8888");
+	gotoxy(85, 14);
+	printf("8 8888           .8'  `8.`8888.`8 8888       .8' 8 8888         8 8888");
+	gotoxy(85, 15);
+	printf("8 8888          .8'    `8.`8888.  8888     ,88'  8 8888         8 8888");
+	gotoxy(85, 16);
+	printf("8 888888888888 .8'      `8.`8888.  `8888888P'    8 888888888888 8 888888888888");
+
+
+	money_bag(30,28);
+	money_bag(60,31);
+	money_bag(90,24);
+	money_bag(120,29);
+	money_bag(150,25);
+	money_bag(180,31);
+
+}
+

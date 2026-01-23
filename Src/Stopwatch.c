@@ -95,7 +95,7 @@ int updated=0; // holder styr på hvilke objekter der allerede er opdateret i gi
 void clock(gtimer_t *gtimer){
 
 
-	  //if((g_time.hs%clockvalue)==0)
+	  //if((g_time.hs%gtimer->clockvalue)==0)
 	  if((g_time.hs & 0b1) == 1)
 		gtimer->tick=1;
 	  	else{

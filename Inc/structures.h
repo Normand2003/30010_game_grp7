@@ -53,6 +53,7 @@ typedef struct {
 typedef struct {
 	int tick;
 	int updated;
+	int clockvalue;
 }gtimer_t;
 
 

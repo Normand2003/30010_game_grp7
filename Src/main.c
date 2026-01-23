@@ -28,6 +28,7 @@ initTimer();
 g_running = 1;
 gtimer_t global_timer;
 
+
 //enables lcd
 lcd_init();
 lcd_reset();
@@ -37,11 +38,14 @@ memset(lcd_buffer,0x00,512);
 //enables LED
 init_led();
 
-//creates "level select" variable
+//creates "level select" variable and bosskey
 int lvl_select = 0;
+int bosskey = 0;
 
-//keeps start screen running
+//keeps game running & functions as a "main outside loop"
 while(1){
+	int time_since_start = 0;
+	int difficulty = 0;
 
 if(lvl_select == 0){
 	start_screen();
@@ -58,11 +62,11 @@ while(lvl_select == 0){
 
 //
 //Keeps help screen running
-if(lvl_select == 2){
+if(lvl_select == 10){
 	help_screen();
 }
 
-while(lvl_select == 2){
+while(lvl_select == 10){
 	if(detect_joystick() == 5 || keyboard2() == 32){
 		lvl_select = 0;
 		}
@@ -106,10 +110,10 @@ astroid_t all_stroids[8]={
 		{70,10,-1,0,1},
 		{85,30,-1,0,2},
 		{100,40,-2,0,3},
-		{115,8,-1,0,1},
-		{130,50,-1,0,1},
+		{115,8,-1,0,4},
+		{130,50,-1,0,5},
 		{145,20,-1,0,2},
-		{160,5,-1,0,3},
+		{160,5,-3,0,6},
 		{175,50,-2,0,1},
 };
 //creates array of bullets
@@ -178,13 +182,18 @@ while(lvl_select == 1){
 		}
 	}
 
+	//forces gravity on bullets by asteroids
+	//lorentzforce(&all_bullets, &all_stroids);
 
-	//health system - displays current health and goes to main menu if health = 0
+	//health system - displays current health, ammo and time - and goes to main menu if health = 0
 	gotoxy(1,1);
 	fgcolor(15);
 	printf("Ship Health: %d",my_ship.health);
 	printf("\nLaser Shot: %d",my_ship.laser_shot);
 	printf("\nSpread Shot: %d",my_ship.spread_shot);
+	printf("\nTime: %d",(time_since_start++)>>2);
+	printf("\nDifficulty Level: %d",difficulty+1);
+
 	number_to_string(my_ship.health, health,2);
 	lcd_write_string(0,40,health);
 	if(my_ship.health == 0){
@@ -193,15 +202,66 @@ while(lvl_select == 1){
 	//rgb lives
 	lives_RGB(&my_ship);
 
-	//score
+	//score on lcd
 	number_to_string(my_ship.score, score ,6);
 	lcd_write_string(1,35,score);
 
-	//ammunition
+	//ammunition on lcd
 	number_to_string(my_ship.laser_shot,laserammo,6);
 	lcd_write_string(2,60,laserammo);
 	number_to_string(my_ship.spread_shot,spreadammo,6);
 	lcd_write_string(3,65,spreadammo);
+
+	//boss key
+	if (key == 120){
+		clrscr();
+		bosskey = 1;
+		bosskey_gfx();
+		while (bosskey == 1){
+			clock(&global_timer);
+			key = keyboard2();
+			if (key == 120){
+				bosskey = 0;
+			}
+			global_timer.updated=1;
+		}
+		clrscr();
+	}
+	//updates difficulty for the game, and increases speed of astroid each time it increases
+		update_difficulty((time_since_start)>>2,&difficulty);
+		if (difficulty == 1){
+			all_stroids[0].vel_x = -2;
+			all_stroids[1].vel_x = -2;
+			all_stroids[2].vel_x = -3;
+			all_stroids[3].vel_x = -1;
+			all_stroids[4].vel_x = -1;
+			all_stroids[5].vel_x = -2;
+			all_stroids[6].vel_x = -4;
+			all_stroids[7].vel_x = -3;
+		}
+		if (difficulty == 2){
+			all_stroids[0].vel_x = -3;
+			all_stroids[1].vel_x = -3;
+			all_stroids[2].vel_x = -4;
+			all_stroids[3].vel_x = -1;
+			all_stroids[4].vel_x = -1;
+			all_stroids[5].vel_x = -3;
+			all_stroids[6].vel_x = -5;
+			all_stroids[7].vel_x = -4;
+		}
+		if (difficulty == 3){
+			all_stroids[0].vel_x = -3;
+			all_stroids[1].vel_x = -3;
+			all_stroids[2].vel_x = -4;
+			all_stroids[3].vel_x = -1;
+			all_stroids[4].vel_x = -1;
+			all_stroids[5].vel_x = -3;
+			all_stroids[6].vel_x = -5;
+			all_stroids[7].vel_x = -4;
+		}
+
+
+
 	global_timer.updated=1;
 	}
 }
