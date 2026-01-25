@@ -2,6 +2,7 @@
 #include "30010_io.h" // Input/output library for this course
 #include "lcd.h"
 #include "stopwatch.h"
+#include "structures.h"
 
 /*
 
@@ -14,6 +15,7 @@
 
 void lcd_write_string(int y, int x, char *p) {
 
+	//y is increased by 128 times, to make sure it goes to next line
 	y = y * 128;
     int counter = 0;
     while (*p != '\0') {
@@ -38,26 +40,29 @@ void lcd_update(char *p, char *q) {
 }
 
 void number_to_string(int number, char* str, size_t str_len) {
-
+	//uses built-in function to convert number to string
 	snprintf(str, str_len, "%d", number);
 
 }
 
+void lcd_danger(astroid_t *alien_object){
+
+	//creates string called tom and alien, which is empty and has "Alien" flashing on it
+	char tom[15] = "       ";
+	char alien[7] = "Alien!";
+
+	//checks to see if the alien is close to the player, and then starts flashing!
+	if (alien_object->pos_x < 140){
 
 
-void lcd_scroll(char *p) {
-	int i = 0;
-	while (1) {
-		printf("Time since start: %u:%02u:%02u.--\n", g_time.h, g_time.m, g_time.s);
-		if (g_second_changed) {
-			memset(lcd_buffer,0x00,512);
-			lcd_write_string(0, 1+i, p);
-			i += 1;
-			g_second_changed = 0;
-		}
-
+    	  if (g_time.hs >= 0 && g_time.hs <= 20) {
+    		lcd_write_string(0,90, alien);
+    	  }
+    	  else if (g_time.hs >= 21 && g_time.hs <= 100) {
+    		lcd_write_string(0, 90, tom);
+    	  }
 	}
-
+	else{
+		lcd_write_string(0, 90, tom);
+	}
 }
-
-

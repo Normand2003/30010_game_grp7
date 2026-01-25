@@ -13,32 +13,10 @@
 #define block 0xDB
 #define skud 0xDF
 
-//function not used
-void print_ship(spaceship_t *ship) {
-
-	//prints ship and "air" around it
-	gotoxy(ship->pos_x+4,ship->pos_y);
-	printf("      ");
-	gotoxy(ship->pos_x+4,ship->pos_y+1);
-	printf("  |\\    ");
-	gotoxy(ship->pos_x+4,ship->pos_y+2);
-	printf("  | \\__  "); //left wing
-	gotoxy(ship->pos_x,ship->pos_y+3);
-	printf("    |\\| |  \\    ");
-	gotoxy(ship->pos_x,ship->pos_y+4);
-	printf("    |-<\xB0\xB0\xB0\xB0\xB0\xB0\xB0\xB0>  "); // body
-	gotoxy(ship->pos_x,ship->pos_y+5);
-	printf("    |/| |__/    ");
-	gotoxy(ship->pos_x+4,ship->pos_y+6);
-	printf("  | /    "); // right wing
-	gotoxy(ship->pos_x+4,ship->pos_y+7);
-	printf("  |/    ");
-	gotoxy(ship->pos_x+4,ship->pos_y+8);
-	printf("      ");
-}
-
 void update_pos(spaceship_t *ship,int joystick, int keyboard) {
 
+
+	//checks what type of input the player gives, and moves ship either up or down
 
 	if (joystick == 1 || keyboard == 65) {
 		if (ship->pos_y>2){
@@ -64,6 +42,133 @@ void update_pos(spaceship_t *ship,int joystick, int keyboard) {
 	//	}
 	//} // left
 }
+
+void laser(spaceship_t *ship, int joystick,int keyboard,laser_t *laser){
+	//logic for spawning laser
+	int length;
+	if (ship->laser_shot > 0){
+		if (joystick == 2 || keyboard ==  67) {
+			ship->laser_shot -= 1;
+			laser->pos_y = ship->pos_y+4;
+			laser->pos_x = ship->pos_x+11;
+			while (length < (228-laser->pos_x)){
+				gotoxy(laser->pos_x+length,laser->pos_y);
+				bgcolor(1);
+				printf("          "); //prints red part of laser
+				length = length + 5;
+			}
+			length = 0;
+			while (length < (228-laser->pos_x)){
+				gotoxy(laser->pos_x+length,laser->pos_y);
+				bgcolor(0);
+				printf("          "); //deprints the laser
+				length = length + 5;
+			}
+			length = 0;
+			bgcolor(0);
+		}
+	}
+}
+
+void spread_shot(spaceship_t *ship, int joystick,int keyboard, bullet_t *bullet_spread1, bullet_t *bullet_spread2, bullet_t *bullet_spread3){
+	if (ship->spread_shot > 0){
+	//logic for spawning bullets
+	//bullet_spread1&2&3 logic
+	if ((bullet_spread1->vel_x == 0) && (bullet_spread2->vel_x == 0) && (bullet_spread3->vel_x == 0)){
+
+		if (joystick == 4 || keyboard == 68) {
+			ship->spread_shot -= 1;
+			bullet_spread1->pos_x = ship->pos_x+12;
+			bullet_spread1->pos_y = (ship->pos_y+3)<<5;
+			bullet_spread1->vel_x = 3;
+			bullet_spread1->vel_y = -1<<5;
+
+			bullet_spread2->pos_x = ship->pos_x+12;
+			bullet_spread2->pos_y = (ship->pos_y+4)<<5;
+			bullet_spread2->vel_x = 3;
+			bullet_spread2->vel_y = 0<<5;
+
+			bullet_spread3->pos_x = ship->pos_x+12;
+			bullet_spread3->pos_y = (ship->pos_y+5)<<5;
+			bullet_spread3->vel_x = 3;
+			bullet_spread3->vel_y = 1<<5;
+		}
+	}
+
+	}
+
+	//logic for moving bullet_spread1
+		if (bullet_spread1->pos_x < 230 && bullet_spread1->vel_x != 0){
+			gotoxy(bullet_spread1->pos_x,bullet_spread1->pos_y>>5);
+			fgcolor(10);
+			printf("%c",skud);
+			fgcolor(15);
+
+			gotoxy(bullet_spread1->pos_x-bullet_spread1->vel_x,(bullet_spread1->pos_y-bullet_spread1->vel_y)>>5);
+			printf(" ");
+			bullet_spread1->pos_x = bullet_spread1->pos_x + bullet_spread1->vel_x;
+			bullet_spread1->pos_y = bullet_spread1->pos_y + bullet_spread1->vel_y;
+
+		}
+		if ((bullet_spread1->pos_x >= 120) || (bullet_spread1->pos_y>>5 >= 64) || (bullet_spread1->pos_y>>5 <= 0)) {
+			gotoxy(bullet_spread1->pos_x,bullet_spread1->pos_y>>5);
+			gotoxy(bullet_spread1->pos_x-bullet_spread1->vel_x,(bullet_spread1->pos_y-bullet_spread1->vel_y)>>5);
+			printf(" ");
+
+			bullet_spread1->vel_x = 0;
+			bullet_spread1->vel_y = 0;
+			bullet_spread1->pos_x = 1;
+			bullet_spread1->pos_y = 1;
+		}
+		//logic for moving bullet_spread1
+			if (bullet_spread2->pos_x < 230 && bullet_spread2->vel_x != 0){
+				gotoxy(bullet_spread2->pos_x,bullet_spread2->pos_y>>5);
+				fgcolor(10);
+				printf("%c",skud);
+				fgcolor(15);
+
+				gotoxy(bullet_spread2->pos_x-bullet_spread2->vel_x,(bullet_spread2->pos_y-bullet_spread2->vel_y)>>5);
+				printf(" ");
+				bullet_spread2->pos_x = bullet_spread2->pos_x + bullet_spread2->vel_x;
+				bullet_spread2->pos_y = bullet_spread2->pos_y + bullet_spread2->vel_y;
+
+			}
+			if ((bullet_spread2->pos_x >= 120) || (bullet_spread2->pos_y>>5 >= 64) || (bullet_spread2->pos_y>>5 <= 0)) {
+				gotoxy(bullet_spread2->pos_x,bullet_spread2->pos_y>>5);
+				gotoxy(bullet_spread2->pos_x-bullet_spread2->vel_x,(bullet_spread2->pos_y-bullet_spread2->vel_y)>>5);
+				printf(" ");
+
+				bullet_spread2->vel_x = 0;
+				bullet_spread2->vel_y = 0;
+				bullet_spread2->pos_x = 1;
+				bullet_spread2->pos_y = 1;
+			}
+			//logic for moving bullet_spread1
+				if (bullet_spread3->pos_x < 230 && bullet_spread3->vel_x != 0){
+					gotoxy(bullet_spread3->pos_x,bullet_spread3->pos_y>>5);
+					fgcolor(10);
+					printf("%c",skud);
+					fgcolor(15);
+
+					gotoxy(bullet_spread3->pos_x-bullet_spread3->vel_x,(bullet_spread3->pos_y-bullet_spread3->vel_y)>>5);
+					printf(" ");
+					bullet_spread3->pos_x = bullet_spread3->pos_x + bullet_spread3->vel_x;
+					bullet_spread3->pos_y = bullet_spread3->pos_y + bullet_spread3->vel_y;
+
+				}
+				if ((bullet_spread3->pos_x >= 120) || (bullet_spread3->pos_y>>5 >= 64) || (bullet_spread3->pos_y>>5 <= 0)) {
+					gotoxy(bullet_spread3->pos_x,bullet_spread3->pos_y>>5);
+					gotoxy(bullet_spread3->pos_x-bullet_spread3->vel_x,(bullet_spread3->pos_y-bullet_spread3->vel_y)>>5);
+					printf(" ");
+
+					bullet_spread3->vel_x = 0;
+					bullet_spread3->vel_y = 0;
+					bullet_spread3->pos_x = 1;
+					bullet_spread3->pos_y = 1;
+				}
+
+}
+
 
 void shoot(spaceship_t *ship, int joystick,int space,bullet_t *bullet1,bullet_t *bullet2,bullet_t *bullet3,bullet_t *bullet4,bullet_t *bullet5) {
 
@@ -126,14 +231,14 @@ else if (bullet5->vel_x == 0){
 //logic for moving bullet1
 	if (bullet1->pos_x < 235 && bullet1->vel_x != 0){
 		gotoxy(bullet1->pos_x,(bullet1->pos_y)>>5);
-		fgcolor(12);
-		printf("%c",skud);
-		fgcolor(15);
+		printf(" "); // prints " " where bullet is to remove trace before updating position
 
-		gotoxy(bullet1->pos_x-bullet1->vel_x,(bullet1->pos_y-bullet1->vel_y)>>5);
-		printf(" ");
-		bullet1->pos_x = bullet1->pos_x + bullet1->vel_x;
+		bullet1->pos_x = bullet1->pos_x + bullet1->vel_x; // updates position
 		bullet1->pos_y = bullet1->pos_y + bullet1->vel_y;
+		gotoxy(bullet1->pos_x,(bullet1->pos_y)>>5);
+		fgcolor(12);
+		printf("%c",skud); //prints bullet at new position
+		fgcolor(15);
 
 	}
 	if (bullet1->pos_x >= 235 || bullet1->pos_y>>5 >=65 || bullet1->pos_y>>5 <= 0) {
@@ -149,14 +254,15 @@ else if (bullet5->vel_x == 0){
 //logic for moving bullet2
 	if (bullet2->pos_x < 235 && bullet2->vel_x != 0){
 		gotoxy(bullet2->pos_x,(bullet2->pos_y)>>5);
+		printf(" ");
+
+
+		bullet2->pos_x = bullet2->pos_x + bullet2->vel_x;
+		bullet2->pos_y = bullet2->pos_y + bullet2->vel_y;
+		gotoxy(bullet2->pos_x,(bullet2->pos_y)>>5);
 		fgcolor(12);
 		printf("%c",skud);
 		fgcolor(15);
-
-		gotoxy(bullet2->pos_x-bullet2->vel_x,(bullet2->pos_y-bullet2->vel_y)>>5);
-		printf(" ");
-		bullet2->pos_x = bullet2->pos_x + bullet2->vel_x;
-		bullet2->pos_y = bullet2->pos_y + bullet2->vel_y;
 
 	}
 	if (bullet2->pos_x >= 235 || bullet2->pos_y>>5 >=65 || bullet2->pos_y>>5 <= 0) {
@@ -171,14 +277,15 @@ else if (bullet5->vel_x == 0){
 //logic for moving bullet3
 	if (bullet3->pos_x < 235 && bullet3->vel_x != 0){
 		gotoxy(bullet3->pos_x,(bullet3->pos_y)>>5);
+		printf(" ");
+
+
+		bullet3->pos_x = bullet3->pos_x + bullet3->vel_x;
+		bullet3->pos_y = bullet3->pos_y + bullet3->vel_y;
+		gotoxy(bullet3->pos_x,(bullet3->pos_y)>>5);
 		fgcolor(12);
 		printf("%c",skud);
 		fgcolor(15);
-
-		gotoxy(bullet3->pos_x-bullet3->vel_x,(bullet3->pos_y-bullet3->vel_y)>>5);
-		printf(" ");
-		bullet3->pos_x = bullet3->pos_x + bullet3->vel_x;
-		bullet3->pos_y = bullet3->pos_y + bullet3->vel_y;
 
 	}
 	if (bullet3->pos_x >= 235 || bullet3->pos_y>>5 >=65 || bullet3->pos_y>>5 <= 0) {
@@ -193,14 +300,14 @@ else if (bullet5->vel_x == 0){
 //logic for moving bullet4
 		if (bullet4->pos_x < 235 && bullet4->vel_x != 0){
 			gotoxy(bullet4->pos_x,(bullet4->pos_y)>>5);
+			printf(" ");
+
+			bullet4->pos_x = bullet4->pos_x + bullet4->vel_x;
+			bullet4->pos_y = bullet4->pos_y + bullet4->vel_y;
+			gotoxy(bullet4->pos_x,(bullet4->pos_y)>>5);
 			fgcolor(12);
 			printf("%c",skud);
 			fgcolor(15);
-
-			gotoxy(bullet4->pos_x-bullet4->vel_x,(bullet4->pos_y-bullet4->vel_y)>>5);
-			printf(" ");
-			bullet4->pos_x = bullet4->pos_x + bullet4->vel_x;
-			bullet4->pos_y = bullet4->pos_y + bullet4->vel_y;
 
 		}
 		if (bullet4->pos_x >= 235 || bullet4->pos_y>>5 >=65 || bullet4->pos_y>>5 <= 0) {
@@ -216,14 +323,14 @@ else if (bullet5->vel_x == 0){
 //logic for moving bullet5
 		if (bullet5->pos_x < 235 && bullet5->vel_x != 0){
 			gotoxy(bullet5->pos_x,(bullet5->pos_y)>>5);
+			printf(" ");
+
+			bullet5->pos_x = bullet5->pos_x + bullet5->vel_x;
+			bullet5->pos_y = bullet5->pos_y + bullet5->vel_y;
+			gotoxy(bullet5->pos_x,(bullet5->pos_y)>>5);
 			fgcolor(12);
 			printf("%c",skud);
 			fgcolor(15);
-
-			gotoxy(bullet5->pos_x-bullet5->vel_x,(bullet5->pos_y-bullet5->vel_y)>>5);
-			printf(" ");
-			bullet5->pos_x = bullet5->pos_x + bullet5->vel_x;
-			bullet5->pos_y = bullet5->pos_y + bullet5->vel_y;
 
 			}
 		if (bullet5->pos_x >= 235 || bullet5->pos_y>>5 >=65 || bullet5->pos_y>>5 <= 0) {
@@ -238,133 +345,9 @@ else if (bullet5->vel_x == 0){
 		}}
 }
 
-void laser(spaceship_t *ship, int joystick,int keyboard,laser_t *laser){
-	//logic for spawning laser
-	int length;
-	if (ship->laser_shot > 0){
-		if (joystick == 2 || keyboard ==  67) {
-			ship->laser_shot -= 1;
-			laser->pos_y = ship->pos_y+4;
-			laser->pos_x = ship->pos_x+11;
-			while (length < (228-laser->pos_x)){
-				gotoxy(laser->pos_x+length,laser->pos_y);
-				bgcolor(1);
-				printf("          ");
-				length = length + 5;
-			}
-			length = 0;
-			while (length < (228-laser->pos_x)){
-				gotoxy(laser->pos_x+length,laser->pos_y);
-				bgcolor(0);
-				printf("          ");
-				length = length + 5;
-			}
-			length = 0;
-			bgcolor(0);
-		}
-	}
-}
-
-void spread_shot(spaceship_t *ship, int joystick,int keyboard, bullet_t *bullet_spread1, bullet_t *bullet_spread2, bullet_t *bullet_spread3){
-	if (ship->spread_shot > 0){
-	//logic for spawning bullets
-	//bullet_spread1&2&3 logic
-	if ((bullet_spread1->vel_x == 0) && (bullet_spread2->vel_x == 0) && (bullet_spread3->vel_x == 0)){
-
-		if (joystick == 4 || keyboard == 68) {
-			ship->spread_shot -= 1;
-			bullet_spread1->pos_x = ship->pos_x+12;
-			bullet_spread1->pos_y = (ship->pos_y+3)<<5;
-			bullet_spread1->vel_x = 3;
-			bullet_spread1->vel_y = -1<<5;
-
-			bullet_spread2->pos_x = ship->pos_x+12;
-			bullet_spread2->pos_y = (ship->pos_y+4)<<5;
-			bullet_spread2->vel_x = 3;
-			bullet_spread2->vel_y = 0<<5;
-
-			bullet_spread3->pos_x = ship->pos_x+12;
-			bullet_spread3->pos_y = (ship->pos_y+5)<<5;
-			bullet_spread3->vel_x = 3;
-			bullet_spread3->vel_y = 1<<5;
-		}
-	}
-
-	}
-
-	//logic for moving bullet_spread1
-		if (bullet_spread1->pos_x < 230 && bullet_spread1->vel_x != 0){
-			gotoxy(bullet_spread1->pos_x,bullet_spread1->pos_y>>5);
-			fgcolor(12);
-			printf("%c",skud);
-			fgcolor(15);
-
-			gotoxy(bullet_spread1->pos_x-bullet_spread1->vel_x,(bullet_spread1->pos_y-bullet_spread1->vel_y)>>5);
-			printf(" ");
-			bullet_spread1->pos_x = bullet_spread1->pos_x + bullet_spread1->vel_x;
-			bullet_spread1->pos_y = bullet_spread1->pos_y + bullet_spread1->vel_y;
-
-		}
-		if ((bullet_spread1->pos_x >= 120) || (bullet_spread1->pos_y>>5 >= 64) || (bullet_spread1->pos_y>>5 <= 0)) {
-			gotoxy(bullet_spread1->pos_x,bullet_spread1->pos_y>>5);
-			gotoxy(bullet_spread1->pos_x-bullet_spread1->vel_x,(bullet_spread1->pos_y-bullet_spread1->vel_y)>>5);
-			printf(" ");
-
-			bullet_spread1->vel_x = 0;
-			bullet_spread1->vel_y = 0;
-			bullet_spread1->pos_x = 1;
-			bullet_spread1->pos_y = 1;
-		}
-		//logic for moving bullet_spread1
-			if (bullet_spread2->pos_x < 230 && bullet_spread2->vel_x != 0){
-				gotoxy(bullet_spread2->pos_x,bullet_spread2->pos_y>>5);
-				fgcolor(12);
-				printf("%c",skud);
-				fgcolor(15);
-
-				gotoxy(bullet_spread2->pos_x-bullet_spread2->vel_x,(bullet_spread2->pos_y-bullet_spread2->vel_y)>>5);
-				printf(" ");
-				bullet_spread2->pos_x = bullet_spread2->pos_x + bullet_spread2->vel_x;
-				bullet_spread2->pos_y = bullet_spread2->pos_y + bullet_spread2->vel_y;
-
-			}
-			if ((bullet_spread2->pos_x >= 120) || (bullet_spread2->pos_y>>5 >= 64) || (bullet_spread2->pos_y>>5 <= 0)) {
-				gotoxy(bullet_spread2->pos_x,bullet_spread2->pos_y>>5);
-				gotoxy(bullet_spread2->pos_x-bullet_spread2->vel_x,(bullet_spread2->pos_y-bullet_spread2->vel_y)>>5);
-				printf(" ");
-
-				bullet_spread2->vel_x = 0;
-				bullet_spread2->vel_y = 0;
-				bullet_spread2->pos_x = 1;
-				bullet_spread2->pos_y = 1;
-			}
-			//logic for moving bullet_spread1
-				if (bullet_spread3->pos_x < 230 && bullet_spread3->vel_x != 0){
-					gotoxy(bullet_spread3->pos_x,bullet_spread3->pos_y>>5);
-					fgcolor(12);
-					printf("%c",skud);
-					fgcolor(15);
-
-					gotoxy(bullet_spread3->pos_x-bullet_spread3->vel_x,(bullet_spread3->pos_y-bullet_spread3->vel_y)>>5);
-					printf(" ");
-					bullet_spread3->pos_x = bullet_spread3->pos_x + bullet_spread3->vel_x;
-					bullet_spread3->pos_y = bullet_spread3->pos_y + bullet_spread3->vel_y;
-
-				}
-				if ((bullet_spread3->pos_x >= 120) || (bullet_spread3->pos_y>>5 >= 64) || (bullet_spread3->pos_y>>5 <= 0)) {
-					gotoxy(bullet_spread3->pos_x,bullet_spread3->pos_y>>5);
-					gotoxy(bullet_spread3->pos_x-bullet_spread3->vel_x,(bullet_spread3->pos_y-bullet_spread3->vel_y)>>5);
-					printf(" ");
-
-					bullet_spread3->vel_x = 0;
-					bullet_spread3->vel_y = 0;
-					bullet_spread3->pos_x = 1;
-					bullet_spread3->pos_y = 1;
-				}
-
-}
-
 void draw_spaceship1(spaceship_t *ship) {
+
+	//draws the spaceship with colours. Also draws empty space above and below, to remove old sprite
 
 	gotoxy(ship->pos_x, ship->pos_y-1);
 	printf("       ");
@@ -520,26 +503,30 @@ fgcolor(15);
 
 void lorentzforce(bullet_t *bullets, astroid_t *stroids)
 {
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 5; i++) { //this runs two loops so every bullet is checked for gravitational pull from every asteroid
         for (int t = 0; t < 8; t++) {
 
             int bx = bullets[i].pos_x;
-            int by = bullets[i].pos_y >> 5;   // only if pos_y is fixed-point
+            int by = bullets[i].pos_y >> 5; // bitshift to get the actual position
             int ax = stroids[t].pos_x;
             int ay = stroids[t].pos_y;
 
-            // X inside asteroid width [ax, ax+5]
-            if ((bullets[i].vel_x !=0)&&(bx >= ax && bx <= ax + 5)) {
 
-                // example: if bullet is in band ay..ay+8 -> push down
-                if (by <= ay && by >= ay - 4) {
-                    bullets[i].vel_y+=3;
+            if ((bullets[i].vel_x !=0)&&(bx >= ax-1 && bx <= ax + 6)) { //checks that bullet is within the correct x-value
 
-                // example: if bullet is in band ay+6..ay+10 -> push up
-                } else if (by >= ay + 3 && by <= ay + 12) {
-                    bullets[i].vel_y-=3;
-                }
-            }
-        }
-    }
-}
+
+                if (by >= ay+4 && by <= ay + 8) { // defines y-coordinate boundries gravitational field below asteroid
+
+                	if(stroids[t].type ==3)
+                		bullets[i].vel_y-=3; //decreases velocity in positive direction on y-axis by three when in gravitational field of large asteroid
+                	else
+                		bullets[i].vel_y-=2;//decreases velocity on y-axis by two when in gravitational field of small or medium asteroid
+
+
+
+                } else if (by <= ay && by >= ay - 5) { // defines y-coordinate boundries gravitational field above asteroid
+                	if(stroids[t].type ==3)
+                		bullets[i].vel_y+=3; //increases velocity on y-axis by three when in gravitational field of large asteroid
+                	else
+                		bullets[i].vel_y+=2;//increases velocity on y-axis by two when in gravitational field of small or medium asteroid
+}}}}}

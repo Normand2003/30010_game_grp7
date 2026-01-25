@@ -7,7 +7,7 @@
 #include "stm32f30x_conf.h" // STM32 config
 #include "30010_io.h" // Input/output library for this course
 #include "draw.h"
-#include "aliens.h"
+#include "structures.h"
 #define ESC 0x1B
 #define block 0xDB
 
@@ -71,31 +71,35 @@ void start_screen() {
     window(70, 29, 170, 40);
 
 
+    //printer aliens
 
-    alien_t alien1;
+    astroid_t alien1;
     alien1.pos_x = 50;
     alien1.pos_y = 20;
-    alien1.health = 1;
-    draw_alien(&alien1);
+    alien1.type = 6;
+    draw_asteroid(&alien1);
 
 
-    alien_t alien2;
+    astroid_t alien2;
     alien2.pos_x = 20;
     alien2.pos_y = 40;
-    alien2.health = 1;
-    draw_alien(&alien2);
+    alien2.type = 6;
+    draw_asteroid(&alien2);
 
-    alien_t alien3;
+    astroid_t alien3;
     alien3.pos_x = 180;
     alien3.pos_y = 15;
-    alien3.health = 1;
-    draw_alien(&alien3);
+    alien3.type = 6;
+    draw_asteroid(&alien3);
+
 
 }
 
 int start_select(int joystick, int keyboard){
 	int static selector;
+	fgcolor(2);
 
+	//logic for detecting what button is currently selected
 	if(joystick == 1 || keyboard == 65){
 		selector = 1;
 	}
@@ -103,6 +107,8 @@ int start_select(int joystick, int keyboard){
 		selector = 2;
 	}
 
+
+	//selects the button, and returns 1(start game) or 10(help screen)
 	if ((joystick == 5 || keyboard == 32) && (selector == 1)){
 		gotoxy(1,1);
 		printf("play selected");
@@ -114,6 +120,8 @@ int start_select(int joystick, int keyboard){
 		return 10;
 	}
 
+
+	//prints play blinking, and removes blinking for help
 	if (joystick == 1 || keyboard == 65){
 		blink(1);
 	    gotoxy(110, 16);
@@ -144,6 +152,7 @@ int start_select(int joystick, int keyboard){
 	    printf("             |_|    ");
 	}
 
+	//prints help blinking, and removes blinking for play
 	if (joystick == 3 || keyboard == 66){
 		blink(1);
 	    gotoxy(110, 31);
@@ -218,6 +227,7 @@ void help_screen(){
 
     window(70, 23, 170, 50);
 
+    //tells the player the controls
     gotoxy(71,25);
     printf("CONTROLS:");
     gotoxy(71,26);
@@ -250,6 +260,8 @@ void help_screen(){
     	printf(" like the laser and spread-shot to kill all who oppose you!");
     gotoxy(71,43);
     	printf(" However! You only have a limited amount! Use them wisely");
+    gotoxy(71,44);
+        printf(" Destroy satellites to increase the amount of powerups!");
 
     //printer "back" knap
 
@@ -440,6 +452,8 @@ void money_bag(int x, int y) {
 }
 
 void bosskey_gfx() {
+
+	//prints bosskey screen
 	fgcolor(2);
 	window(20,20,215,50);
 	gotoxy(25,25);

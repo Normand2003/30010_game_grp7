@@ -5,7 +5,6 @@
 #include "structures.h"
 #include "spaceship.h"
 #include "stopwatch.h"
-#include "aliens.h"
 #include "gui_hud.h"
 #include "lcd.h"
 #include <string.h>
@@ -16,8 +15,8 @@ int main(void){
 
 
 
-uart_init( 115200 ); // Initialize USB serial emulation at 115200 baud
-//uart_init( 230400 ); // Initialize USB serial emulation at 230400 baud
+//uart_init( 115200 ); // Initialize USB serial emulation at 115200 baud
+uart_init( 230400 ); // Initialize USB serial emulation at 230400 baud
 
 clrscr();
 init_joystick();
@@ -183,7 +182,7 @@ while(lvl_select == 1){
 	}
 
 	//forces gravity on bullets by asteroids
-	//lorentzforce(&all_bullets, &all_stroids);
+	lorentzforce(&all_bullets, &all_stroids);
 
 	//health system - displays current health, ammo and time - and goes to main menu if health = 0
 	gotoxy(1,1);
@@ -211,6 +210,9 @@ while(lvl_select == 1){
 	lcd_write_string(2,60,laserammo);
 	number_to_string(my_ship.spread_shot,spreadammo,6);
 	lcd_write_string(3,65,spreadammo);
+
+	//alien warning on LCD
+	lcd_danger(&all_stroids[6]);
 
 	//boss key
 	if (key == 120){

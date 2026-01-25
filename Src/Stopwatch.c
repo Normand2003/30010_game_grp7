@@ -94,6 +94,7 @@ int updated=0; // holder styr på hvilke objekter der allerede er opdateret i gi
 
 void clock(gtimer_t *gtimer){
 
+	//Updates gtimer_t structure, to make sure everything is run on the same clockperiod, and only once.
 
 	  //if((g_time.hs%gtimer->clockvalue)==0)
 	  if((g_time.hs & 0b1) == 1)
@@ -101,14 +102,5 @@ void clock(gtimer_t *gtimer){
 	  	else{
 			gtimer->tick=0;
 			gtimer->updated=0; //resetter update så den kan opdatere igen i næste clockperiode
-	}
-}
-
-void run_functions(){
-	if((tick==1)&&(updated==0)){
-	player();
-	update_positions();
-	print();
-	updated=1;
 	}
 }

@@ -6,10 +6,7 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../Src/30010_io.c \
-../Src/Gravity.c \
-../Src/Plainmove.c \
 ../Src/Stopwatch.c \
-../Src/aliens.c \
 ../Src/asteroids.c \
 ../Src/charset.c \
 ../Src/draw.c \
@@ -17,8 +14,7 @@ C_SRCS += \
 ../Src/joystick.c \
 ../Src/lcd.c \
 ../Src/main.c \
-../Src/menu.c \
-../Src/mid.c \
+../Src/rgbled.c \
 ../Src/spaceship.c \
 ../Src/syscalls.c \
 ../Src/sysmem.c \
@@ -26,10 +22,7 @@ C_SRCS += \
 
 OBJS += \
 ./Src/30010_io.o \
-./Src/Gravity.o \
-./Src/Plainmove.o \
 ./Src/Stopwatch.o \
-./Src/aliens.o \
 ./Src/asteroids.o \
 ./Src/charset.o \
 ./Src/draw.o \
@@ -37,8 +30,7 @@ OBJS += \
 ./Src/joystick.o \
 ./Src/lcd.o \
 ./Src/main.o \
-./Src/menu.o \
-./Src/mid.o \
+./Src/rgbled.o \
 ./Src/spaceship.o \
 ./Src/syscalls.o \
 ./Src/sysmem.o \
@@ -46,10 +38,7 @@ OBJS += \
 
 C_DEPS += \
 ./Src/30010_io.d \
-./Src/Gravity.d \
-./Src/Plainmove.d \
 ./Src/Stopwatch.d \
-./Src/aliens.d \
 ./Src/asteroids.d \
 ./Src/charset.d \
 ./Src/draw.d \
@@ -57,8 +46,7 @@ C_DEPS += \
 ./Src/joystick.d \
 ./Src/lcd.d \
 ./Src/main.d \
-./Src/menu.d \
-./Src/mid.d \
+./Src/rgbled.d \
 ./Src/spaceship.d \
 ./Src/syscalls.d \
 ./Src/sysmem.d \
@@ -72,7 +60,7 @@ Src/%.o: ../Src/%.c Src/subdir.mk
 clean: clean-Src
 
 clean-Src:
-	-$(RM) ./Src/30010_io.d ./Src/30010_io.o ./Src/Gravity.d ./Src/Gravity.o ./Src/Plainmove.d ./Src/Plainmove.o ./Src/Stopwatch.d ./Src/Stopwatch.o ./Src/aliens.d ./Src/aliens.o ./Src/asteroids.d ./Src/asteroids.o ./Src/charset.d ./Src/charset.o ./Src/draw.d ./Src/draw.o ./Src/gui_hud.d ./Src/gui_hud.o ./Src/joystick.d ./Src/joystick.o ./Src/lcd.d ./Src/lcd.o ./Src/main.d ./Src/main.o ./Src/menu.d ./Src/menu.o ./Src/mid.d ./Src/mid.o ./Src/spaceship.d ./Src/spaceship.o ./Src/syscalls.d ./Src/syscalls.o ./Src/sysmem.d ./Src/sysmem.o ./Src/system_stm32f30x.d ./Src/system_stm32f30x.o
+	-$(RM) ./Src/30010_io.d ./Src/30010_io.o ./Src/Stopwatch.d ./Src/Stopwatch.o ./Src/asteroids.d ./Src/asteroids.o ./Src/charset.d ./Src/charset.o ./Src/draw.d ./Src/draw.o ./Src/gui_hud.d ./Src/gui_hud.o ./Src/joystick.d ./Src/joystick.o ./Src/lcd.d ./Src/lcd.o ./Src/main.d ./Src/main.o ./Src/rgbled.d ./Src/rgbled.o ./Src/spaceship.d ./Src/spaceship.o ./Src/syscalls.d ./Src/syscalls.o ./Src/sysmem.d ./Src/sysmem.o ./Src/system_stm32f30x.d ./Src/system_stm32f30x.o
 
 .PHONY: clean-Src
 

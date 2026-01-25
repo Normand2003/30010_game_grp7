@@ -14,44 +14,8 @@
 #define block 0xDB
 
 
-
-//function not used? i think
-void deprint_astroid(astroid_t *astroid){
-	if (astroid->type == 3){
-		gotoxy(astroid->pos_x-astroid->vel_x,astroid->pos_y); //this prints the removal astroid type 3 (large)
-		printf("          ");
-		gotoxy(astroid->pos_x-astroid->vel_x,astroid->pos_y+1);
-		printf("           ");
-		gotoxy(astroid->pos_x-astroid->vel_x,astroid->pos_y+2);
-		printf("           ");
-		gotoxy(astroid->pos_x-astroid->vel_x,astroid->pos_y+3);
-		printf("          ");
-		gotoxy(astroid->pos_x-astroid->vel_x,astroid->pos_y+4);
-		printf("          ");
-	}
-
-	if (astroid->type == 2){
-		gotoxy(astroid->pos_x-astroid->vel_x,astroid->pos_y); //this prints the removal astroid type 2 (medium)
-		printf("       ");
-		gotoxy(astroid->pos_x-astroid->vel_x,astroid->pos_y+1);
-		printf("       ");
-		gotoxy(astroid->pos_x-astroid->vel_x,astroid->pos_y+2);
-		printf("       ");
-		gotoxy(astroid->pos_x-astroid->vel_x,astroid->pos_y+3);
-		printf("       ");
-	}
-
-	if (astroid->type == 1){
-	gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 1 (small)
-	printf("    ");
-	gotoxy(astroid->pos_x,astroid->pos_y+1);
-	printf("    ");
-	gotoxy(astroid->pos_x,astroid->pos_y+2);
-	printf("    ");
-	}
-}
-
 void hit_astroid(astroid_t *astroid,bullet_t *bullet, spaceship_t *ship) {
+	//checks to see if bullet hits the "hitbox" of the astroid, depending on what type it is
 	if (astroid->type == 3){
 	if ((bullet->pos_x-1 >= astroid->pos_x && bullet->pos_y>>5 >= astroid->pos_y) && (bullet->pos_x <= astroid->pos_x+10 && bullet->pos_y>>5 <= astroid->pos_y+4)){
 
@@ -67,7 +31,7 @@ void hit_astroid(astroid_t *astroid,bullet_t *bullet, spaceship_t *ship) {
 		printf("          ");
 		//respawns astroid
 		astroid->pos_x = 230;
-		astroid->pos_y = (rand() % 57)+4;
+		astroid->pos_y = (rand() % 54)+4;
 		//increases score
 		ship->score += 10;
 
@@ -80,7 +44,7 @@ void hit_astroid(astroid_t *astroid,bullet_t *bullet, spaceship_t *ship) {
 
 	}
 	}
-
+	//checks to see if bullet hits the "hitbox" of the astroid, depending on what type it is
 	if (astroid->type == 2){
 	if ((bullet->pos_x-1 >= astroid->pos_x && bullet->pos_y>>5 >= astroid->pos_y) && (bullet->pos_x <= astroid->pos_x+6 && bullet->pos_y>>5 <= astroid->pos_y+3)){
 
@@ -106,16 +70,16 @@ void hit_astroid(astroid_t *astroid,bullet_t *bullet, spaceship_t *ship) {
 		bullet->pos_y = 0;
 	}
 	}
-
+	//checks to see if bullet hits the "hitbox" of the astroid, depending on what type it is
 	if (astroid->type == 1){
-	if ((bullet->pos_x-1 >= astroid->pos_x && bullet->pos_y>>5 >= astroid->pos_y) && (bullet->pos_x <= astroid->pos_x+5 && bullet->pos_y>>5 <= astroid->pos_y+2)){
+	if ((bullet->pos_x >= astroid->pos_x && bullet->pos_y>>5 >= astroid->pos_y) && (bullet->pos_x <= astroid->pos_x+5 && bullet->pos_y>>5 <= astroid->pos_y+2)){
 
 		gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 1 (small)
-		printf("    ");
+		printf("     ");
 		gotoxy(astroid->pos_x,astroid->pos_y+1);
-		printf("    ");
+		printf("     ");
 		gotoxy(astroid->pos_x,astroid->pos_y+2);
-		printf("    ");
+		printf("     ");
 		//respawns astroid
 		astroid->pos_x = 230;
 		astroid->pos_y = (rand() % 57)+4;
@@ -130,6 +94,7 @@ void hit_astroid(astroid_t *astroid,bullet_t *bullet, spaceship_t *ship) {
 		bullet->pos_y = 0;
 	}
 	}
+	//checks to see if bullet hits the "hitbox" of the astroid, depending on what type it is
 	if (astroid->type == 4){
 	if ((bullet->pos_x-1 >= astroid->pos_x && bullet->pos_y>>5 >= astroid->pos_y) && (bullet->pos_x <= astroid->pos_x+7 && bullet->pos_y>>5 <= astroid->pos_y+8)){
 
@@ -165,6 +130,7 @@ void hit_astroid(astroid_t *astroid,bullet_t *bullet, spaceship_t *ship) {
 
 	}
 	}
+	//checks to see if bullet hits the "hitbox" of the astroid, depending on what type it is
 	if (astroid->type == 5){
 	if ((bullet->pos_x-1 >= astroid->pos_x && bullet->pos_y>>5 >= astroid->pos_y) && (bullet->pos_x <= astroid->pos_x+7 && bullet->pos_y>>5 <= astroid->pos_y+8)){
 
@@ -200,6 +166,7 @@ void hit_astroid(astroid_t *astroid,bullet_t *bullet, spaceship_t *ship) {
 
 	}
 	}
+	//checks to see if bullet hits the "hitbox" of the astroid, depending on what type it is
 	if (astroid->type == 6){
 	if ((bullet->pos_x-1 >= astroid->pos_x && bullet->pos_y>>5 >= astroid->pos_y) && (bullet->pos_x <= astroid->pos_x+11 && bullet->pos_y>>5 <= astroid->pos_y+5)){
 
@@ -233,6 +200,7 @@ void hit_astroid(astroid_t *astroid,bullet_t *bullet, spaceship_t *ship) {
 }
 
 void laser_hit(astroid_t *astroid, laser_t *laser,spaceship_t *ship){
+	//checks to see if the laser hits the "hitbox" of the astroid, depending on what type it is
 	if (astroid->type == 3){
 	if (laser->pos_y >= astroid->pos_y && laser->pos_y <= astroid->pos_y+4){
 		gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 3 (large)
@@ -246,12 +214,13 @@ void laser_hit(astroid_t *astroid, laser_t *laser,spaceship_t *ship){
 		gotoxy(astroid->pos_x,astroid->pos_y+4);
 		printf("          ");
 		//respawns the asteroid
-		astroid->pos_y = (rand() % 57)+4;
+		astroid->pos_y = (rand() % 54)+4;
 		astroid->pos_x = 234;
 		laser->pos_y = 70;
 		ship->score += 10;
 	}
 	}
+	//checks to see if the laser hits the "hitbox" of the astroid, depending on what type it is
 	if (astroid->type == 2){
 	if (laser->pos_y >= astroid->pos_y && laser->pos_y <= astroid->pos_y+3){
 		gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 2 (med)
@@ -269,6 +238,7 @@ void laser_hit(astroid_t *astroid, laser_t *laser,spaceship_t *ship){
 		ship->score += 20;
 	}
 	}
+	//checks to see if the laser hits the "hitbox" of the astroid, depending on what type it is
 	if (astroid->type == 1){
 	if (laser->pos_y >= astroid->pos_y && laser->pos_y <= astroid->pos_y+2){
 		gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 2 (med)
@@ -284,6 +254,7 @@ void laser_hit(astroid_t *astroid, laser_t *laser,spaceship_t *ship){
 		ship->score += 30;
 	}
 	}
+	//checks to see if the laser hits the "hitbox" of the astroid, depending on what type it is
 	if (astroid->type == 4){
 	if (laser->pos_y >= astroid->pos_y && laser->pos_y <= astroid->pos_y+8){
 		gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 4 (satellite)
@@ -310,6 +281,7 @@ void laser_hit(astroid_t *astroid, laser_t *laser,spaceship_t *ship){
 		ship->score += 2;
 	}
 	}
+	//checks to see if the laser hits the "hitbox" of the astroid, depending on what type it is
 	if (astroid->type == 5){
 	if (laser->pos_y >= astroid->pos_y && laser->pos_y <= astroid->pos_y+8){
 		gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 5 (satellite)
@@ -336,6 +308,7 @@ void laser_hit(astroid_t *astroid, laser_t *laser,spaceship_t *ship){
 		ship->score += 2;
 	}
 	}
+	//checks to see if the laser hits the "hitbox" of the astroid, depending on what type it is
 	if (astroid->type == 6){
 	if (laser->pos_y >= astroid->pos_y && laser->pos_y <= astroid->pos_y+5){
 		gotoxy(astroid->pos_x,astroid->pos_y); //this prints the removal astroid type 6 (alien)
@@ -360,6 +333,7 @@ void laser_hit(astroid_t *astroid, laser_t *laser,spaceship_t *ship){
 }
 
 void spaceship_hit(astroid_t *astroid,spaceship_t *ship){
+//checks to see if the ships hitbox, intercepts the astroids hitbox, depending on what type it is
 if (astroid->type == 3){
 	if((ship->pos_x+9 >= astroid->pos_x) && (ship->pos_x <= astroid->pos_x+6 )){
 		if((ship->pos_y+8 >= astroid->pos_y) && (ship->pos_y <= astroid->pos_y+4)){
@@ -381,6 +355,7 @@ if (astroid->type == 3){
 		}
 	}
 }
+//checks to see if the ships hitbox, intercepts the astroids hitbox, depending on what type it is
 if (astroid->type == 2){
 	if((ship->pos_x+9 >= astroid->pos_x) && (ship->pos_x <= astroid->pos_x+5 )){
 		if((ship->pos_y+8 >= astroid->pos_y) && (ship->pos_y <= astroid->pos_y+3)){
@@ -401,6 +376,7 @@ if (astroid->type == 2){
 		}
 	}
 }
+//checks to see if the ships hitbox, intercepts the astroids hitbox, depending on what type it is
 if (astroid->type == 1){
 	if((ship->pos_x+9 >= astroid->pos_x) && (ship->pos_x <= astroid->pos_x+4 )){
 		if((ship->pos_y+8 >= astroid->pos_y) && (ship->pos_y <= astroid->pos_y+2)){
@@ -419,6 +395,7 @@ if (astroid->type == 1){
 		}
 	}
 }
+//checks to see if the ships hitbox, intercepts the astroids hitbox, depending on what type it is
 if (astroid->type == 4 || astroid->type == 5){
 	if((ship->pos_x+9 >= astroid->pos_x) && (ship->pos_x <= astroid->pos_x+7 )){
 		if((ship->pos_y+8 >= astroid->pos_y) && (ship->pos_y <= astroid->pos_y+8)){
@@ -447,6 +424,7 @@ if (astroid->type == 4 || astroid->type == 5){
 		}
 	}
 }
+//checks to see if the ships hitbox, intercepts the astroids hitbox, depending on what type it is
 if (astroid->type == 6){
 	if((ship->pos_x+9 >= astroid->pos_x) && (ship->pos_x <= astroid->pos_x+11 )){
 		if((ship->pos_y+8 >= astroid->pos_y) && (ship->pos_y <= astroid->pos_y+5)){
@@ -625,7 +603,7 @@ void draw_asteroid(astroid_t *astroid) {
 
 	}
 
-
+	//draws satellite
 	else if (astroid->type == 4) {
 		gotoxy(astroid->pos_x,astroid->pos_y);
 		fgcolor(12);
@@ -705,6 +683,7 @@ void draw_asteroid(astroid_t *astroid) {
 		//resetter farven
 		fgcolor(15);
 	}
+	//draws satellite red
 	else if (astroid->type == 5) {
 		gotoxy(astroid->pos_x,astroid->pos_y);
 		fgcolor(9);
@@ -784,30 +763,31 @@ void draw_asteroid(astroid_t *astroid) {
 		//resetter farven
 		fgcolor(15);
 	}
+	//draws alien
 	else if (astroid->type == 6) {
-		//printer linje 3
+		//printer linje 1
 			gotoxy(astroid->pos_x, astroid->pos_y);
 			printf("  ");
 			fgcolor(1);
 			printf("%c%c%c%c%c%c%c        ",block,block,block,block,block,block,block);
 
-		//printer linje 4
+		//printer linje 2
 			gotoxy(astroid->pos_x,astroid->pos_y+1);
 			printf(" %c%c %c%c%c %c%c       ",block,block,block,block,block,block,block);
 
-		//printer linje 5
+		//printer linje 3
 			gotoxy(astroid->pos_x,astroid->pos_y+2);
 			printf("%c%c%c%c%c%c%c%c%c%c%c      ",block,block,block,block,block,block,block,block,block,block,block);
 
-		//printer linje 6
+		//printer linje 4
 			gotoxy(astroid->pos_x,astroid->pos_y+3);
 			printf("%c %c%c%c%c%c%c%c %c      ",block,block,block,block,block,block,block,block,block);
 
-		//printer linje 7
+		//printer linje 5
 			gotoxy(astroid->pos_x,astroid->pos_y+4);
 			printf("%c %c     %c %c      ",block,block,block,block);
 
-		//printer linje 8
+		//printer linje 6
 			gotoxy(astroid->pos_x,astroid->pos_y+5);
 			printf("   %c%c %c%c         ",block,block,block,block);
 
@@ -817,6 +797,9 @@ void draw_asteroid(astroid_t *astroid) {
 }
 
 void update_pos_asteroid(astroid_t *astroid){
+
+	//starts by checking if the asteroid is gonna go off-screen (to the left). Otherwise its position gets updated by its
+	//velocity and the old sprite is deleted.
 	if (astroid->pos_x > 3){
 	astroid->pos_x = astroid->pos_x + astroid->vel_x;
 	}
@@ -837,12 +820,15 @@ void update_pos_asteroid(astroid_t *astroid){
 		printf("              ");
 		gotoxy(astroid->pos_x,astroid->pos_y+7);
 		printf("              ");
+
+		//spawns the asteroid to the right, and in an random y-position
 		astroid->pos_x = 235;
-		astroid->pos_y = (rand() % 54)+4;
+		astroid->pos_y = (rand() % 53)+4;
 	}
 }
 
 void update_difficulty(int timer, int *difficulty){
+	//simple loop that updates the difficulty depending on what the timer is at
 	if (timer > 30 && *difficulty == 0){
 		*difficulty = 1;
 	}
@@ -853,3 +839,4 @@ void update_difficulty(int timer, int *difficulty){
 		*difficulty = 3;
 	}
 }
+
